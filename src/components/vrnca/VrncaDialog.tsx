@@ -105,14 +105,23 @@ const VrncaDialog: React.FC<VrncaDialogProps> = ({
 
   return (
     <div 
-      className={cn('bg-evrgrn-darker/80 backdrop-blur-sm border border-evrgrn-blue/30 rounded-lg p-4', className)}
+      className={cn('terminal-window', className)}
       style={{ transform: `translateX(${offsetX}px)` }}
     >
+      <div className="terminal-header">
+        <div className="flex space-x-2">
+          <div className="window-button window-close"></div>
+          <div className="window-button window-minimize"></div>
+          <div className="window-button window-maximize"></div>
+        </div>
+        <div className="text-xs text-evrgrn-accent ml-3">VRNCA Terminal</div>
+      </div>
+      
       <div className="flex items-start gap-4">
         <VrncaAvatar state={avatarState} size="sm" />
         
         <div className="flex-1">
-          <div className="text-xs text-evrgrn-blue mb-1">VRNCA</div>
+          <div className="text-xs text-evrgrn-accent mb-1">VRNCA@EVRGRN:~$ </div>
           <div className="terminal-text text-sm md:text-base">
             {displayedText.split('').map((char, index) => (
               shouldGlitch(index) ? 
@@ -125,7 +134,7 @@ const VrncaDialog: React.FC<VrncaDialogProps> = ({
           
           {/* Indicateur pour continuer si le message est complet */}
           {isMessageComplete && currentMessageIndex === messages.length - 1 && (
-            <div className="mt-3 text-xs text-evrgrn-blue/70 animate-pulse">
+            <div className="mt-3 text-xs text-evrgrn-accent/70 animate-pulse">
               [Cliquez n'importe où pour continuer]
             </div>
           )}

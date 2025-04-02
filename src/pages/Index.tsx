@@ -6,13 +6,35 @@ import Hero from '../components/home/Hero';
 import FeaturedContent from '../components/home/FeaturedContent';
 import VrncaIntro from '../components/vrnca/VrncaIntro';
 import ParticleBackground from '../components/ui/ParticleBackground';
+import { Button } from '@/components/ui/button';
 
 const Index = () => {
-  const [showIntro, setShowIntro] = useState(true);
+  // Check if intro has been seen before
+  const [showIntro, setShowIntro] = useState(false);
   const [introComplete, setIntroComplete] = useState(false);
+  const [skipButtonVisible, setSkipButtonVisible] = useState(false);
+
+  useEffect(() => {
+    // Check localStorage to see if intro has been shown
+    const hasSeenIntro = localStorage.getItem('hasSeenIntro');
+    
+    if (!hasSeenIntro) {
+      setShowIntro(true);
+      // Show skip button after a short delay
+      setTimeout(() => {
+        setSkipButtonVisible(true);
+      }, 2000);
+    } else {
+      // If user has seen intro, go straight to main content
+      setIntroComplete(true);
+    }
+  }, []);
 
   // Handle intro completion
   const handleIntroComplete = () => {
+    // Save that user has seen intro
+    localStorage.setItem('hasSeenIntro', 'true');
+    
     setIntroComplete(true);
     // Give time for exit animation
     setTimeout(() => {
@@ -20,12 +42,36 @@ const Index = () => {
     }, 1000);
   };
 
+  // Handle skip intro
+  const handleSkipIntro = () => {
+    // Save that user has seen intro
+    localStorage.setItem('hasSeenIntro', 'true');
+    
+    setIntroComplete(true);
+    setShowIntro(false);
+  };
+
   return (
     <div className="bg-evrgrn-dark text-foreground min-h-screen flex flex-col">
       {/* Introduction sequence */}
-      {showIntro && <VrncaIntro onComplete={handleIntroComplete} />}
+      {showIntro && (
+        <>
+          <VrncaIntro onComplete={handleIntroComplete} />
+          {skipButtonVisible && (
+            <div className="fixed bottom-8 right-8 z-50 animate-fade-in">
+              <Button 
+                onClick={handleSkipIntro}
+                variant="outline"
+                className="bg-evrgrn-darker/80 border border-evrgrn-accent text-evrgrn-accent hover:bg-evrgrn-accent hover:text-black"
+              >
+                Passer l'intro
+              </Button>
+            </div>
+          )}
+        </>
+      )}
 
-      {/* Main site content (only show after intro completes) */}
+      {/* Main site content */}
       <div className={`w-full min-h-screen flex flex-col ${introComplete ? 'animate-fade-in' : 'opacity-0'}`}>
         <Header />
         

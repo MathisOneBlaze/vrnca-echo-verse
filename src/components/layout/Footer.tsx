@@ -10,12 +10,12 @@ interface FooterProps {
 
 const Footer: React.FC<FooterProps> = ({ className }) => {
   return (
-    <footer className={cn('bg-evrgrn-darker border-t border-evrgrn-blue/10 py-12', className)}>
+    <footer className={cn('bg-evrgrn-darker border-t border-evrgrn-accent/10 py-12', className)}>
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Logo and description */}
           <div className="md:col-span-1">
-            <GlitchText intensity="low" className="text-xl font-bold mb-4">
+            <GlitchText intensity="low" className="text-xl font-bold mb-4 text-evrgrn-accent">
               EVRGRN
             </GlitchText>
             <p className="text-muted-foreground mb-4 text-sm">
@@ -32,11 +32,11 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
           
           {/* Quick links */}
           <div>
-            <h3 className="text-evrgrn-blue font-medium mb-4 text-sm uppercase tracking-wider">Navigation</h3>
+            <h3 className="text-evrgrn-accent font-medium mb-4 text-sm uppercase tracking-wider">Navigation</h3>
             <ul className="space-y-2 text-sm">
               <FooterLink to="/" label="Accueil" />
               <FooterLink to="/biographie" label="Biographie" />
-              <FooterLink to="/musique" label="Musique" />
+              <FooterLink to="/musique" label="EVRGRN Lab" />
               <FooterLink to="/evenements" label="Événements" />
               <FooterLink to="/shop" label="Shop" />
             </ul>
@@ -44,26 +44,26 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
           
           {/* Resources */}
           <div>
-            <h3 className="text-evrgrn-blue font-medium mb-4 text-sm uppercase tracking-wider">Ressources</h3>
+            <h3 className="text-evrgrn-accent font-medium mb-4 text-sm uppercase tracking-wider">Ressources</h3>
             <ul className="space-y-2 text-sm">
-              <FooterLink to="/education" label="Formations" />
-              <FooterLink to="/bibliographie" label="Livres & Publications" />
-              <FooterLink to="/services" label="Services Studio" />
-              <FooterLink to="/design" label="Design & Direction Artistique" />
-              <FooterLink to="/presse" label="Presse & Médias" />
+              <FooterLink to="/publications" label="Publications" />
+              <FooterLink to="/publications" label="Livres & Articles" />
+              <FooterLink to="/musique" label="Services Studio" />
+              <FooterLink to="/musique" label="Design & Direction Artistique" />
+              <FooterLink to="/contact" label="Presse & Médias" />
             </ul>
           </div>
           
           {/* Contact */}
           <div>
-            <h3 className="text-evrgrn-blue font-medium mb-4 text-sm uppercase tracking-wider">Contact</h3>
+            <h3 className="text-evrgrn-accent font-medium mb-4 text-sm uppercase tracking-wider">Contact</h3>
             <ul className="space-y-2 text-sm">
               <FooterLink to="/contact" label="Formulaire de contact" />
-              <FooterLink to="/professionnels" label="Contact pros" />
-              <FooterLink to="/mentions-legales" label="Mentions légales" />
-              <FooterLink to="/confidentialite" label="Confidentialité" />
+              <FooterLink to="/contact" label="Contact pros" />
+              <FooterLink to="/" label="Mentions légales" />
+              <FooterLink to="/" label="Confidentialité" />
             </ul>
-            <div className="mt-4 pt-4 border-t border-evrgrn-blue/10">
+            <div className="mt-4 pt-4 border-t border-evrgrn-accent/10">
               <button className="vrnca-button text-xs">
                 Activer VRNCA Guide
               </button>
@@ -71,7 +71,7 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
           </div>
         </div>
         
-        <div className="border-t border-evrgrn-blue/10 mt-8 pt-8 text-center text-xs text-muted-foreground">
+        <div className="border-t border-evrgrn-accent/10 mt-8 pt-8 text-center text-xs text-muted-foreground">
           <p>© {new Date().getFullYear()} EVRGRN. Tous droits réservés.</p>
           <p className="mt-2">
             VRNCA Version 1.0.0 | L'extension consciente de celui qui est banni
@@ -92,7 +92,7 @@ const FooterLink: React.FC<FooterLinkProps> = ({ to, label }) => {
     <li>
       <Link 
         to={to} 
-        className="text-muted-foreground hover:text-evrgrn-blue transition-colors duration-200"
+        className="text-muted-foreground hover:text-evrgrn-accent transition-colors duration-200"
       >
         {label}
       </Link>
@@ -111,10 +111,10 @@ const SocialLink: React.FC<SocialLinkProps> = ({ href, type }) => {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="w-8 h-8 rounded-full flex items-center justify-center bg-evrgrn-muted hover:bg-evrgrn-blue/20 transition-colors duration-200"
+      className="w-8 h-8 rounded-full flex items-center justify-center bg-evrgrn-muted hover:bg-evrgrn-accent/20 transition-colors duration-200"
     >
       <span className="sr-only">{type}</span>
-      <div className="h-4 w-4 text-evrgrn-blue">
+      <div className="h-4 w-4 text-evrgrn-accent">
         {/* Simple placeholder icon */}
         {type === 'twitch' && (
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

@@ -98,30 +98,33 @@ const VrncaIntro: React.FC<VrncaIntroProps> = ({ onComplete, className }) => {
         <div className="tv-scanline"></div>
       </div>
       
+      {/* Effet de TV static */}
+      <div className="absolute inset-0 tv-static opacity-10"></div>
+      
       <div className="w-full max-w-md px-6 relative">
         {/* Glitch effet visuel occasionnel */}
         {glitchEffect && (
-          <div className="absolute inset-0 bg-evrgrn-blue/10 z-10"></div>
+          <div className="absolute inset-0 bg-evrgrn-accent/10 z-10"></div>
         )}
         
         {stage === 'initial' && (
           <div className="text-center animate-fade-in">
-            <div className="text-evrgrn-blue text-sm font-mono mb-2">INITIALIZING</div>
+            <div className="text-evrgrn-accent text-sm font-mono mb-2">INITIALIZING</div>
             <VrncaAvatar state="idle" size="lg" className="mx-auto mb-4" />
             <div className="h-1 w-full bg-evrgrn-muted rounded-full overflow-hidden">
-              <div className="h-full bg-evrgrn-blue animate-pulse" style={{ width: '10%' }}></div>
+              <div className="h-full bg-evrgrn-accent animate-pulse" style={{ width: '10%' }}></div>
             </div>
           </div>
         )}
         
         {stage === 'connecting' && (
           <div className="text-center animate-fade-in">
-            <div className="text-evrgrn-blue text-sm font-mono mb-2">ESTABLISHING CONNECTION</div>
+            <div className="text-evrgrn-accent text-sm font-mono mb-2">ESTABLISHING CONNECTION</div>
             <VrncaAvatar state="active" size="lg" className="mx-auto mb-4" />
             <div className="h-1 w-full bg-evrgrn-muted rounded-full overflow-hidden">
-              <div className="h-full bg-evrgrn-blue animate-pulse" style={{ width: '40%' }}></div>
+              <div className="h-full bg-evrgrn-accent animate-pulse" style={{ width: '40%' }}></div>
             </div>
-            <div className="mt-4 font-mono text-xs text-evrgrn-blue">
+            <div className="mt-4 font-mono text-xs text-evrgrn-accent">
               Connection to EVRGRN network: <GlitchText intensity="low">IN PROGRESS</GlitchText>
             </div>
           </div>

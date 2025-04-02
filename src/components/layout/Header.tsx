@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import GlitchText from '../ui/GlitchText';
 import VrncaAvatar from '../vrnca/VrncaAvatar';
@@ -12,6 +12,7 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ className }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,18 +40,20 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center">
-          <GlitchText intensity="low" className="text-xl font-bold">
+          <GlitchText intensity="low" className="text-xl font-bold text-evrgrn-accent">
             EVRGRN
           </GlitchText>
         </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
-          <NavLink to="/" label="Accueil" />
-          <NavLink to="/musique" label="Musique" />
-          <NavLink to="/evenements" label="Événements" />
-          <NavLink to="/shop" label="Shop" />
-          <NavLink to="/contact" label="Contact" />
+          <NavLink to="/" label="Accueil" currentPath={location.pathname} />
+          <NavLink to="/musique" label="EVRGRN Lab" currentPath={location.pathname} />
+          <NavLink to="/evenements" label="Événements" currentPath={location.pathname} />
+          <NavLink to="/publications" label="Publications" currentPath={location.pathname} />
+          <NavLink to="/shop" label="Shop" currentPath={location.pathname} />
+          <NavLink to="/biographie" label="Biographie" currentPath={location.pathname} />
+          <NavLink to="/contact" label="Contact" currentPath={location.pathname} />
         </nav>
 
         {/* VRNCA Interactive Element */}
@@ -59,7 +62,7 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
             className="vrnca-button text-sm px-4 py-1.5"
             onClick={() => console.log('VRNCA interaction')}
           >
-            <span className="mr-2">Communiquer</span>
+            <span className="mr-2">VRNCA</span>
             <VrncaAvatar size="sm" className="inline-block" />
           </button>
         </div>
@@ -72,17 +75,17 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
           <span className="sr-only">Menu</span>
           <div className="w-6 h-5 flex flex-col justify-between">
             <span 
-              className={`w-full h-0.5 bg-evrgrn-blue block transition-transform ${
+              className={`w-full h-0.5 bg-evrgrn-accent block transition-transform ${
                 isMenuOpen ? 'rotate-45 translate-y-2' : ''
               }`}
             ></span>
             <span 
-              className={`w-full h-0.5 bg-evrgrn-blue block transition-opacity ${
+              className={`w-full h-0.5 bg-evrgrn-accent block transition-opacity ${
                 isMenuOpen ? 'opacity-0' : 'opacity-100'
               }`}
             ></span>
             <span 
-              className={`w-full h-0.5 bg-evrgrn-blue block transition-transform ${
+              className={`w-full h-0.5 bg-evrgrn-accent block transition-transform ${
                 isMenuOpen ? '-rotate-45 -translate-y-2' : ''
               }`}
             ></span>
@@ -92,21 +95,23 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
 
       {/* Mobile menu */}
       <div 
-        className={`md:hidden absolute w-full bg-evrgrn-darker/95 backdrop-blur-md transition-all duration-300 border-t border-evrgrn-blue/20 overflow-hidden ${
+        className={`md:hidden absolute w-full bg-evrgrn-darker/95 backdrop-blur-md transition-all duration-300 border-t border-evrgrn-accent/20 overflow-hidden ${
           isMenuOpen ? 'max-h-96 border-opacity-100' : 'max-h-0 border-opacity-0'
         }`}
       >
         <div className="container mx-auto px-4 py-4">
           <div className="flex flex-col space-y-4">
-            <MobileNavLink to="/" label="Accueil" onClick={() => setIsMenuOpen(false)} />
-            <MobileNavLink to="/musique" label="Musique" onClick={() => setIsMenuOpen(false)} />
-            <MobileNavLink to="/evenements" label="Événements" onClick={() => setIsMenuOpen(false)} />
-            <MobileNavLink to="/shop" label="Shop" onClick={() => setIsMenuOpen(false)} />
-            <MobileNavLink to="/contact" label="Contact" onClick={() => setIsMenuOpen(false)} />
+            <MobileNavLink to="/" label="Accueil" onClick={() => setIsMenuOpen(false)} currentPath={location.pathname} />
+            <MobileNavLink to="/musique" label="EVRGRN Lab" onClick={() => setIsMenuOpen(false)} currentPath={location.pathname} />
+            <MobileNavLink to="/evenements" label="Événements" onClick={() => setIsMenuOpen(false)} currentPath={location.pathname} />
+            <MobileNavLink to="/publications" label="Publications" onClick={() => setIsMenuOpen(false)} currentPath={location.pathname} />
+            <MobileNavLink to="/shop" label="Shop" onClick={() => setIsMenuOpen(false)} currentPath={location.pathname} />
+            <MobileNavLink to="/biographie" label="Biographie" onClick={() => setIsMenuOpen(false)} currentPath={location.pathname} />
+            <MobileNavLink to="/contact" label="Contact" onClick={() => setIsMenuOpen(false)} currentPath={location.pathname} />
             
-            <div className="pt-4 border-t border-evrgrn-blue/20">
+            <div className="pt-4 border-t border-evrgrn-accent/20">
               <button 
-                className="flex items-center text-evrgrn-blue font-medium"
+                className="flex items-center text-evrgrn-accent font-medium"
                 onClick={() => {
                   console.log('Mobile VRNCA interaction');
                   setIsMenuOpen(false);
@@ -126,16 +131,21 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
 interface NavLinkProps {
   to: string;
   label: string;
+  currentPath: string;
 }
 
-const NavLink: React.FC<NavLinkProps> = ({ to, label }) => {
+const NavLink: React.FC<NavLinkProps> = ({ to, label, currentPath }) => {
+  const isActive = currentPath === to || (to !== '/' && currentPath.startsWith(to));
+  
   return (
     <Link 
       to={to} 
-      className="text-foreground hover:text-evrgrn-blue transition-colors duration-200 relative group text-sm"
+      className={`text-foreground hover:text-evrgrn-accent transition-colors duration-200 relative group text-sm ${isActive ? 'text-evrgrn-accent' : ''}`}
     >
       {label}
-      <span className="absolute left-0 right-0 bottom-0 h-0.5 bg-evrgrn-blue transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+      <span 
+        className={`absolute left-0 right-0 bottom-0 h-0.5 bg-evrgrn-accent transform ${isActive ? 'scale-x-100' : 'scale-x-0'} group-hover:scale-x-100 transition-transform duration-300 origin-left`}
+      ></span>
     </Link>
   );
 };
@@ -144,11 +154,13 @@ interface MobileNavLinkProps extends NavLinkProps {
   onClick: () => void;
 }
 
-const MobileNavLink: React.FC<MobileNavLinkProps> = ({ to, label, onClick }) => {
+const MobileNavLink: React.FC<MobileNavLinkProps> = ({ to, label, onClick, currentPath }) => {
+  const isActive = currentPath === to || (to !== '/' && currentPath.startsWith(to));
+  
   return (
     <Link 
       to={to} 
-      className="text-foreground hover:text-evrgrn-blue transition-colors duration-200 text-lg font-medium"
+      className={`hover:text-evrgrn-accent transition-colors duration-200 text-lg font-medium ${isActive ? 'text-evrgrn-accent' : 'text-foreground'}`}
       onClick={onClick}
     >
       {label}
