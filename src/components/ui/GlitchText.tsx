@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 
 interface GlitchTextProps {
-  text: string;
+  text?: string;
   className?: string;
   intensity?: 'low' | 'medium' | 'high';
   variant?: 'primary' | 'accent';
@@ -50,22 +50,14 @@ const GlitchText: React.FC<GlitchTextProps> = ({
     accent: 'text-evrgrn-gold',
   };
   
-  // If children are provided, apply glitch effect to them instead of text prop
-  if (children) {
-    return (
-      <span 
-        className={cn(
-          isGlitching ? 'text-glitch' : '',
-          variantClasses[variant],
-          className
-        )}
-        data-text={children}
-      >
-        {children}
-      </span>
-    );
+  // Get the content to display and use for data-text attribute
+  const content = children || text;
+  
+  if (!content) {
+    console.warn('GlitchText needs either text prop or children');
+    return null;
   }
-
+  
   return (
     <span 
       className={cn(
@@ -73,9 +65,9 @@ const GlitchText: React.FC<GlitchTextProps> = ({
         variantClasses[variant],
         className
       )}
-      data-text={text}
+      data-text={content}
     >
-      {text}
+      {content}
     </span>
   );
 };

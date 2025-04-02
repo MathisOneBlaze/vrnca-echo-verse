@@ -222,12 +222,18 @@
   
   .vrnca-button {
     @apply relative overflow-hidden bg-transparent border border-evrgrn-blue text-evrgrn-blue px-6 py-2 
-           rounded transition-all duration-300 hover:text-white z-10 group;
+           rounded transition-all duration-300 hover:text-white z-10;
   }
   
+  /* We need to use this separately since 'group' can't be used with @apply */
   .vrnca-button::before {
     content: "";
     @apply absolute top-0 left-0 w-0 h-full bg-evrgrn-blue -z-10
-           transition-all duration-500 group-hover:w-full;
+           transition-all duration-500;
+  }
+  
+  /* Add this class to handle the hover effect without using group */
+  .vrnca-button:hover::before {
+    @apply w-full;
   }
 }
