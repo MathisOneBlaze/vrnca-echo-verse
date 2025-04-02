@@ -12,14 +12,26 @@ interface VrncaIntroProps {
 
 const VrncaIntro: React.FC<VrncaIntroProps> = ({ onComplete, className }) => {
   const [stage, setStage] = useState<'initial' | 'connecting' | 'scanning' | 'intro' | 'complete'>('initial');
+  const [glitchEffect, setGlitchEffect] = useState(false);
 
   useEffect(() => {
+    // Ajouter des effets de glitch aléatoires
+    const glitchInterval = setInterval(() => {
+      if (Math.random() > 0.7) {
+        setGlitchEffect(true);
+        setTimeout(() => setGlitchEffect(false), 200);
+      }
+    }, 2000);
+    
     // Start connecting animation after a short delay
     const timer = setTimeout(() => {
       setStage('connecting');
     }, 1500);
     
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      clearInterval(glitchInterval);
+    }
   }, []);
 
   useEffect(() => {
@@ -62,10 +74,36 @@ const VrncaIntro: React.FC<VrncaIntroProps> = ({ onComplete, className }) => {
       className={cn(
         'fixed inset-0 flex flex-col items-center justify-center z-50 bg-evrgrn-darker',
         stage === 'complete' ? 'animate-fade-out pointer-events-none' : '',
+        glitchEffect ? 'animate-glitch-subtle' : '',
         className
       )}
     >
-      <div className="w-full max-w-md px-6">
+      {/* Effet de lignes statiques de télévision */}
+      <div className="absolute inset-0 pointer-events-none">
+        {Array.from({ length: 50 }).map((_, i) => (
+          <div 
+            key={i}
+            className="absolute w-full h-px bg-white/5"
+            style={{ 
+              top: `${i * 2}%`,
+              opacity: Math.random() * 0.2,
+              animationDelay: `${Math.random() * 5}s`
+            }}
+          />
+        ))}
+      </div>
+      
+      {/* Effet de scan line qui parcourt l'écran */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="tv-scanline"></div>
+      </div>
+      
+      <div className="w-full max-w-md px-6 relative">
+        {/* Glitch effet visuel occasionnel */}
+        {glitchEffect && (
+          <div className="absolute inset-0 bg-evrgrn-blue/10 z-10"></div>
+        )}
+        
         {stage === 'initial' && (
           <div className="text-center animate-fade-in">
             <div className="text-evrgrn-blue text-sm font-mono mb-2">INITIALIZING</div>

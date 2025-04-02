@@ -23,6 +23,9 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-b from-evrgrn-darker to-evrgrn-dark opacity-90"></div>
         <div className="absolute inset-0 bg-noise opacity-5"></div>
+        
+        {/* Effet statique TV */}
+        <div className="absolute inset-0 tv-static opacity-5"></div>
       </div>
       
       {/* Digital circuit lines */}
@@ -92,8 +95,10 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
               <div className="absolute inset-0 rounded-full bg-gradient-radial from-evrgrn-blue/20 to-transparent animate-pulse-soft"></div>
               <div className="absolute inset-8 rounded-full bg-gradient-radial from-evrgrn-blue/30 to-transparent animate-pulse"></div>
               <div className="absolute inset-16 rounded-full border border-evrgrn-blue/40 animate-spin" style={{ animationDuration: '20s' }}></div>
+              
+              {/* Effet de glitch sur le texte VRNCA */}
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-4xl font-serif text-evrgrn-blue">VRNCA</div>
+                <div className="text-4xl font-serif text-evrgrn-blue text-glitch" data-text="VRNCA">VRNCA</div>
               </div>
               
               {/* Digital particles */}
@@ -125,6 +130,11 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
             </div>
           </div>
         </div>
+      </div>
+      
+      {/* Scan line effect */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="scan-line"></div>
       </div>
       
       {/* Scroll indicator */}
