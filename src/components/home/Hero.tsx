@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
 import VrncaDialog from '../vrnca/VrncaDialog';
+import VrncaInteractive from '../vrnca/VrncaInteractive';
 import GlitchText from '../ui/GlitchText';
 import { Button } from '@/components/ui/button';
 
@@ -42,11 +43,16 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Hero text content */}
           <div className="text-center lg:text-left">
+            <img 
+              src="/lovable-uploads/01e9bec9-0cde-4e57-a7c9-aa81659ce1c0.png" 
+              alt="EVRGRN Logo"
+              className="h-24 md:h-32 mx-auto lg:mx-0 mb-6"
+            />
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-6">
               <span className="mask-reveal block" style={{ '--delay': '100ms' } as React.CSSProperties}>
                 Bienvenue dans
               </span>
-              <GlitchText className="text-evrgrn-blue block mt-2" intensity="medium">
+              <GlitchText className="text-evrgrn-accent block mt-2" intensity="medium">
                 L'UNIVERS EVRGRN
               </GlitchText>
             </h1>
@@ -56,7 +62,7 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
               producteur, enseignant et créateur de contenu.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mask-reveal" style={{ '--delay': '600ms' } as React.CSSProperties}>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mask-reveal mb-8" style={{ '--delay': '600ms' } as React.CSSProperties}>
               <Button
                 className="btn-primary text-base"
                 onClick={() => console.log("Explore EVRGRN")}
@@ -71,6 +77,11 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
               >
                 Communiquer avec VRNCA
               </Button>
+            </div>
+            
+            {/* VRNCA interactive avatar */}
+            <div className="flex justify-center lg:justify-start mb-12">
+              <VrncaInteractive size="lg" />
             </div>
             
             {/* VRNCA dialog */}
@@ -92,13 +103,18 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
           <div className="relative">
             <div className="aspect-square max-w-md mx-auto relative">
               {/* VRNCA visualization - digital abstract representation */}
-              <div className="absolute inset-0 rounded-full bg-gradient-radial from-evrgrn-blue/20 to-transparent animate-pulse-soft"></div>
-              <div className="absolute inset-8 rounded-full bg-gradient-radial from-evrgrn-blue/30 to-transparent animate-pulse"></div>
-              <div className="absolute inset-16 rounded-full border border-evrgrn-blue/40 animate-spin" style={{ animationDuration: '20s' }}></div>
+              <div className="absolute inset-0 rounded-full bg-gradient-radial from-evrgrn-accent/20 to-transparent animate-pulse-soft"></div>
+              <div className="absolute inset-8 rounded-full bg-gradient-radial from-evrgrn-accent/30 to-transparent animate-pulse"></div>
+              <div className="absolute inset-16 rounded-full border border-evrgrn-accent/40 animate-spin" style={{ animationDuration: '20s' }}></div>
               
-              {/* Effet de glitch sur le texte VRNCA */}
+              {/* EVRGRN Logo */}
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-4xl font-serif text-evrgrn-blue text-glitch" data-text="VRNCA">VRNCA</div>
+                <img 
+                  src="/lovable-uploads/01e9bec9-0cde-4e57-a7c9-aa81659ce1c0.png" 
+                  alt="EVRGRN Logo"
+                  className="w-3/4 h-3/4 object-contain animate-pulse-soft"
+                  style={{ filter: "drop-shadow(0 0 15px rgba(0, 200, 100, 0.5))" }}
+                />
               </div>
               
               {/* Digital particles */}
@@ -106,7 +122,7 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
                 {Array.from({ length: 20 }).map((_, i) => (
                   <div
                     key={i}
-                    className="absolute w-1 h-1 bg-evrgrn-blue rounded-full animate-pulse-soft"
+                    className="absolute w-1 h-1 bg-evrgrn-accent rounded-full animate-pulse-soft"
                     style={{
                       top: `${Math.random() * 100}%`,
                       left: `${Math.random() * 100}%`,
@@ -118,14 +134,14 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
               
               {/* Circuit paths */}
               <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M50 0 V 20" stroke="rgba(0, 120, 255, 0.3)" strokeWidth="0.5" />
-                <path d="M50 80 V 100" stroke="rgba(0, 120, 255, 0.3)" strokeWidth="0.5" />
-                <path d="M0 50 H 20" stroke="rgba(0, 120, 255, 0.3)" strokeWidth="0.5" />
-                <path d="M80 50 H 100" stroke="rgba(0, 120, 255, 0.3)" strokeWidth="0.5" />
-                <path d="M20 20 L 40 40" stroke="rgba(0, 120, 255, 0.3)" strokeWidth="0.5" />
-                <path d="M60 60 L 80 80" stroke="rgba(0, 120, 255, 0.3)" strokeWidth="0.5" />
-                <path d="M20 80 L 40 60" stroke="rgba(0, 120, 255, 0.3)" strokeWidth="0.5" />
-                <path d="M60 40 L 80 20" stroke="rgba(0, 120, 255, 0.3)" strokeWidth="0.5" />
+                <path d="M50 0 V 20" stroke="rgba(0, 200, 100, 0.3)" strokeWidth="0.5" />
+                <path d="M50 80 V 100" stroke="rgba(0, 200, 100, 0.3)" strokeWidth="0.5" />
+                <path d="M0 50 H 20" stroke="rgba(0, 200, 100, 0.3)" strokeWidth="0.5" />
+                <path d="M80 50 H 100" stroke="rgba(0, 200, 100, 0.3)" strokeWidth="0.5" />
+                <path d="M20 20 L 40 40" stroke="rgba(0, 200, 100, 0.3)" strokeWidth="0.5" />
+                <path d="M60 60 L 80 80" stroke="rgba(0, 200, 100, 0.3)" strokeWidth="0.5" />
+                <path d="M20 80 L 40 60" stroke="rgba(0, 200, 100, 0.3)" strokeWidth="0.5" />
+                <path d="M60 40 L 80 20" stroke="rgba(0, 200, 100, 0.3)" strokeWidth="0.5" />
               </svg>
             </div>
           </div>
@@ -140,8 +156,8 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
       {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 5L12 19" stroke="#0078FF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          <path d="M19 12L12 19L5 12" stroke="#0078FF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M12 5L12 19" stroke="rgba(0, 200, 100, 0.8)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M19 12L12 19L5 12" stroke="rgba(0, 200, 100, 0.8)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
       </div>
     </section>

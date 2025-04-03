@@ -9,6 +9,7 @@ import NotFound from "./pages/NotFound";
 
 // Import des pages
 import Music from "./pages/Music";
+import AlbumPage from "./pages/AlbumPage";
 import Events from "./pages/Events";
 import Shop from "./pages/Shop";
 import Biography from "./pages/Biography";
@@ -26,6 +27,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/musique" element={<Music />} />
+          <Route path="/album/:id" element={<AlbumPage />} />
           <Route path="/evenements" element={<Events />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/biographie" element={<Biography />} />

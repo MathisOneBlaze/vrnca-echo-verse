@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import GlitchText from '../ui/GlitchText';
-import VrncaAvatar from '../vrnca/VrncaAvatar';
+import VrncaInteractive from '../vrnca/VrncaInteractive';
 
 interface HeaderProps {
   className?: string;
@@ -40,7 +40,12 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center">
-          <GlitchText intensity="low" className="text-xl font-bold text-evrgrn-accent">
+          <img 
+            src="/lovable-uploads/01e9bec9-0cde-4e57-a7c9-aa81659ce1c0.png"
+            alt="EVRGRN Logo" 
+            className="h-8 mr-2"
+          />
+          <GlitchText intensity="low" className="text-xl font-bold text-evrgrn-accent hidden md:block">
             EVRGRN
           </GlitchText>
         </Link>
@@ -48,23 +53,16 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
           <NavLink to="/" label="Accueil" currentPath={location.pathname} />
-          <NavLink to="/musique" label="EVRGRN Lab" currentPath={location.pathname} />
-          <NavLink to="/evenements" label="Événements" currentPath={location.pathname} />
-          <NavLink to="/publications" label="Publications" currentPath={location.pathname} />
+          <NavLink to="/musique" label="Catalogue" currentPath={location.pathname} />
+          <NavLink to="/biographie" label="Artiste" currentPath={location.pathname} />
+          <NavLink to="/publications" label="Médias" currentPath={location.pathname} />
           <NavLink to="/shop" label="Shop" currentPath={location.pathname} />
-          <NavLink to="/biographie" label="Biographie" currentPath={location.pathname} />
           <NavLink to="/contact" label="Contact" currentPath={location.pathname} />
         </nav>
 
         {/* VRNCA Interactive Element */}
         <div className="hidden md:flex items-center">
-          <button 
-            className="vrnca-button text-sm px-4 py-1.5"
-            onClick={() => console.log('VRNCA interaction')}
-          >
-            <span className="mr-2">VRNCA</span>
-            <VrncaAvatar size="sm" className="inline-block" />
-          </button>
+          <VrncaInteractive size="sm" />
         </div>
 
         {/* Mobile menu button */}
@@ -102,24 +100,15 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
         <div className="container mx-auto px-4 py-4">
           <div className="flex flex-col space-y-4">
             <MobileNavLink to="/" label="Accueil" onClick={() => setIsMenuOpen(false)} currentPath={location.pathname} />
-            <MobileNavLink to="/musique" label="EVRGRN Lab" onClick={() => setIsMenuOpen(false)} currentPath={location.pathname} />
-            <MobileNavLink to="/evenements" label="Événements" onClick={() => setIsMenuOpen(false)} currentPath={location.pathname} />
-            <MobileNavLink to="/publications" label="Publications" onClick={() => setIsMenuOpen(false)} currentPath={location.pathname} />
+            <MobileNavLink to="/musique" label="Catalogue" onClick={() => setIsMenuOpen(false)} currentPath={location.pathname} />
+            <MobileNavLink to="/biographie" label="Artiste" onClick={() => setIsMenuOpen(false)} currentPath={location.pathname} />
+            <MobileNavLink to="/publications" label="Médias" onClick={() => setIsMenuOpen(false)} currentPath={location.pathname} />
             <MobileNavLink to="/shop" label="Shop" onClick={() => setIsMenuOpen(false)} currentPath={location.pathname} />
-            <MobileNavLink to="/biographie" label="Biographie" onClick={() => setIsMenuOpen(false)} currentPath={location.pathname} />
             <MobileNavLink to="/contact" label="Contact" onClick={() => setIsMenuOpen(false)} currentPath={location.pathname} />
             
-            <div className="pt-4 border-t border-evrgrn-accent/20">
-              <button 
-                className="flex items-center text-evrgrn-accent font-medium"
-                onClick={() => {
-                  console.log('Mobile VRNCA interaction');
-                  setIsMenuOpen(false);
-                }}
-              >
-                <VrncaAvatar size="sm" className="mr-2" />
-                <span>Communiquer avec VRNCA</span>
-              </button>
+            <div className="pt-4 border-t border-evrgrn-accent/20 flex items-center">
+              <VrncaInteractive size="sm" className="mr-3" />
+              <span className="text-evrgrn-accent font-medium">Communiquer avec VRNCA</span>
             </div>
           </div>
         </div>

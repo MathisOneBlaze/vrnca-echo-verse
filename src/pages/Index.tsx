@@ -51,6 +51,12 @@ const Index = () => {
     setShowIntro(false);
   };
 
+  // Reset intro (for testing purposes)
+  const resetIntro = () => {
+    localStorage.removeItem('hasSeenIntro');
+    window.location.reload();
+  };
+
   return (
     <div className="bg-evrgrn-dark text-foreground min-h-screen flex flex-col">
       {/* Introduction sequence */}
@@ -85,6 +91,16 @@ const Index = () => {
       
       {/* Interactive particle background */}
       <ParticleBackground />
+      
+      {/* Debug button to reset intro (only visible in development) */}
+      {process.env.NODE_ENV === 'development' && (
+        <button
+          onClick={resetIntro}
+          className="fixed bottom-4 left-4 bg-red-500 text-white px-2 py-1 text-xs rounded opacity-50 hover:opacity-100 z-50"
+        >
+          Reset Intro
+        </button>
+      )}
     </div>
   );
 };

@@ -1,0 +1,110 @@
+
+import React from 'react';
+import { useParams, Link } from 'react-router-dom';
+import Header from '../components/layout/Header';
+import Footer from '../components/layout/Footer';
+import AlbumDetail from '../components/music/AlbumDetail';
+import { Button } from '@/components/ui/button';
+import { ArrowLeft } from 'lucide-react';
+
+// Sample album data - in a real app this would be fetched from an API
+const albumData = [
+  { 
+    id: "1", 
+    title: "TEDDY BLAZE 2", 
+    year: "2024", 
+    collection: "EVRGRN",
+    musicCharacteristics: {
+      calmDancing: 85,
+      engagedSilly: 40,
+      realityFiction: 60
+    }
+  },
+  { 
+    id: "2", 
+    title: "EVRGRN, Le projet", 
+    year: "2024",
+    musicCharacteristics: {
+      calmDancing: 70,
+      engagedSilly: 20,
+      realityFiction: 50
+    }
+  },
+  { 
+    id: "3", 
+    title: "LETTERS II", 
+    year: "2024",
+    musicCharacteristics: {
+      calmDancing: 30,
+      engagedSilly: 80,
+      realityFiction: 65
+    }
+  },
+  { 
+    id: "4", 
+    title: "Maëlstrom", 
+    year: "2024", 
+    collaborators: "LeTrom Beats", 
+    isUnreleased: true,
+    musicCharacteristics: {
+      calmDancing: 60,
+      engagedSilly: 35,
+      realityFiction: 75
+    }
+  }
+  // Add more albums as needed
+];
+
+const AlbumPage: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
+  
+  // Find the album by id
+  const album = albumData.find(album => album.id === id);
+  
+  if (!album) {
+    return (
+      <div className="bg-evrgrn-dark text-foreground min-h-screen flex flex-col">
+        <Header />
+        <main className="flex-grow pt-24">
+          <div className="container mx-auto px-4 py-12">
+            <Link to="/musique" className="text-evrgrn-accent hover:underline flex items-center mb-8">
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Retour au catalogue
+            </Link>
+            <div className="text-center py-12">
+              <h1 className="text-3xl font-serif mb-4">Album non trouvé</h1>
+              <p className="text-muted-foreground mb-8">
+                L'album que vous recherchez n'existe pas ou a été déplacé.
+              </p>
+              <Button asChild>
+                <Link to="/musique">Voir tous les albums</Link>
+              </Button>
+            </div>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+  
+  return (
+    <div className="bg-evrgrn-dark text-foreground min-h-screen flex flex-col">
+      <Header />
+      
+      <main className="flex-grow pt-24">
+        <div className="container mx-auto px-4 py-12">
+          <Link to="/musique" className="text-evrgrn-accent hover:underline flex items-center mb-8">
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Retour au catalogue
+          </Link>
+          
+          <AlbumDetail {...album} />
+        </div>
+      </main>
+      
+      <Footer />
+    </div>
+  );
+};
+
+export default AlbumPage;

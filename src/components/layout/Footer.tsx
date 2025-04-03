@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import GlitchText from '../ui/GlitchText';
+import VrncaInteractive from '../vrnca/VrncaInteractive';
 
 interface FooterProps {
   className?: string;
@@ -15,9 +16,16 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Logo and description */}
           <div className="md:col-span-1">
-            <GlitchText intensity="low" className="text-xl font-bold mb-4 text-evrgrn-accent">
-              EVRGRN
-            </GlitchText>
+            <div className="flex items-center mb-4">
+              <img 
+                src="/lovable-uploads/01e9bec9-0cde-4e57-a7c9-aa81659ce1c0.png"
+                alt="EVRGRN Logo" 
+                className="h-10 mr-2"
+              />
+              <GlitchText intensity="low" className="text-xl font-bold text-evrgrn-accent">
+                EVRGRN
+              </GlitchText>
+            </div>
             <p className="text-muted-foreground mb-4 text-sm">
               Le hub digital de Mathis OneBlaze, artiste multidisciplinaire, producteur, enseignant et créateur de contenu.
             </p>
@@ -35,8 +43,8 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
             <h3 className="text-evrgrn-accent font-medium mb-4 text-sm uppercase tracking-wider">Navigation</h3>
             <ul className="space-y-2 text-sm">
               <FooterLink to="/" label="Accueil" />
-              <FooterLink to="/biographie" label="Biographie" />
-              <FooterLink to="/musique" label="EVRGRN Lab" />
+              <FooterLink to="/biographie" label="Artiste" />
+              <FooterLink to="/musique" label="Catalogue" />
               <FooterLink to="/evenements" label="Événements" />
               <FooterLink to="/shop" label="Shop" />
             </ul>
@@ -54,7 +62,7 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
             </ul>
           </div>
           
-          {/* Contact */}
+          {/* Contact & VRNCA */}
           <div>
             <h3 className="text-evrgrn-accent font-medium mb-4 text-sm uppercase tracking-wider">Contact</h3>
             <ul className="space-y-2 text-sm">
@@ -63,8 +71,9 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
               <FooterLink to="/" label="Mentions légales" />
               <FooterLink to="/" label="Confidentialité" />
             </ul>
-            <div className="mt-4 pt-4 border-t border-evrgrn-accent/10">
-              <button className="vrnca-button text-xs">
+            <div className="mt-4 pt-4 border-t border-evrgrn-accent/10 flex items-center">
+              <VrncaInteractive size="sm" className="mr-3" />
+              <button className="text-sm text-evrgrn-accent hover:text-evrgrn-accent/80 transition-colors">
                 Activer VRNCA Guide
               </button>
             </div>
