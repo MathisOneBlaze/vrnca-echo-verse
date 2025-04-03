@@ -1,15 +1,18 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import GlitchText from '../ui/GlitchText';
-import VrncaInteractive from '../vrnca/VrncaInteractive';
+import VrncaHead from '../vrnca/VrncaHead';
+import VrncaVoiceChat from '../vrnca/VrncaVoiceChat';
 
 interface FooterProps {
   className?: string;
 }
 
 const Footer: React.FC<FooterProps> = ({ className }) => {
+  const [showVoiceChat, setShowVoiceChat] = useState(false);
+
   return (
     <footer className={cn('bg-evrgrn-darker border-t border-evrgrn-accent/10 py-12', className)}>
       <div className="container mx-auto px-4">
@@ -72,9 +75,12 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
               <FooterLink to="/" label="Confidentialité" />
             </ul>
             <div className="mt-4 pt-4 border-t border-evrgrn-accent/10 flex items-center">
-              <VrncaInteractive size="sm" className="mr-3" />
-              <button className="text-sm text-evrgrn-accent hover:text-evrgrn-accent/80 transition-colors">
-                Activer VRNCA Guide
+              <VrncaHead size="sm" className="mr-3" />
+              <button 
+                className="text-sm text-evrgrn-accent hover:text-evrgrn-accent/80 transition-colors"
+                onClick={() => setShowVoiceChat(!showVoiceChat)}
+              >
+                {showVoiceChat ? 'Désactiver VRNCA Guide' : 'Activer VRNCA Guide'}
               </button>
             </div>
           </div>
@@ -87,6 +93,9 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
           </p>
         </div>
       </div>
+      
+      {/* Voice chat component */}
+      {showVoiceChat && <VrncaVoiceChat onClose={() => setShowVoiceChat(false)} />}
     </footer>
   );
 };

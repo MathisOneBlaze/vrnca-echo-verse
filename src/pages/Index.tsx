@@ -6,7 +6,6 @@ import Hero from '../components/home/Hero';
 import FeaturedContent from '../components/home/FeaturedContent';
 import VrncaIntro from '../components/vrnca/VrncaIntro';
 import ParticleBackground from '../components/ui/ParticleBackground';
-import VrncaHead from '../components/vrnca/VrncaHead';
 import { Button } from '@/components/ui/button';
 
 const Index = () => {
@@ -92,14 +91,6 @@ const Index = () => {
       
       {/* Interactive particle background */}
       <ParticleBackground />
-      
-      {/* Fixed VRNCA head in bottom right */}
-      <VrncaHead 
-        size="md" 
-        fixed={true} 
-        position="bottom-right" 
-        className="z-40"
-      />
       
       {/* Debug button to reset intro (only visible in development) */}
       {process.env.NODE_ENV === 'development' && (

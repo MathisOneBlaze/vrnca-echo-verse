@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
 import VrncaDialog from '../vrnca/VrncaDialog';
-import VrncaInteractive from '../vrnca/VrncaInteractive';
+import VrncaHead from '../vrnca/VrncaHead';
 import GlitchText from '../ui/GlitchText';
 import { Button } from '@/components/ui/button';
 
@@ -79,9 +79,9 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
               </Button>
             </div>
             
-            {/* VRNCA interactive avatar */}
+            {/* VRNCA Head instead of interactive avatar */}
             <div className="flex justify-center lg:justify-start mb-12">
-              <VrncaInteractive size="lg" />
+              <VrncaHead size="lg" />
             </div>
             
             {/* VRNCA dialog */}
