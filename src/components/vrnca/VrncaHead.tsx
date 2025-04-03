@@ -6,12 +6,16 @@ interface VrncaHeadProps {
   className?: string;
   size?: 'sm' | 'md' | 'lg';
   initialRotation?: { x: number, y: number };
+  fixed?: boolean;
+  position?: 'bottom-right' | 'bottom-left' | 'top-right' | 'top-left' | 'custom';
 }
 
 const VrncaHead: React.FC<VrncaHeadProps> = ({
   className,
   size = 'md',
-  initialRotation = { x: 0, y: 0 }
+  initialRotation = { x: 0, y: 0 },
+  fixed = false,
+  position = 'custom'
 }) => {
   const [rotation, setRotation] = useState(initialRotation);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -49,16 +53,26 @@ const VrncaHead: React.FC<VrncaHeadProps> = ({
     lg: 'w-48 h-48',
   };
 
+  const positionClasses = {
+    'bottom-right': 'fixed bottom-8 right-8',
+    'bottom-left': 'fixed bottom-8 left-8',
+    'top-right': 'fixed top-8 right-8',
+    'top-left': 'fixed top-8 left-8',
+    'custom': '',
+  };
+
   return (
     <div 
       ref={containerRef}
       className={cn(
         'relative cursor-pointer transition-transform duration-100',
         sizeClasses[size],
+        fixed ? positionClasses[position] : '',
         className
       )}
       style={{
         transform: `perspective(1000px) rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)`,
+        zIndex: fixed ? 50 : 'auto',
       }}
     >
       <img 
