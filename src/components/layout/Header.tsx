@@ -55,7 +55,7 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
           <NavLink to="/" label="Accueil" currentPath={location.pathname} />
-          <NavLink to="/musique" label="Catalogue" currentPath={location.pathname} />
+          <NavLink to="/musique" label="Musique" currentPath={location.pathname} />
           <NavLink to="/biographie" label="Artiste" currentPath={location.pathname} />
           <NavLink to="/publications" label="Médias" currentPath={location.pathname} />
           <NavLink to="/services" label="Services" currentPath={location.pathname} />
@@ -106,7 +106,7 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
         <div className="container mx-auto px-4 py-4">
           <div className="flex flex-col space-y-4">
             <MobileNavLink to="/" label="Accueil" onClick={() => setIsMenuOpen(false)} currentPath={location.pathname} />
-            <MobileNavLink to="/musique" label="Catalogue" onClick={() => setIsMenuOpen(false)} currentPath={location.pathname} />
+            <MobileNavLink to="/musique" label="Musique" onClick={() => setIsMenuOpen(false)} currentPath={location.pathname} />
             <MobileNavLink to="/biographie" label="Artiste" onClick={() => setIsMenuOpen(false)} currentPath={location.pathname} />
             <MobileNavLink to="/publications" label="Médias" onClick={() => setIsMenuOpen(false)} currentPath={location.pathname} />
             <MobileNavLink to="/services" label="Services" onClick={() => setIsMenuOpen(false)} currentPath={location.pathname} />

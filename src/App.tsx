@@ -18,6 +18,9 @@ import Contact from "./pages/Contact";
 import Services from "./pages/Services";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import Register from "./pages/Register";
+import MentionsLegales from "./pages/MentionsLegales";
+import Confidentialite from "./pages/Confidentialite";
 
 const queryClient = new QueryClient();
 
@@ -38,7 +41,10 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />
           <Route path="/services" element={<Services />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/mentions-legales" element={<MentionsLegales />} />
+          <Route path="/confidentialite" element={<Confidentialite />} />
           
           {/* Attrape toutes les autres routes et renvoie vers NotFound */}
           <Route path="*" element={<NotFound />} />

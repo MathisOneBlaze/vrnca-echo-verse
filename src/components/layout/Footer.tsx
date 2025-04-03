@@ -32,12 +32,19 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
             <p className="text-muted-foreground mb-4 text-sm">
               Le hub digital de Mathis OneBlaze, artiste multidisciplinaire, producteur, enseignant et créateur de contenu.
             </p>
-            <div className="flex space-x-4">
+            <div className="flex space-x-4 mb-4">
               {/* Social icons - simplified placeholders */}
               <SocialLink href="#" type="twitch" />
               <SocialLink href="#" type="youtube" />
               <SocialLink href="#" type="instagram" />
               <SocialLink href="#" type="discord" />
+            </div>
+            {/* Nouveaux liens d'authentification */}
+            <div className="pt-4 border-t border-evrgrn-accent/10">
+              <ul className="space-y-2 text-sm">
+                <FooterLink to="/login" label="Se connecter" />
+                <FooterLink to="/register" label="S'inscrire" />
+              </ul>
             </div>
           </div>
           
@@ -47,7 +54,7 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
             <ul className="space-y-2 text-sm">
               <FooterLink to="/" label="Accueil" />
               <FooterLink to="/biographie" label="Artiste" />
-              <FooterLink to="/musique" label="Catalogue" />
+              <FooterLink to="/musique" label="Musique" />
               <FooterLink to="/evenements" label="Événements" />
               <FooterLink to="/shop" label="Shop" />
             </ul>
@@ -58,9 +65,9 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
             <h3 className="text-evrgrn-accent font-medium mb-4 text-sm uppercase tracking-wider">Ressources</h3>
             <ul className="space-y-2 text-sm">
               <FooterLink to="/publications" label="Publications" />
-              <FooterLink to="/publications" label="Livres & Articles" />
-              <FooterLink to="/musique" label="Services Studio" />
-              <FooterLink to="/musique" label="Design & Direction Artistique" />
+              <FooterLink to="/publications#livres" label="Livres & Articles" />
+              <FooterLink to="/services" label="Services Studio" />
+              <FooterLink to="/services#design" label="Design & Direction Artistique" />
               <FooterLink to="/contact" label="Presse & Médias" />
             </ul>
           </div>
@@ -71,8 +78,8 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
             <ul className="space-y-2 text-sm">
               <FooterLink to="/contact" label="Formulaire de contact" />
               <FooterLink to="/contact" label="Contact pros" />
-              <FooterLink to="/" label="Mentions légales" />
-              <FooterLink to="/" label="Confidentialité" />
+              <FooterLink to="/mentions-legales" label="Mentions légales" />
+              <FooterLink to="/confidentialite" label="Confidentialité" />
             </ul>
             <div className="mt-4 pt-4 border-t border-evrgrn-accent/10 flex items-center">
               <VrncaHead size="sm" className="mr-3" />

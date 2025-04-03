@@ -7,6 +7,7 @@ import FeaturedContent from '../components/home/FeaturedContent';
 import VrncaIntro from '../components/vrnca/VrncaIntro';
 import ParticleBackground from '../components/ui/ParticleBackground';
 import { Button } from '@/components/ui/button';
+import VrncaHead from '../components/vrnca/VrncaHead';
 
 const Index = () => {
   // Check if intro has been seen before
@@ -91,6 +92,13 @@ const Index = () => {
       
       {/* Interactive particle background */}
       <ParticleBackground />
+      
+      {/* VRNCA Head in bottom right corner */}
+      <VrncaHead 
+        size="md"
+        fixed={true}
+        position="bottom-right"
+      />
       
       {/* Debug button to reset intro (only visible in development) */}
       {process.env.NODE_ENV === 'development' && (
