@@ -4,6 +4,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import GlitchText from '../ui/GlitchText';
 import VrncaInteractive from '../vrnca/VrncaInteractive';
+import VrncaHead from '../vrnca/VrncaHead';
+import { UserCircle } from 'lucide-react';
 
 interface HeaderProps {
   className?: string;
@@ -56,13 +58,17 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
           <NavLink to="/musique" label="Catalogue" currentPath={location.pathname} />
           <NavLink to="/biographie" label="Artiste" currentPath={location.pathname} />
           <NavLink to="/publications" label="Médias" currentPath={location.pathname} />
+          <NavLink to="/services" label="Services" currentPath={location.pathname} />
           <NavLink to="/shop" label="Shop" currentPath={location.pathname} />
           <NavLink to="/contact" label="Contact" currentPath={location.pathname} />
         </nav>
 
-        {/* VRNCA Interactive Element */}
-        <div className="hidden md:flex items-center">
-          <VrncaInteractive size="sm" />
+        {/* VRNCA Interactive Element et Login */}
+        <div className="hidden md:flex items-center space-x-4">
+          <VrncaHead size="sm" />
+          <Link to="/login" className="text-foreground hover:text-evrgrn-accent transition-colors">
+            <UserCircle className="w-6 h-6" />
+          </Link>
         </div>
 
         {/* Mobile menu button */}
@@ -94,7 +100,7 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
       {/* Mobile menu */}
       <div 
         className={`md:hidden absolute w-full bg-evrgrn-darker/95 backdrop-blur-md transition-all duration-300 border-t border-evrgrn-accent/20 overflow-hidden ${
-          isMenuOpen ? 'max-h-96 border-opacity-100' : 'max-h-0 border-opacity-0'
+          isMenuOpen ? 'max-h-screen border-opacity-100' : 'max-h-0 border-opacity-0'
         }`}
       >
         <div className="container mx-auto px-4 py-4">
@@ -103,11 +109,13 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
             <MobileNavLink to="/musique" label="Catalogue" onClick={() => setIsMenuOpen(false)} currentPath={location.pathname} />
             <MobileNavLink to="/biographie" label="Artiste" onClick={() => setIsMenuOpen(false)} currentPath={location.pathname} />
             <MobileNavLink to="/publications" label="Médias" onClick={() => setIsMenuOpen(false)} currentPath={location.pathname} />
+            <MobileNavLink to="/services" label="Services" onClick={() => setIsMenuOpen(false)} currentPath={location.pathname} />
             <MobileNavLink to="/shop" label="Shop" onClick={() => setIsMenuOpen(false)} currentPath={location.pathname} />
             <MobileNavLink to="/contact" label="Contact" onClick={() => setIsMenuOpen(false)} currentPath={location.pathname} />
+            <MobileNavLink to="/login" label="Connexion" onClick={() => setIsMenuOpen(false)} currentPath={location.pathname} />
             
             <div className="pt-4 border-t border-evrgrn-accent/20 flex items-center">
-              <VrncaInteractive size="sm" className="mr-3" />
+              <VrncaHead size="sm" className="mr-3" />
               <span className="text-evrgrn-accent font-medium">Communiquer avec VRNCA</span>
             </div>
           </div>

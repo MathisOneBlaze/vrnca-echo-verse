@@ -15,6 +15,9 @@ import Shop from "./pages/Shop";
 import Biography from "./pages/Biography";
 import Publications from "./pages/Publications";
 import Contact from "./pages/Contact";
+import Services from "./pages/Services";
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +36,9 @@ const App = () => (
           <Route path="/biographie" element={<Biography />} />
           <Route path="/publications" element={<Publications />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           
           {/* Attrape toutes les autres routes et renvoie vers NotFound */}
           <Route path="*" element={<NotFound />} />
