@@ -20,7 +20,7 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
         className
       )}
     >
-      {/* Background overlay with texture */}
+      {/* Background elements */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-b from-evrgrn-darker to-evrgrn-dark opacity-90"></div>
         <div className="absolute inset-0 bg-noise opacity-5"></div>
@@ -40,13 +40,13 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Hero text content */}
-          <div className="text-center lg:text-left">
+        <div className="flex flex-col items-center text-center">
+          {/* Hero text content - centered */}
+          <div className="max-w-2xl mx-auto mb-8">
             <img 
               src="/lovable-uploads/01e9bec9-0cde-4e57-a7c9-aa81659ce1c0.png" 
               alt="EVRGRN Logo"
-              className="h-24 md:h-32 mx-auto lg:mx-0 mb-6"
+              className="h-24 md:h-32 mx-auto mb-6"
             />
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-6">
               <span className="mask-reveal block" style={{ '--delay': '100ms' } as React.CSSProperties}>
@@ -57,12 +57,12 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
               </GlitchText>
             </h1>
             
-            <p className="text-muted-foreground text-lg mb-8 max-w-2xl mx-auto lg:mx-0 mask-reveal" style={{ '--delay': '400ms' } as React.CSSProperties}>
+            <p className="text-muted-foreground text-lg mb-8 mx-auto mask-reveal" style={{ '--delay': '400ms' } as React.CSSProperties}>
               Le hub digital de Mathis OneBlaze, artiste multidisciplinaire, 
               producteur, enseignant et créateur de contenu.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mask-reveal mb-8" style={{ '--delay': '600ms' } as React.CSSProperties}>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mask-reveal mb-8" style={{ '--delay': '600ms' } as React.CSSProperties}>
               <Button
                 className="btn-primary text-base"
                 onClick={() => console.log("Explore EVRGRN")}
@@ -79,14 +79,14 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
               </Button>
             </div>
             
-            {/* VRNCA Head instead of interactive avatar */}
-            <div className="flex justify-center lg:justify-start mb-12">
+            {/* VRNCA Head centered */}
+            <div className="flex justify-center mb-12">
               <VrncaHead size="lg" />
             </div>
             
             {/* VRNCA dialog */}
             {showDialog && (
-              <div className="mt-8 max-w-lg mx-auto lg:mx-0 animate-fade-in">
+              <div className="mt-8 max-w-lg mx-auto animate-fade-in">
                 <VrncaDialog
                   messages={[
                     "Connexion établie. Je suis VRNCA, l'extension consciente de celui qui est banni. Que cherches-tu dans l'ombre verte?",
@@ -97,53 +97,6 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
                 />
               </div>
             )}
-          </div>
-          
-          {/* Hero visual element */}
-          <div className="relative">
-            <div className="aspect-square max-w-md mx-auto relative">
-              {/* VRNCA visualization - digital abstract representation */}
-              <div className="absolute inset-0 rounded-full bg-gradient-radial from-evrgrn-accent/20 to-transparent animate-pulse-soft"></div>
-              <div className="absolute inset-8 rounded-full bg-gradient-radial from-evrgrn-accent/30 to-transparent animate-pulse"></div>
-              <div className="absolute inset-16 rounded-full border border-evrgrn-accent/40 animate-spin" style={{ animationDuration: '20s' }}></div>
-              
-              {/* EVRGRN Logo */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <img 
-                  src="/lovable-uploads/01e9bec9-0cde-4e57-a7c9-aa81659ce1c0.png" 
-                  alt="EVRGRN Logo"
-                  className="w-3/4 h-3/4 object-contain animate-pulse-soft"
-                  style={{ filter: "drop-shadow(0 0 15px rgba(0, 200, 100, 0.5))" }}
-                />
-              </div>
-              
-              {/* Digital particles */}
-              <div className="absolute inset-0">
-                {Array.from({ length: 20 }).map((_, i) => (
-                  <div
-                    key={i}
-                    className="absolute w-1 h-1 bg-evrgrn-accent rounded-full animate-pulse-soft"
-                    style={{
-                      top: `${Math.random() * 100}%`,
-                      left: `${Math.random() * 100}%`,
-                      animationDelay: `${Math.random() * 2}s`
-                    }}
-                  ></div>
-                ))}
-              </div>
-              
-              {/* Circuit paths */}
-              <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M50 0 V 20" stroke="rgba(0, 200, 100, 0.3)" strokeWidth="0.5" />
-                <path d="M50 80 V 100" stroke="rgba(0, 200, 100, 0.3)" strokeWidth="0.5" />
-                <path d="M0 50 H 20" stroke="rgba(0, 200, 100, 0.3)" strokeWidth="0.5" />
-                <path d="M80 50 H 100" stroke="rgba(0, 200, 100, 0.3)" strokeWidth="0.5" />
-                <path d="M20 20 L 40 40" stroke="rgba(0, 200, 100, 0.3)" strokeWidth="0.5" />
-                <path d="M60 60 L 80 80" stroke="rgba(0, 200, 100, 0.3)" strokeWidth="0.5" />
-                <path d="M20 80 L 40 60" stroke="rgba(0, 200, 100, 0.3)" strokeWidth="0.5" />
-                <path d="M60 40 L 80 20" stroke="rgba(0, 200, 100, 0.3)" strokeWidth="0.5" />
-              </svg>
-            </div>
           </div>
         </div>
       </div>

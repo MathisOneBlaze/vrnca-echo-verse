@@ -93,12 +93,12 @@ const Index = () => {
       {/* Interactive particle background */}
       <ParticleBackground />
       
-      {/* VRNCA Head in bottom right corner */}
-      <VrncaHead 
-        size="md"
-        fixed={true}
-        position="bottom-right"
-      />
+      {/* VRNCA Head centered on the screen */}
+      <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50">
+        <VrncaHead 
+          size="md"
+        />
+      </div>
       
       {/* Debug button to reset intro (only visible in development) */}
       {process.env.NODE_ENV === 'development' && (
