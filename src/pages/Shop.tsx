@@ -1,18 +1,20 @@
 
 import React, { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { ShoppingCart } from 'lucide-react';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
-import ProductCard, { Product } from '../components/shop/ProductCard';
+import ProductCard from '../components/shop/ProductCard';
 import ShopFilters from '../components/shop/ShopFilters';
 import ShopProductGrid from '../components/shop/ShopProductGrid';
+import CartDropdown from '../components/shop/CartDropdown';
 import { shopItems } from '../components/shop/ShopData';
+import { useCart } from '../context/CartContext';
 
 const Shop = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [sortOption, setSortOption] = useState("newest");
   const [activeCategory, setActiveCategory] = useState("all");
+  const { addToCart } = useCart();
 
   const filteredProducts = shopItems.filter(item => {
     const matchesCategory = activeCategory === "all" || item.category === activeCategory;
@@ -55,9 +57,7 @@ const Shop = () => {
             </div>
             <div className="flex items-center space-x-2">
               <span className="hidden md:inline text-evrgrn-accent">Panier</span>
-              <button className="bg-evrgrn-muted hover:bg-evrgrn-light p-2 rounded-full transition-colors">
-                <ShoppingCart className="h-5 w-5 text-evrgrn-accent" />
-              </button>
+              <CartDropdown />
             </div>
           </div>
           
@@ -80,23 +80,43 @@ const Shop = () => {
             </TabsList>
             
             <TabsContent value="all" className="mt-6">
-              <ShopProductGrid products={sortedProducts} />
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {sortedProducts.map((product) => (
+                  <ProductCard key={product.id} product={product} addToCart={addToCart} />
+                ))}
+              </div>
             </TabsContent>
             
             <TabsContent value="featured" className="mt-6">
-              <ShopProductGrid products={sortedProducts.filter(p => p.isFeatured)} />
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {sortedProducts.filter(p => p.isFeatured).map((product) => (
+                  <ProductCard key={product.id} product={product} addToCart={addToCart} />
+                ))}
+              </div>
             </TabsContent>
             
             <TabsContent value="clothing" className="mt-6">
-              <ShopProductGrid products={sortedProducts.filter(p => p.category === 'clothing')} />
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {sortedProducts.filter(p => p.category === 'clothing').map((product) => (
+                  <ProductCard key={product.id} product={product} addToCart={addToCart} />
+                ))}
+              </div>
             </TabsContent>
             
             <TabsContent value="accessories" className="mt-6">
-              <ShopProductGrid products={sortedProducts.filter(p => p.category === 'accessories')} />
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {sortedProducts.filter(p => p.category === 'accessories').map((product) => (
+                  <ProductCard key={product.id} product={product} addToCart={addToCart} />
+                ))}
+              </div>
             </TabsContent>
             
             <TabsContent value="music" className="mt-6">
-              <ShopProductGrid products={sortedProducts.filter(p => p.category === 'music')} />
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {sortedProducts.filter(p => p.category === 'music').map((product) => (
+                  <ProductCard key={product.id} product={product} addToCart={addToCart} />
+                ))}
+              </div>
             </TabsContent>
           </Tabs>
           
@@ -104,7 +124,7 @@ const Shop = () => {
             <div className="flex justify-center mb-4">
               <div className="flex space-x-4 items-center">
                 <img 
-                  src="/lovable-uploads/ab3f2594-f0b8-44d7-a839-d3a957a32f1b.png" 
+                  src="/lovable-uploads/01e9bec9-0cde-4e57-a7c9-aa81659ce1c0.png" 
                   alt="EVRGRN Logo" 
                   className="h-10"
                 />
