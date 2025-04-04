@@ -75,7 +75,7 @@ const Biography = () => {
               <h2 className="text-2xl font-medium mt-8 mb-4">Parcours musical</h2>
               
               <p>
-                Mathis se fait connaître sur la scène rap antillaise sous le nom de OneBlaze. Inspiré par ses racines caribéennes et son déplacement en banlieue parisienne, après des projets en groupe comme la série #Konewing, il franchit une étape décisive avec l'univers Teddy Blaze puis développe son identité artistique à travers des œuvres telles que "MAGNUM (Œuvre au Noir)" qui explore l'alchimie intérieure.
+                Mathis se fait connaître sur la scène battle rap antillaise sous le nom de OneBlaze. Inspiré par ses racines caribéennes et son déplacement en banlieue parisienne, après des projets en groupe comme la série #Konewing, il franchit une étape décisive avec l'univers Teddy Blaze puis développe son identité artistique à travers des œuvres telles que "MAGNUM (Œuvre au Noir)" qui explore l'alchimie intérieure.
               </p>
               
               <p>
