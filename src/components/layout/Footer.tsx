@@ -39,7 +39,7 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
               <SocialLink href="#" type="instagram" />
               <SocialLink href="#" type="discord" />
             </div>
-            {/* Nouveaux liens d'authentification */}
+            {/* Liens d'authentification */}
             <div className="pt-4 border-t border-evrgrn-accent/10">
               <ul className="space-y-2 text-sm">
                 <FooterLink to="/login" label="Se connecter" />

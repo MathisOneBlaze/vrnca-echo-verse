@@ -8,82 +8,90 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
 import { Badge } from '@/components/ui/badge';
 import { Check, Star } from 'lucide-react';
 import GlitchText from '@/components/ui/GlitchText';
+import { Link } from 'react-router-dom';
+import { useToast } from '@/hooks/use-toast';
 
 const Services = () => {
-  // Les différents niveaux d'adhésion
+  const { toast } = useToast();
+  
+  // Les différents niveaux d'adhésion selon la nouvelle nomenclature
   const subscriptionTiers = [
     {
-      name: 'Argent',
-      color: 'bg-gradient-to-br from-gray-300 to-gray-500',
-      price: '9,99€',
-      period: 'par mois',
-      description: 'Accès de base aux ressources exclusives EVRGRN',
+      name: 'Ceinture Blanche',
+      color: 'bg-gradient-to-br from-gray-100 to-gray-300',
+      price: 'Gratuit',
+      period: '',
+      description: 'Accès gratuit dès la création de votre compte',
       features: [
-        'Accès aux recherches',
-        'Accès aux données statistiques',
-        'Accès aux schémas',
-        'Newsletters exclusives',
+        'Accès anticipé aux ventes exclusives',
+        'Accès au catalogue complet',
+        'Accès aux séances de dédicaces',
+        'Pop-up shops et événements',
       ],
       popular: false,
-      buttonText: 'Commencer',
+      buttonText: 'S\'inscrire gratuitement',
+      buttonLink: '/register'
     },
     {
-      name: 'Or',
-      color: 'bg-gradient-to-br from-yellow-300 to-amber-600',
+      name: 'Ceinture Verte',
+      color: 'bg-gradient-to-br from-green-400 to-green-700',
       price: '19,99€',
       period: 'par mois',
       description: 'Pour les créateurs sérieux qui veulent développer leur art',
       features: [
-        'Tout du niveau Argent',
-        'Applications personnalisées',
-        'Ressources exclusives',
-        'Remises sur les produits',
-        'Sessions de Q&R mensuelles',
+        'Tout de la Ceinture Blanche',
+        'Accès à toutes les recherches',
+        'Articles et vidéos complètes',
+        'Assets (PDF, schémas, sources)',
+        'Tarifs préférentiels pour masterclass',
+        'Remises sur les achats shop',
       ],
       popular: true,
       buttonText: 'S\'abonner',
+      buttonLink: '/register'
     },
     {
-      name: 'Diamant',
-      color: 'bg-gradient-to-br from-blue-300 to-purple-600',
-      price: '49,99€',
-      period: 'par mois',
-      description: 'Relation directe et privilégiée avec Mathis OneBlaze',
+      name: 'Ceinture Noire',
+      color: 'bg-gradient-to-br from-gray-800 to-black',
+      price: 'Sur devis',
+      period: '',
+      description: 'Conseil personnalisé et accompagnement VIP',
       features: [
-        'Tout du niveau Or',
-        'Extraits de livre en avant-première',
-        'Comptes rendus de conférences',
-        'Consulting direct avec Mathis OneBlaze',
-        'Accès au numéro de téléphone personnel',
-        'Accompagnement personnalisé',
+        'Tout de la Ceinture Verte',
+        'Accès aux applications exclusives',
+        'Pass VIP gratuits pour les événements',
+        'Conseil personnalisé',
+        'Coaching sur mesure',
+        'Accompagnement de carrière',
       ],
       popular: false,
-      buttonText: 'Devenir Membre Premium',
+      buttonText: 'Demander un devis',
+      buttonAction: () => toast({
+        title: "Demande de devis",
+        description: "Le formulaire de demande sera disponible prochainement."
+      })
     },
   ];
 
-  // Services de consulting et formation
+  // Services de consulting
   const consultingServices = [
     {
       title: 'Consulting Production Musicale',
       description: 'Sessions de consulting personnalisées pour vos projets musicaux avec analyse détaillée et conseils techniques.',
-      price: 'À partir de 150€',
-      duration: 'Session de 2 heures',
       tags: ['Production', 'Mixage', 'Mastering'],
+      level: 'Ceinture Noire'
     },
     {
       title: 'Formation Théorie Musicale',
       description: 'Cours particuliers adaptés à votre niveau pour maîtriser les fondamentaux théoriques et les appliquer à votre musique.',
-      price: 'À partir de 80€',
-      duration: 'Session de 1 heure',
       tags: ['Théorie', 'Composition', 'Harmonie'],
+      level: 'Ceinture Noire'
     },
     {
       title: 'Stratégie Carrière Artistique',
       description: 'Accompagnement complet dans le développement de votre carrière artistique: positionnement, communication, business plan.',
-      price: 'Sur devis',
-      duration: 'Programme personnalisé',
       tags: ['Stratégie', 'Marketing', 'Développement'],
+      level: 'Ceinture Noire'
     },
   ];
 
@@ -96,7 +104,7 @@ const Services = () => {
         {/* En-tête de page */}
         <section className="container mx-auto px-4 py-12 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            <GlitchText intensity="medium">Services & Abonnements</GlitchText>
+            <GlitchText intensity="medium">Niveaux d'Adhésion</GlitchText>
           </h1>
           <p className="text-lg md:text-xl max-w-3xl mx-auto text-muted-foreground mb-8">
             Rejoignez l'écosystème EVRGRN et accédez à des ressources exclusives, du mentorat personnalisé
@@ -143,9 +151,19 @@ const Services = () => {
                 </CardContent>
                 
                 <CardFooter>
-                  <Button className="w-full" variant={tier.popular ? "default" : "outline"}>
-                    {tier.buttonText}
-                  </Button>
+                  {tier.buttonLink ? (
+                    <Button className="w-full" variant={tier.popular ? "default" : "outline"} asChild>
+                      <Link to={tier.buttonLink}>{tier.buttonText}</Link>
+                    </Button>
+                  ) : (
+                    <Button 
+                      className="w-full" 
+                      variant={tier.popular ? "default" : "outline"}
+                      onClick={tier.buttonAction}
+                    >
+                      {tier.buttonText}
+                    </Button>
+                  )}
                 </CardFooter>
               </Card>
             ))}
@@ -175,10 +193,17 @@ const Services = () => {
                   
                   <div className="flex justify-between items-center mt-6">
                     <div>
-                      <p className="text-lg font-bold">{service.price}</p>
-                      <p className="text-sm text-muted-foreground">{service.duration}</p>
+                      <p className="text-sm text-muted-foreground">Disponible pour:</p>
+                      <Badge variant="outline" className="mt-1 bg-gray-800 text-white">
+                        {service.level}
+                      </Badge>
                     </div>
-                    <Button variant="outline" size="sm">En savoir plus</Button>
+                    <Button variant="outline" size="sm" onClick={() => toast({
+                      title: "Demande de devis",
+                      description: "Le formulaire de demande sera disponible prochainement."
+                    })}>
+                      Sur devis
+                    </Button>
                   </div>
                 </CardContent>
               </Card>
@@ -186,11 +211,14 @@ const Services = () => {
           </div>
           
           <div className="text-center mt-12">
-            <Button size="lg" className="bg-evrgrn-accent hover:bg-evrgrn-accent/80">
+            <Button size="lg" className="bg-evrgrn-accent hover:bg-evrgrn-accent/80" onClick={() => toast({
+              title: "Demande de devis personnalisé",
+              description: "Le formulaire de demande sera disponible prochainement."
+            })}>
               Demander un devis personnalisé
             </Button>
             <p className="text-sm text-muted-foreground mt-4">
-              Chaque service peut être adapté à vos besoins spécifiques. Contactez-nous pour une évaluation personnalisée.
+              Tous nos services de consulting sont disponibles sur devis. Contactez-nous pour une évaluation personnalisée.
             </p>
           </div>
         </section>
@@ -202,10 +230,10 @@ const Services = () => {
           <div className="max-w-3xl mx-auto space-y-6">
             <Card>
               <CardHeader>
-                <CardTitle className="text-xl">Comment choisir mon niveau d'adhésion ?</CardTitle>
+                <CardTitle className="text-xl">Comment fonctionnent les niveaux d'adhésion ?</CardTitle>
               </CardHeader>
               <CardContent>
-                <p>Votre choix dépend de vos objectifs artistiques et professionnels. Le niveau Argent est idéal pour découvrir l'écosystème, Or pour les artistes engagés dans leur développement, et Diamant pour ceux qui souhaitent un accompagnement personnalisé direct avec Mathis OneBlaze.</p>
+                <p>Chaque niveau d'adhésion vous donne accès à des avantages spécifiques. La Ceinture Blanche est gratuite et s'obtient dès la création d'un compte. La Ceinture Verte offre des avantages premium avec un abonnement mensuel. La Ceinture Noire propose un accompagnement personnalisé avec des services sur devis.</p>
               </CardContent>
             </Card>
             
@@ -220,10 +248,10 @@ const Services = () => {
             
             <Card>
               <CardHeader>
-                <CardTitle className="text-xl">Comment se déroulent les sessions de consulting ?</CardTitle>
+                <CardTitle className="text-xl">Comment se déroulent les services de consulting ?</CardTitle>
               </CardHeader>
               <CardContent>
-                <p>Les sessions se déroulent en visioconférence ou en présentiel selon les disponibilités. Vous recevrez un questionnaire préalable pour préparer la session et maximiser son efficacité. Un suivi post-session est également inclus.</p>
+                <p>Les services de consulting de la Ceinture Noire sont personnalisés et adaptés à vos besoins spécifiques. Après votre demande de devis, nous vous contacterons pour définir précisément vos objectifs et vous proposer un accompagnement sur mesure.</p>
               </CardContent>
             </Card>
           </div>

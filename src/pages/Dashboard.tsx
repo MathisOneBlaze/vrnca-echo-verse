@@ -12,11 +12,12 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Bell, Calendar, CreditCard, Download, Music, Settings, User } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import GlitchText from '@/components/ui/GlitchText';
+import { Link } from 'react-router-dom';
 
 // Cet exemple de Dashboard sera connecté à Supabase plus tard
 const Dashboard = () => {
   const { toast } = useToast();
-  const [membershipLevel, setMembershipLevel] = useState('argent'); // argent, or, diamant
+  const [membershipLevel, setMembershipLevel] = useState('blanche'); // blanche, verte, noire
 
   // Données factices pour le tableau de bord
   const userData = {
@@ -26,18 +27,40 @@ const Dashboard = () => {
     memberSince: '10 mars 2023',
     membership: {
       level: membershipLevel,
-      nextPayment: '15 juillet 2023',
-      price: membershipLevel === 'argent' ? '9,99€' : 
-             membershipLevel === 'or' ? '19,99€' : '49,99€'
+      nextPayment: membershipLevel === 'blanche' ? '-' : '15 juillet 2023',
+      price: membershipLevel === 'blanche' ? 'Gratuit' : 
+             membershipLevel === 'verte' ? '19,99€/mois' : 'Sur devis'
     }
   };
   
   const resources = [
-    { id: 1, title: 'Guide de production - Introduction', type: 'PDF', size: '2.3 MB', date: '12/05/2023', access: ['argent', 'or', 'diamant'] },
-    { id: 2, title: 'Templates Ableton Live - Pack 1', type: 'ZIP', size: '156 MB', date: '28/04/2023', access: ['or', 'diamant'] },
-    { id: 3, title: 'Masterclass Mixage Vocals', type: 'VIDEO', size: '1.2 GB', date: '05/06/2023', access: ['or', 'diamant'] },
-    { id: 4, title: 'Consultation privée - Réservation', type: 'BOOKING', date: '10/07/2023', access: ['diamant'] },
-    { id: 5, title: 'Analyse de projet personnalisée', type: 'SERVICE', date: 'Sur demande', access: ['diamant'] },
+    { id: 1, title: 'Guide de production - Introduction', type: 'PDF', size: '2.3 MB', date: '12/05/2023', access: ['blanche', 'verte', 'noire'] },
+    { id: 2, title: 'Templates Ableton Live - Pack 1', type: 'ZIP', size: '156 MB', date: '28/04/2023', access: ['verte', 'noire'] },
+    { id: 3, title: 'Masterclass Mixage Vocals', type: 'VIDEO', size: '1.2 GB', date: '05/06/2023', access: ['verte', 'noire'] },
+    { id: 4, title: 'Consultation privée - Réservation', type: 'BOOKING', date: '10/07/2023', access: ['noire'] },
+    { id: 5, title: 'Analyse de projet personnalisée', type: 'SERVICE', date: 'Sur demande', access: ['noire'] },
+  ];
+
+  // Événements exclusifs pour les membres
+  const memberEvents = [
+    { 
+      id: 1, 
+      title: 'Masterclass Production Musicale', 
+      date: '15/07/2023', 
+      time: '18:00', 
+      location: 'En ligne',
+      access: ['verte', 'noire'],
+      hasTicket: membershipLevel === 'noire'
+    },
+    { 
+      id: 2, 
+      title: 'Pop-up Shop EVRGRN', 
+      date: '22/07/2023', 
+      time: '14:00 - 20:00', 
+      location: 'Paris',
+      access: ['blanche', 'verte', 'noire'],
+      hasTicket: false
+    },
   ];
 
   // Fonctions d'interaction
@@ -63,13 +86,53 @@ const Dashboard = () => {
     }
   };
 
+  const handleEventAction = (event: any) => {
+    if (event.hasTicket) {
+      toast({
+        title: "Pass VIP activé",
+        description: "Votre réservation a été confirmée."
+      });
+    } else if (event.access.includes(membershipLevel)) {
+      toast({
+        title: "Réservation en cours",
+        description: "La réservation sera disponible prochainement."
+      });
+    } else {
+      toast({
+        title: "Accès restreint",
+        description: "Ce contenu est réservé aux membres premium.",
+        variant: "destructive"
+      });
+    }
+  };
+
   // Simuler un changement de niveau d'adhésion pour la démo
   const changeMembershipLevel = (level: string) => {
     setMembershipLevel(level);
     toast({
       title: `Niveau d'adhésion modifié`,
-      description: `Vous simulez maintenant le niveau ${level.toUpperCase()}`
+      description: `Vous simulez maintenant le niveau Ceinture ${level.charAt(0).toUpperCase() + level.slice(1)}`
     });
+  };
+
+  // Fonction pour obtenir le nom complet du niveau
+  const getMembershipName = (level: string) => {
+    switch(level) {
+      case 'blanche': return 'Ceinture Blanche';
+      case 'verte': return 'Ceinture Verte';
+      case 'noire': return 'Ceinture Noire';
+      default: return level;
+    }
+  };
+
+  // Fonction pour obtenir la couleur du badge selon le niveau
+  const getMembershipColor = (level: string) => {
+    switch(level) {
+      case 'blanche': return 'bg-gray-300';
+      case 'verte': return 'bg-green-600';
+      case 'noire': return 'bg-black';
+      default: return 'bg-gray-300';
+    }
   };
 
   return (
@@ -80,8 +143,8 @@ const Dashboard = () => {
       <main className="flex-1 pt-24 pb-16 container mx-auto px-4">
         <div className="mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold"><GlitchText intensity="low">Tableau de Bord</GlitchText></h1>
-            <p className="text-muted-foreground">Bienvenue dans votre espace personnel EVRGRN</p>
+            <h1 className="text-3xl font-bold"><GlitchText intensity="low">Espace Personnel</GlitchText></h1>
+            <p className="text-muted-foreground">Bienvenue dans votre espace membre EVRGRN</p>
           </div>
           
           <div className="flex items-center space-x-4">
@@ -89,25 +152,25 @@ const Dashboard = () => {
               <p className="text-sm font-medium">Simuler le niveau:</p>
               <div className="flex space-x-2 mt-1">
                 <Button 
-                  variant={membershipLevel === 'argent' ? 'default' : 'outline'} 
+                  variant={membershipLevel === 'blanche' ? 'default' : 'outline'} 
                   size="sm"
-                  onClick={() => changeMembershipLevel('argent')}
+                  onClick={() => changeMembershipLevel('blanche')}
                 >
-                  Argent
+                  Blanche
                 </Button>
                 <Button 
-                  variant={membershipLevel === 'or' ? 'default' : 'outline'} 
+                  variant={membershipLevel === 'verte' ? 'default' : 'outline'} 
                   size="sm"
-                  onClick={() => changeMembershipLevel('or')}
+                  onClick={() => changeMembershipLevel('verte')}
                 >
-                  Or
+                  Verte
                 </Button>
                 <Button 
-                  variant={membershipLevel === 'diamant' ? 'default' : 'outline'} 
+                  variant={membershipLevel === 'noire' ? 'default' : 'outline'} 
                   size="sm"
-                  onClick={() => changeMembershipLevel('diamant')}
+                  onClick={() => changeMembershipLevel('noire')}
                 >
-                  Diamant
+                  Noire
                 </Button>
               </div>
             </div>
@@ -135,13 +198,9 @@ const Dashboard = () => {
                     <div className="flex justify-between items-center mb-2">
                       <div className="flex items-center">
                         <Badge 
-                          className={`
-                            ${membershipLevel === 'argent' ? 'bg-gray-400' : 
-                             membershipLevel === 'or' ? 'bg-amber-500' : 'bg-blue-500'} 
-                            text-white
-                          `}
+                          className={`${getMembershipColor(membershipLevel)} text-white`}
                         >
-                          {membershipLevel.toUpperCase()}
+                          {getMembershipName(membershipLevel)}
                         </Badge>
                         <span className="ml-2 text-sm text-muted-foreground">Niveau d'adhésion</span>
                       </div>
@@ -149,6 +208,7 @@ const Dashboard = () => {
                         variant="outline" 
                         size="sm"
                         onClick={handleUpgradeClick}
+                        disabled={membershipLevel === 'noire'}
                       >
                         Améliorer
                       </Button>
@@ -156,17 +216,23 @@ const Dashboard = () => {
                     
                     <div className="text-xs text-muted-foreground">
                       <p>Membre depuis: {userData.memberSince}</p>
-                      <p>Prochain paiement: {userData.membership.nextPayment}</p>
-                      <p>Montant: {userData.membership.price}/mois</p>
+                      {membershipLevel !== 'blanche' && (
+                        <p>Prochain paiement: {userData.membership.nextPayment}</p>
+                      )}
+                      <p>Montant: {userData.membership.price}</p>
                     </div>
                   </div>
                   
                   <div className="space-y-1">
-                    <p className="text-sm font-medium">Utilisation des ressources</p>
-                    <Progress value={membershipLevel === 'argent' ? 30 : membershipLevel === 'or' ? 60 : 90} className="h-2" />
+                    <p className="text-sm font-medium">Progrès du niveau</p>
+                    <Progress 
+                      value={membershipLevel === 'blanche' ? 30 : 
+                            membershipLevel === 'verte' ? 60 : 100} 
+                      className="h-2" 
+                    />
                     <p className="text-xs text-muted-foreground text-right">
-                      {membershipLevel === 'argent' ? '3/10' : 
-                       membershipLevel === 'or' ? '6/10' : '9/10'} ressources consultées
+                      {membershipLevel === 'blanche' ? '3/10' : 
+                       membershipLevel === 'verte' ? '6/10' : '10/10'} ressources consultées
                     </p>
                   </div>
                   
@@ -205,19 +271,24 @@ const Dashboard = () => {
                   <div className="bg-evrgrn-darker/30 rounded-md p-4 text-center">
                     <p className="text-sm font-medium text-muted-foreground">Ressources disponibles</p>
                     <p className="text-3xl font-bold mt-1">
-                      {membershipLevel === 'argent' ? '14' : 
-                       membershipLevel === 'or' ? '32' : '49'}
+                      {membershipLevel === 'blanche' ? '4' : 
+                       membershipLevel === 'verte' ? '15' : '32'}
                     </p>
                   </div>
                   
                   <div className="bg-evrgrn-darker/30 rounded-md p-4 text-center">
                     <p className="text-sm font-medium text-muted-foreground">Événements à venir</p>
-                    <p className="text-3xl font-bold mt-1">2</p>
+                    <p className="text-3xl font-bold mt-1">
+                      {memberEvents.filter(e => e.access.includes(membershipLevel)).length}
+                    </p>
                   </div>
                   
                   <div className="bg-evrgrn-darker/30 rounded-md p-4 text-center">
-                    <p className="text-sm font-medium text-muted-foreground">Nouvelles publications</p>
-                    <p className="text-3xl font-bold mt-1">5</p>
+                    <p className="text-sm font-medium text-muted-foreground">Avantages exclusifs</p>
+                    <p className="text-3xl font-bold mt-1">
+                      {membershipLevel === 'blanche' ? '3' : 
+                       membershipLevel === 'verte' ? '8' : '12'}
+                    </p>
                   </div>
                 </div>
               </CardContent>
@@ -309,16 +380,72 @@ const Dashboard = () => {
                           </Button>
                         </div>
                       )}
+                      
+                      {membershipLevel !== 'noire' && (
+                        <div className="mt-6 p-4 bg-evrgrn-darker/30 rounded-md">
+                          <p className="text-sm mb-2">Débloquez plus de contenu avec un abonnement supérieur</p>
+                          <Button size="sm" onClick={handleUpgradeClick}>
+                            Voir les options d'abonnement
+                          </Button>
+                        </div>
+                      )}
                     </div>
                   </TabsContent>
                   
                   <TabsContent value="events">
-                    <div className="bg-evrgrn-darker/30 rounded-md p-6 text-center">
-                      <p className="text-lg font-medium mb-2">Aucun événement à venir</p>
-                      <p className="text-muted-foreground mb-4">
-                        Les prochains événements seront affichés ici dès qu'ils seront disponibles
-                      </p>
-                    </div>
+                    {memberEvents.length > 0 ? (
+                      <div className="space-y-4">
+                        {memberEvents.map(event => (
+                          <div 
+                            key={event.id}
+                            className={`p-4 rounded-md border ${
+                              event.access.includes(membershipLevel) 
+                                ? 'border-evrgrn-accent/20' 
+                                : 'border-gray-700 opacity-50'
+                            }`}
+                          >
+                            <div className="flex justify-between items-start">
+                              <div>
+                                <h3 className="font-medium">{event.title}</h3>
+                                <p className="text-sm text-muted-foreground">
+                                  {event.date} à {event.time}
+                                </p>
+                                <p className="text-sm">
+                                  Lieu: {event.location}
+                                </p>
+                              </div>
+                              <div>
+                                {event.hasTicket ? (
+                                  <Badge className="bg-green-600 text-white">Pass VIP</Badge>
+                                ) : event.access.includes(membershipLevel) ? (
+                                  <Badge variant="outline">Accès autorisé</Badge>
+                                ) : (
+                                  <Badge variant="outline" className="bg-gray-800/50">Accès restreint</Badge>
+                                )}
+                              </div>
+                            </div>
+                            
+                            <div className="mt-4 flex justify-end">
+                              <Button 
+                                size="sm" 
+                                variant={event.access.includes(membershipLevel) ? "outline" : "ghost"}
+                                disabled={!event.access.includes(membershipLevel)}
+                                onClick={() => handleEventAction(event)}
+                              >
+                                {event.hasTicket ? 'Voir mon pass' : 'Réserver'}
+                              </Button>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="bg-evrgrn-darker/30 rounded-md p-6 text-center">
+                        <p className="text-lg font-medium mb-2">Aucun événement à venir</p>
+                        <p className="text-muted-foreground mb-4">
+                          Les prochains événements seront affichés ici dès qu'ils seront disponibles
+                        </p>
+                      </div>
+                    )}
                   </TabsContent>
                   
                   <TabsContent value="projects">
@@ -333,6 +460,46 @@ const Dashboard = () => {
                 </Tabs>
               </CardContent>
             </Card>
+            
+            {/* Appel à l'action pour les fonctionnalités premium */}
+            {membershipLevel === 'blanche' && (
+              <Card className="border border-green-500/20 bg-gradient-to-br from-green-900/20 to-green-800/10">
+                <CardHeader>
+                  <CardTitle>Passez à la Ceinture Verte</CardTitle>
+                  <CardDescription>
+                    Débloquez l'accès à toutes les recherches, articles, vidéos complètes et bien plus
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="grid grid-cols-2 gap-2">
+                    <div className="flex items-center">
+                      <Check className="h-5 w-5 text-green-500 mr-2" />
+                      <span className="text-sm">Ressources exclusives</span>
+                    </div>
+                    <div className="flex items-center">
+                      <Check className="h-5 w-5 text-green-500 mr-2" />
+                      <span className="text-sm">Tarifs préférentiels</span>
+                    </div>
+                    <div className="flex items-center">
+                      <Check className="h-5 w-5 text-green-500 mr-2" />
+                      <span className="text-sm">Articles et vidéos complètes</span>
+                    </div>
+                    <div className="flex items-center">
+                      <Check className="h-5 w-5 text-green-500 mr-2" />
+                      <span className="text-sm">Remises sur le shop</span>
+                    </div>
+                  </div>
+                  
+                  <div className="flex justify-center">
+                    <Button asChild className="bg-green-600 hover:bg-green-700">
+                      <Link to="/services">
+                        Passer à la Ceinture Verte
+                      </Link>
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
           </div>
         </div>
       </main>

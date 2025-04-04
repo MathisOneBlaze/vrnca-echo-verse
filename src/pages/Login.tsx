@@ -11,6 +11,8 @@ import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
 import GlitchText from '@/components/ui/GlitchText';
+import { Facebook, Twitter, UserCheck } from 'lucide-react';
+import { FaGoogle } from 'react-icons/fa';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -25,12 +27,11 @@ const Login = () => {
     });
   };
 
-  const handleRegister = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Cette fonction sera remplacée par l'enregistrement Supabase
+  const handleSocialAuth = (provider: string) => {
+    // Cette fonction sera remplacée par l'authentification sociale Supabase
     toast({
-      title: "Fonctionnalité en cours de développement",
-      description: "L'enregistrement sera bientôt disponible via Supabase.",
+      title: `Connexion via ${provider}`,
+      description: "L'authentification sociale sera bientôt disponible via Supabase.",
     });
   };
 
@@ -91,38 +92,13 @@ const Login = () => {
               </TabsContent>
               
               <TabsContent value="register">
-                <form onSubmit={handleRegister} className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="firstName">Prénom</Label>
-                      <Input id="firstName" required />
-                    </div>
-                    
-                    <div className="space-y-2">
-                      <Label htmlFor="lastName">Nom</Label>
-                      <Input id="lastName" required />
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="registerEmail">Email</Label>
-                    <Input id="registerEmail" type="email" placeholder="votre@email.com" required />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="registerPassword">Mot de passe</Label>
-                    <Input id="registerPassword" type="password" required />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="confirmPassword">Confirmer le mot de passe</Label>
-                    <Input id="confirmPassword" type="password" required />
-                  </div>
-                  
-                  <Button type="submit" className="w-full">
+                <div className="text-center py-2">
+                  <p>Pour créer un compte complet, veuillez utiliser la page d'inscription</p>
+                  <Button className="mt-4" onClick={() => navigate('/register')}>
+                    <UserCheck className="mr-2 h-4 w-4" />
                     Créer un compte
                   </Button>
-                </form>
+                </div>
               </TabsContent>
             </Tabs>
           </CardContent>
@@ -132,20 +108,40 @@ const Login = () => {
               ou continuer avec
             </div>
             
-            <div className="grid grid-cols-2 gap-4 w-full">
-              <Button variant="outline" onClick={() => toast({
-                title: "Connexion Google",
-                description: "Cette fonctionnalité sera disponible prochainement."
-              })}>
+            <div className="grid grid-cols-3 gap-4 w-full">
+              <Button 
+                variant="outline" 
+                className="flex items-center justify-center"
+                onClick={() => handleSocialAuth('Google')}
+              >
+                <FaGoogle className="mr-2 h-4 w-4" />
                 Google
               </Button>
               
-              <Button variant="outline" onClick={() => toast({
-                title: "Connexion Facebook",
-                description: "Cette fonctionnalité sera disponible prochainement."
-              })}>
+              <Button 
+                variant="outline"
+                className="flex items-center justify-center" 
+                onClick={() => handleSocialAuth('Facebook')}
+              >
+                <Facebook className="mr-2 h-4 w-4" />
                 Facebook
               </Button>
+              
+              <Button 
+                variant="outline"
+                className="flex items-center justify-center" 
+                onClick={() => handleSocialAuth('Twitter')}
+              >
+                <Twitter className="mr-2 h-4 w-4" />
+                Twitter
+              </Button>
+            </div>
+            
+            <div className="text-center pt-4 text-sm">
+              Pas encore de compte ?{" "}
+              <a className="text-evrgrn-accent hover:underline cursor-pointer" onClick={() => navigate('/register')}>
+                S'inscrire
+              </a>
             </div>
           </CardFooter>
         </Card>

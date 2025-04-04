@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
@@ -11,17 +11,38 @@ import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
 import { useToast } from '@/hooks/use-toast';
 import GlitchText from '@/components/ui/GlitchText';
+import { Facebook, Twitter } from 'lucide-react';
+import { FaGoogle } from 'react-icons/fa';
 
 const Register = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const [agreed, setAgreed] = useState(false);
 
   const handleRegister = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!agreed) {
+      toast({
+        title: "Acceptation des conditions requise",
+        description: "Veuillez accepter les conditions d'utilisation et la politique de confidentialité.",
+        variant: "destructive"
+      });
+      return;
+    }
+    
     // Cette fonction sera remplacée par l'authentification Supabase
     toast({
       title: "Fonctionnalité en cours de développement",
       description: "L'inscription sera bientôt disponible via Supabase.",
+    });
+  };
+
+  const handleSocialAuth = (provider: string) => {
+    // Cette fonction sera remplacée par l'authentification sociale Supabase
+    toast({
+      title: `Inscription via ${provider}`,
+      description: "L'authentification sociale sera bientôt disponible via Supabase.",
     });
   };
 
@@ -37,7 +58,7 @@ const Register = () => {
               <GlitchText intensity="low">Créer un compte</GlitchText>
             </CardTitle>
             <CardDescription>
-              Rejoignez l'écosystème EVRGRN pour accéder à du contenu exclusif
+              Rejoignez l'écosystème EVRGRN et obtenez votre Ceinture Blanche gratuite
             </CardDescription>
           </CardHeader>
           
@@ -59,7 +80,15 @@ const Register = () => {
               </div>
               
               <div className="flex items-center space-x-2">
-                <Checkbox id="terms" />
+                <Checkbox 
+                  id="terms" 
+                  checked={agreed} 
+                  onCheckedChange={(checked) => {
+                    if (typeof checked === 'boolean') {
+                      setAgreed(checked);
+                    }
+                  }} 
+                />
                 <label
                   htmlFor="terms"
                   className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
@@ -78,6 +107,10 @@ const Register = () => {
               <Button type="submit" className="w-full">
                 S'inscrire
               </Button>
+              
+              <div className="text-xs text-center text-muted-foreground">
+                En vous inscrivant, vous obtenez automatiquement le statut de <b>Ceinture Blanche</b> avec ses avantages exclusifs
+              </div>
             </form>
           </CardContent>
           
@@ -87,30 +120,36 @@ const Register = () => {
             </div>
             
             <div className="grid grid-cols-3 gap-4 w-full">
-              <Button variant="outline" onClick={() => toast({
-                title: "Inscription Google",
-                description: "Cette fonctionnalité sera disponible prochainement."
-              })}>
+              <Button 
+                variant="outline" 
+                className="flex items-center justify-center"
+                onClick={() => handleSocialAuth('Google')}
+              >
+                <FaGoogle className="mr-2 h-4 w-4" />
                 Google
               </Button>
               
-              <Button variant="outline" onClick={() => toast({
-                title: "Inscription Facebook",
-                description: "Cette fonctionnalité sera disponible prochainement."
-              })}>
+              <Button 
+                variant="outline" 
+                className="flex items-center justify-center"
+                onClick={() => handleSocialAuth('Facebook')}
+              >
+                <Facebook className="mr-2 h-4 w-4" />
                 Facebook
               </Button>
               
-              <Button variant="outline" onClick={() => toast({
-                title: "Inscription Twitter",
-                description: "Cette fonctionnalité sera disponible prochainement."
-              })}>
+              <Button 
+                variant="outline" 
+                className="flex items-center justify-center"
+                onClick={() => handleSocialAuth('Twitter')}
+              >
+                <Twitter className="mr-2 h-4 w-4" />
                 Twitter
               </Button>
             </div>
             
             <div className="text-center pt-4 text-sm">
-              Vous avez déjà un compte?{" "}
+              Vous avez déjà un compte ?{" "}
               <a className="text-evrgrn-accent hover:underline cursor-pointer" onClick={() => navigate('/login')}>
                 Se connecter
               </a>
