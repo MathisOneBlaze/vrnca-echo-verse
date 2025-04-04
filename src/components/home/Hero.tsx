@@ -31,12 +31,12 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
       
       {/* Digital circuit lines */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        <div className="absolute top-1/4 left-0 w-full h-px bg-evrgrn-blue/10"></div>
-        <div className="absolute top-1/2 left-0 w-full h-px bg-evrgrn-blue/15"></div>
-        <div className="absolute top-3/4 left-0 w-full h-px bg-evrgrn-blue/10"></div>
-        <div className="absolute top-0 left-1/4 h-full w-px bg-evrgrn-blue/10"></div>
-        <div className="absolute top-0 left-1/2 h-full w-px bg-evrgrn-blue/15"></div>
-        <div className="absolute top-0 left-3/4 h-full w-px bg-evrgrn-blue/10"></div>
+        <div className="absolute top-1/4 left-0 w-full h-px bg-evrgrn-accent/10"></div>
+        <div className="absolute top-1/2 left-0 w-full h-px bg-evrgrn-accent/15"></div>
+        <div className="absolute top-3/4 left-0 w-full h-px bg-evrgrn-accent/10"></div>
+        <div className="absolute top-0 left-1/4 h-full w-px bg-evrgrn-accent/10"></div>
+        <div className="absolute top-0 left-1/2 h-full w-px bg-evrgrn-accent/15"></div>
+        <div className="absolute top-0 left-3/4 h-full w-px bg-evrgrn-accent/10"></div>
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
@@ -48,7 +48,7 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
               alt="EVRGRN Logo"
               className="h-24 md:h-32 mx-auto mb-6"
             />
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-6 text-center">
               <span className="mask-reveal block" style={{ '--delay': '100ms' } as React.CSSProperties}>
                 Bienvenue dans
               </span>
@@ -57,7 +57,7 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
               </GlitchText>
             </h1>
             
-            <p className="text-muted-foreground text-lg mb-8 mx-auto mask-reveal" style={{ '--delay': '400ms' } as React.CSSProperties}>
+            <p className="text-muted-foreground text-lg mb-8 mx-auto text-center mask-reveal" style={{ '--delay': '400ms' } as React.CSSProperties}>
               Le hub digital de Mathis OneBlaze, artiste multidisciplinaire, 
               producteur, enseignant et créateur de contenu.
             </p>
@@ -109,8 +109,8 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
       {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 5L12 19" stroke="rgba(0, 200, 100, 0.8)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          <path d="M19 12L12 19L5 12" stroke="rgba(0, 200, 100, 0.8)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M12 5L12 19" stroke="rgba(0, 245, 212, 0.8)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M19 12L12 19L5 12" stroke="rgba(0, 245, 212, 0.8)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
       </div>
     </section>

@@ -52,8 +52,8 @@ const VrncaAvatar: React.FC<VrncaAvatarProps> = ({
 
   // State colors
   const stateColors = {
-    idle: 'from-evrgrn-blue/40 to-evrgrn-blue/20',
-    active: 'from-evrgrn-blue to-evrgrn-blue/60',
+    idle: 'from-evrgrn-accent/40 to-evrgrn-accent/20',
+    active: 'from-evrgrn-accent to-evrgrn-accent/60',
     scanning: 'from-evrgrn-green to-evrgrn-green/60',
     alert: 'from-evrgrn-red to-evrgrn-red/60',
   };
@@ -74,7 +74,7 @@ const VrncaAvatar: React.FC<VrncaAvatarProps> = ({
           stateColors[state],
           pulseAnimationClass,
           isGlitching ? 'animate-glitch-subtle' : '',
-          state === 'idle' ? 'border-evrgrn-blue/30' : 'border-evrgrn-blue/60'
+          state === 'idle' ? 'border-evrgrn-accent/30' : 'border-evrgrn-accent/60'
         )}
       >
         {/* Avatar face/symbol */}
@@ -104,7 +104,7 @@ const VrncaAvatar: React.FC<VrncaAvatarProps> = ({
           background: `radial-gradient(circle, 
             ${state === 'alert' ? 'rgba(255,58,75,0.2)' : 
               state === 'scanning' ? 'rgba(0,200,150,0.2)' : 
-              'rgba(0,120,255,0.2)'} 0%, 
+              'rgba(0,245,212,0.2)'} 0%, 
             transparent 70%)`,
         }}
       ></div>

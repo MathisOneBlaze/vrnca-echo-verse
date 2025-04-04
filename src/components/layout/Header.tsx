@@ -4,7 +4,6 @@ import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import GlitchText from '../ui/GlitchText';
 import VrncaInteractive from '../vrnca/VrncaInteractive';
-import VrncaHead from '../vrnca/VrncaHead';
 import { UserCircle } from 'lucide-react';
 
 interface HeaderProps {
@@ -63,9 +62,8 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
           <NavLink to="/contact" label="Contact" currentPath={location.pathname} />
         </nav>
 
-        {/* VRNCA Interactive Element et Login */}
-        <div className="hidden md:flex items-center space-x-4">
-          <VrncaHead size="sm" />
+        {/* Login icon */}
+        <div className="hidden md:flex items-center">
           <Link to="/login" className="text-foreground hover:text-evrgrn-accent transition-colors">
             <UserCircle className="w-6 h-6" />
           </Link>
@@ -115,7 +113,6 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
             <MobileNavLink to="/login" label="Connexion" onClick={() => setIsMenuOpen(false)} currentPath={location.pathname} />
             
             <div className="pt-4 border-t border-evrgrn-accent/20 flex items-center">
-              <VrncaHead size="sm" className="mr-3" />
               <span className="text-evrgrn-accent font-medium">Communiquer avec VRNCA</span>
             </div>
           </div>

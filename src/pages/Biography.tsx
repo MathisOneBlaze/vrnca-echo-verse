@@ -2,6 +2,8 @@
 import React from 'react';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
+import { Button } from '@/components/ui/button';
+import { ArrowRight } from 'lucide-react';
 
 const Biography = () => {
   return (
@@ -99,6 +101,31 @@ const Biography = () => {
                 <li><span className="text-evrgrn-accent">2015-2016:</span> MAGNUM (Œuvre au Noir), MAGNUM 2 (Œuvre au Blanc)</li>
                 <li><span className="text-evrgrn-accent">2012-2014:</span> Série #Konewing avec YRHN</li>
               </ul>
+              
+              {/* Book purchase incitation */}
+              <div className="mt-12 p-6 bg-evrgrn-accent/10 border border-evrgrn-accent rounded-lg">
+                <h3 className="text-xl font-medium mb-4 text-evrgrn-accent">Découvrez l'œuvre complète</h3>
+                <div className="flex flex-col md:flex-row items-center">
+                  <div className="md:w-1/4 mb-4 md:mb-0">
+                    <img 
+                      src="/placeholder.svg" 
+                      alt="Le Trousseau - Livre" 
+                      className="w-full h-auto rounded-lg shadow-lg"
+                    />
+                  </div>
+                  <div className="md:w-3/4 md:pl-6">
+                    <h4 className="text-lg font-medium mb-2">Le Trousseau</h4>
+                    <p className="text-muted-foreground mb-4">
+                      Pour une biographie plus complète et des anecdotes exclusives sur le parcours de Mathis OneBlaze, 
+                      découvrez "Le Trousseau", son livre autobiographique qui plonge dans les coulisses de sa carrière
+                      et révèle sa philosophie artistique en profondeur.
+                    </p>
+                    <Button className="bg-evrgrn-accent text-black hover:bg-evrgrn-accent/80 transition-colors">
+                      Commander le livre <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
+              </div>
               
               <div className="mt-12 p-6 bg-evrgrn-muted/50 border border-evrgrn-accent/10 rounded-lg">
                 <h3 className="text-xl font-medium mb-4 text-evrgrn-accent">À propos d'EVRGRN</h3>
