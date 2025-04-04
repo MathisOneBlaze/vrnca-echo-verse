@@ -32,7 +32,7 @@ const Biography = () => {
                 <div className="bg-evrgrn-muted border border-evrgrn-accent/10 rounded-lg overflow-hidden mb-6">
                   <div className="aspect-square bg-evrgrn-darker">
                     <img
-                      src="/placeholder.svg"
+                      src="/P1320893_optimized.jpg"
                       alt="Mathis OneBlaze"
                       className="w-full h-full object-cover"
                     />
@@ -75,7 +75,7 @@ const Biography = () => {
               <h2 className="text-2xl font-medium mt-8 mb-4">Parcours musical</h2>
               
               <p>
-                Inspiré par ses racines caribéennes et son enfance en banlieue parisienne, Mathis se fait connaître sur la scène rap française sous le nom de OneBlaze. Après des projets en groupe comme la série #Konewing, il franchit une étape décisive avec l'univers Teddy Blaze puis développe son identité artistique à travers des œuvres telles que "MAGNUM (Œuvre au Noir)" qui explore l'alchimie intérieure.
+                Mathis se fait connaître sur la scène rap antillaise sous le nom de OneBlaze. Inspiré par ses racines caribéennes et son déplacement en banlieue parisienne, après des projets en groupe comme la série #Konewing, il franchit une étape décisive avec l'univers Teddy Blaze puis développe son identité artistique à travers des œuvres telles que "MAGNUM (Œuvre au Noir)" qui explore l'alchimie intérieure.
               </p>
               
               <p>
@@ -108,7 +108,7 @@ const Biography = () => {
                 <div className="flex flex-col md:flex-row items-center">
                   <div className="md:w-1/4 mb-4 md:mb-0">
                     <img 
-                      src="/placeholder.svg" 
+                      src="/LE TROUSSEAU cover.jpg" 
                       alt="Le Trousseau - Livre" 
                       className="w-full h-auto rounded-lg shadow-lg"
                     />

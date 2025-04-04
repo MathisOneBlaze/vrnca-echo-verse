@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import GlitchText from '../ui/GlitchText';
-import VrncaHead from '../vrnca/VrncaHead';
+import MiniVrncaModel from '../3d/MiniVrncaModel';
 import VrncaVoiceChat from '../vrnca/VrncaVoiceChat';
 
 interface FooterProps {
@@ -33,11 +33,12 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
               Le hub digital de Mathis OneBlaze, artiste multidisciplinaire, producteur, enseignant et créateur de contenu.
             </p>
             <div className="flex space-x-4 mb-4">
-              {/* Social icons - simplified placeholders */}
-              <SocialLink href="#" type="twitch" />
-              <SocialLink href="#" type="youtube" />
-              <SocialLink href="#" type="instagram" />
-              <SocialLink href="#" type="discord" />
+              {/* Social icons avec vos vraies informations */}
+              <SocialLink href="https://www.twitch.tv/mathisoneblaze" type="twitch" />
+              <SocialLink href="https://www.youtube.com/@MathisOneBlaze" type="youtube" />
+              <SocialLink href="https://www.instagram.com/mathisoneblaze" type="instagram" />
+              <SocialLink href="https://twitter.com/mathisoneblaze" type="twitter" />
+              <SocialLink href="https://www.tiktok.com/@mathisoneblaze" type="tiktok" />
             </div>
             {/* Liens d'authentification */}
             <div className="pt-4 border-t border-evrgrn-accent/10">
@@ -55,7 +56,8 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
               <FooterLink to="/" label="Accueil" />
               <FooterLink to="/biographie" label="Artiste" />
               <FooterLink to="/musique" label="Musique" />
-              <FooterLink to="/evenements" label="Événements" />
+              <FooterLink to="/publications" label="Médias" />
+              <FooterLink to="/services" label="Services" />
               <FooterLink to="/shop" label="Shop" />
             </ul>
           </div>
@@ -82,7 +84,10 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
               <FooterLink to="/confidentialite" label="Confidentialité" />
             </ul>
             <div className="mt-4 pt-4 border-t border-evrgrn-accent/10 flex items-center">
-              <VrncaHead size="sm" className="mr-3" />
+              {/* Modèle 3D miniature qui tourne en remplacement de l'image statique */}
+              <div className="mr-3">
+                <MiniVrncaModel />
+              </div>
               <button 
                 className="text-sm text-evrgrn-accent hover:text-evrgrn-accent/80 transition-colors"
                 onClick={() => setShowVoiceChat(!showVoiceChat)}
@@ -127,7 +132,7 @@ const FooterLink: React.FC<FooterLinkProps> = ({ to, label }) => {
 
 interface SocialLinkProps {
   href: string;
-  type: 'twitch' | 'youtube' | 'instagram' | 'discord';
+  type: 'twitch' | 'youtube' | 'instagram' | 'twitter' | 'discord' | 'tiktok';
 }
 
 const SocialLink: React.FC<SocialLinkProps> = ({ href, type }) => {
@@ -140,7 +145,7 @@ const SocialLink: React.FC<SocialLinkProps> = ({ href, type }) => {
     >
       <span className="sr-only">{type}</span>
       <div className="h-4 w-4 text-evrgrn-accent">
-        {/* Simple placeholder icon */}
+        {/* Icons for social media platforms */}
         {type === 'twitch' && (
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M21 2H3v16h5v4l4-4h5l4-4V2zm-10 9V7m5 4V7"></path>
@@ -159,13 +164,23 @@ const SocialLink: React.FC<SocialLinkProps> = ({ href, type }) => {
             <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
           </svg>
         )}
+        {type === 'twitter' && (
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+          </svg>
+        )}
         {type === 'discord' && (
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M18 9a5 5 0 0 0-5-5H6a5 5 0 0 0-5 5v6a5 5 0 0 0 5 5h2l1 3l3-3h1a5 5 0 0 0 5-5V9z"></path>
             <path d="M9.09 9.45a.5.5 0 0 0 0 1 .5.5 0 0 0 0-1z"></path>
             <path d="M14.91 9.45a.5.5 0 0 0 0 1 .5.5 0 0 0 0-1z"></path>
-            <path d="M8.91 12.55a.5.5 0 0 0 .18-.55 .5.5 0 0 0 0 1z"></path>
-            <path d="M15.09 12.55a.5.5 0 0 0 .18-.55 .5.5 0 0 0 0 1z"></path>
+          </svg>
+        )}
+        {type === 'tiktok' && (
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M9 12a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"></path>
+            <path d="M15 8c0 4.56-1.41 8.79-3.5 11.82"></path>
+            <path d="M9 2h6v12h4"></path>
           </svg>
         )}
       </div>

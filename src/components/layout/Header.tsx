@@ -51,11 +51,11 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
           </GlitchText>
         </Link>
 
-        {/* Desktop Navigation */}
+        {/* Desktop Navigation - menu réorganisé selon vos instructions */}
         <nav className="hidden md:flex items-center space-x-8">
           <NavLink to="/" label="Accueil" currentPath={location.pathname} />
-          <NavLink to="/musique" label="Musique" currentPath={location.pathname} />
           <NavLink to="/biographie" label="Artiste" currentPath={location.pathname} />
+          <NavLink to="/musique" label="Musique" currentPath={location.pathname} />
           <NavLink to="/publications" label="Médias" currentPath={location.pathname} />
           <NavLink to="/services" label="Services" currentPath={location.pathname} />
           <NavLink to="/shop" label="Shop" currentPath={location.pathname} />
@@ -95,7 +95,7 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
         </button>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile menu - également réorganisé */}
       <div 
         className={`md:hidden absolute w-full bg-evrgrn-darker/95 backdrop-blur-md transition-all duration-300 border-t border-evrgrn-accent/20 overflow-hidden ${
           isMenuOpen ? 'max-h-screen border-opacity-100' : 'max-h-0 border-opacity-0'
@@ -104,8 +104,8 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
         <div className="container mx-auto px-4 py-4">
           <div className="flex flex-col space-y-4">
             <MobileNavLink to="/" label="Accueil" onClick={() => setIsMenuOpen(false)} currentPath={location.pathname} />
-            <MobileNavLink to="/musique" label="Musique" onClick={() => setIsMenuOpen(false)} currentPath={location.pathname} />
             <MobileNavLink to="/biographie" label="Artiste" onClick={() => setIsMenuOpen(false)} currentPath={location.pathname} />
+            <MobileNavLink to="/musique" label="Musique" onClick={() => setIsMenuOpen(false)} currentPath={location.pathname} />
             <MobileNavLink to="/publications" label="Médias" onClick={() => setIsMenuOpen(false)} currentPath={location.pathname} />
             <MobileNavLink to="/services" label="Services" onClick={() => setIsMenuOpen(false)} currentPath={location.pathname} />
             <MobileNavLink to="/shop" label="Shop" onClick={() => setIsMenuOpen(false)} currentPath={location.pathname} />
