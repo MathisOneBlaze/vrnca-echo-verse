@@ -1,5 +1,5 @@
 
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Canvas, useFrame, useLoader } from '@react-three/fiber';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from '@react-three/drei';
@@ -27,12 +27,30 @@ const VrncaModelInner = () => {
 
 interface VrncaModelProps {
   className?: string;
+  scale?: number;
+  showLoader?: boolean;
 }
 
-const VrncaModel: React.FC<VrncaModelProps> = ({ className }) => {
+const VrncaModel: React.FC<VrncaModelProps> = ({ className, scale = 1.5, showLoader = true }) => {
+  const [loading, setLoading] = useState(true);
+
+  const handleModelLoaded = () => {
+    setLoading(false);
+  };
+
   return (
     <div className={`relative ${className}`}>
+      {showLoader && loading && (
+        <div className="absolute inset-0 flex items-center justify-center bg-evrgrn-darker/50 backdrop-blur-sm z-10">
+          <div className="flex flex-col items-center">
+            <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-evrgrn-accent mb-2"></div>
+            <p className="text-evrgrn-accent text-sm">Chargement de VRNCA...</p>
+          </div>
+        </div>
+      )}
+      
       <Canvas
+        onCreated={handleModelLoaded}
         camera={{ position: [0, 0, 5], fov: 45 }}
         style={{ width: '100%', height: '100%', backgroundColor: 'transparent' }}
       >
