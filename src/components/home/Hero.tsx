@@ -2,9 +2,13 @@
 import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
 import VrncaDialog from '../vrnca/VrncaDialog';
-import VrncaHead from '../vrnca/VrncaHead';
 import GlitchText from '../ui/GlitchText';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
+import { Suspense, lazy } from 'react';
+
+// Lazy load the 3D model component to improve initial page load
+const VrncaModel = lazy(() => import('../3d/VrncaModel'));
 
 interface HeroProps {
   className?: string;
@@ -63,12 +67,13 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center mask-reveal mb-8" style={{ '--delay': '600ms' } as React.CSSProperties}>
-              <Button
-                className="btn-primary text-base"
-                onClick={() => console.log("Explore EVRGRN")}
-              >
-                Explorer l'univers
-              </Button>
+              <Link to="/biographie">
+                <Button
+                  className="btn-primary text-base"
+                >
+                  Explorer l'univers
+                </Button>
+              </Link>
               
               <Button
                 variant="outline"
@@ -79,9 +84,11 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
               </Button>
             </div>
             
-            {/* VRNCA Head centered */}
-            <div className="flex justify-center mb-12">
-              <VrncaHead size="lg" />
+            {/* VRNCA 3D Model centered */}
+            <div className="flex justify-center mb-12 h-80 w-80 mx-auto">
+              <Suspense fallback={<div className="text-evrgrn-accent">Chargement de VRNCA...</div>}>
+                <VrncaModel />
+              </Suspense>
             </div>
             
             {/* VRNCA dialog */}
