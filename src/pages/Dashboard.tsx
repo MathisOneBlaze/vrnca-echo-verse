@@ -9,7 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Bell, Calendar, CreditCard, Download, Music, Settings, User } from 'lucide-react';
+import { Bell, Calendar, Check, CreditCard, Download, Music, Settings, User } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import GlitchText from '@/components/ui/GlitchText';
 import { Link } from 'react-router-dom';
