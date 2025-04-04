@@ -1,8 +1,9 @@
 
 import React, { useRef } from 'react';
 import { Canvas, useFrame, useLoader } from '@react-three/fiber';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from '@react-three/drei';
+import * as THREE from 'three';
 
 const VrncaModelInner = () => {
   const gltf = useLoader(GLTFLoader, '/VRNCA_4__0404022903_texture.glb');
