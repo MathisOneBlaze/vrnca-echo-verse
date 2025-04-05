@@ -1,263 +1,120 @@
 
 import React from 'react';
-import Header from '@/components/layout/Header';
-import Footer from '@/components/layout/Footer';
-import ParticleBackground from '@/components/ui/ParticleBackground';
+import Header from '../components/layout/Header';
+import Footer from '../components/layout/Footer';
 import { Button } from '@/components/ui/button';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Check, Star } from 'lucide-react';
-import GlitchText from '@/components/ui/GlitchText';
-import { Link } from 'react-router-dom';
-import { useToast } from '@/hooks/use-toast';
+import { Card, CardContent } from '@/components/ui/card';
+import { Headphones, BookOpen, BarChart3, Mic2 } from 'lucide-react';
 
 const Services = () => {
-  const { toast } = useToast();
-  
-  // Les différents niveaux d'adhésion selon la nouvelle nomenclature
-  const subscriptionTiers = [
+  const services = [
     {
-      name: 'Ceinture Blanche',
-      color: 'bg-gradient-to-br from-gray-100 to-gray-300',
-      price: 'Gratuit',
-      period: '',
-      description: 'Accès gratuit dès la création de votre compte',
-      features: [
-        'Accès anticipé aux ventes exclusives',
-        'Accès au catalogue complet',
-        'Accès aux séances de dédicaces',
-        'Pop-up shops et événements',
-      ],
-      popular: false,
-      buttonText: 'S\'inscrire gratuitement',
-      buttonLink: '/register'
+      title: "Consulting Production Musicale",
+      icon: <Headphones className="w-10 h-10 text-evrgrn-accent" />,
+      description: "Bénéficiez de nos conseils experts pour améliorer vos productions musicales. Notre équipe vous guide dans le choix des techniques de production, l'optimisation de vos arrangements et la finalisation de vos projets audio.",
+      cta: "Obtenir un devis"
     },
     {
-      name: 'Ceinture Verte',
-      color: 'bg-gradient-to-br from-green-400 to-green-700',
-      price: '19,99€',
-      period: 'par mois',
-      description: 'Pour les créateurs sérieux qui veulent développer leur art',
-      features: [
-        'Tout de la Ceinture Blanche',
-        'Accès à toutes les recherches',
-        'Articles et vidéos complètes',
-        'Assets (PDF, schémas, sources)',
-        'Tarifs préférentiels pour masterclass',
-        'Remises sur les achats shop',
-      ],
-      popular: true,
-      buttonText: 'S\'abonner',
-      buttonLink: '/register'
+      title: "Formation Théorie Musicale",
+      icon: <BookOpen className="w-10 h-10 text-evrgrn-accent" />,
+      description: "Apprenez les fondamentaux de la théorie musicale adaptés à vos projets créatifs. Nos formations sur mesure vous permettent de développer vos compétences en composition, harmonie et arrangements.",
+      cta: "Demander plus d'infos"
     },
     {
-      name: 'Ceinture Noire',
-      color: 'bg-gradient-to-br from-gray-800 to-black',
-      price: 'Sur devis',
-      period: '',
-      description: 'Conseil personnalisé et accompagnement VIP',
-      features: [
-        'Tout de la Ceinture Verte',
-        'Accès aux applications exclusives',
-        'Pass VIP gratuits pour les événements',
-        'Conseil personnalisé',
-        'Coaching sur mesure',
-        'Accompagnement de carrière',
-      ],
-      popular: false,
-      buttonText: 'Demander un devis',
-      buttonAction: () => toast({
-        title: "Demande de devis",
-        description: "Le formulaire de demande sera disponible prochainement."
-      })
-    },
-  ];
-
-  // Services de consulting
-  const consultingServices = [
-    {
-      title: 'Consulting Production Musicale',
-      description: 'Sessions de consulting personnalisées pour vos projets musicaux avec analyse détaillée et conseils techniques.',
-      tags: ['Production', 'Mixage', 'Mastering'],
-      level: 'Ceinture Noire'
+      title: "Stratégie Carrière Artistique",
+      icon: <BarChart3 className="w-10 h-10 text-evrgrn-accent" />,
+      description: "Développez votre carrière d'artiste avec notre accompagnement stratégique. Nous vous aidons à définir votre identité artistique, à élaborer votre plan de communication et à maximiser votre impact dans l'industrie musicale.",
+      cta: "Planifier un entretien"
     },
     {
-      title: 'Formation Théorie Musicale',
-      description: 'Cours particuliers adaptés à votre niveau pour maîtriser les fondamentaux théoriques et les appliquer à votre musique.',
-      tags: ['Théorie', 'Composition', 'Harmonie'],
-      level: 'Ceinture Noire'
-    },
-    {
-      title: 'Stratégie Carrière Artistique',
-      description: 'Accompagnement complet dans le développement de votre carrière artistique: positionnement, communication, business plan.',
-      tags: ['Stratégie', 'Marketing', 'Développement'],
-      level: 'Ceinture Noire'
-    },
+      title: "Session Studio",
+      icon: <Mic2 className="w-10 h-10 text-evrgrn-accent" />,
+      description: "Enregistrez vos projets musicaux dans des conditions professionnelles. Notre studio vous offre un équipement de qualité et l'expertise technique nécessaire pour donner vie à vos créations sonores.",
+      cta: "Réserver une session"
+    }
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
-      <ParticleBackground />
+    <div className="bg-evrgrn-dark text-foreground min-h-screen flex flex-col">
       <Header />
       
-      <main className="flex-1 pt-24 pb-16">
-        {/* En-tête de page */}
-        <section className="container mx-auto px-4 py-12 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            <GlitchText intensity="medium">Niveaux d'Adhésion</GlitchText>
-          </h1>
-          <p className="text-lg md:text-xl max-w-3xl mx-auto text-muted-foreground mb-8">
-            Rejoignez l'écosystème EVRGRN et accédez à des ressources exclusives, du mentorat personnalisé
-            et un accompagnement sur mesure pour votre développement artistique.
-          </p>
-        </section>
-
-        {/* Section abonnements */}
-        <section className="container mx-auto px-4 py-12">
-          <h2 className="text-3xl font-bold mb-10 text-center">Niveaux d'Adhésion</h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {subscriptionTiers.map((tier, index) => (
-              <Card key={index} className={`relative overflow-hidden border border-evrgrn-accent/20 ${tier.popular ? 'ring-2 ring-evrgrn-accent shadow-lg transform md:scale-105' : ''}`}>
-                {tier.popular && (
-                  <div className="absolute top-0 right-0 bg-evrgrn-accent text-white text-xs font-bold px-3 py-1 rounded-bl">
-                    POPULAIRE
-                  </div>
-                )}
-                
-                <CardHeader className={`${tier.color} text-white`}>
-                  <div className="flex items-center justify-between">
-                    <CardTitle className="text-2xl font-bold">{tier.name}</CardTitle>
-                    {tier.popular && <Star className="h-5 w-5 fill-white" />}
-                  </div>
-                  <div className="mt-4">
-                    <span className="text-3xl font-bold">{tier.price}</span>
-                    <span className="text-sm opacity-80 ml-1">{tier.period}</span>
-                  </div>
-                  <CardDescription className="text-white/90 mt-2">
-                    {tier.description}
-                  </CardDescription>
-                </CardHeader>
-                
-                <CardContent className="mt-6">
-                  <ul className="space-y-3">
-                    {tier.features.map((feature, i) => (
-                      <li key={i} className="flex items-center">
-                        <Check className="h-5 w-5 text-evrgrn-accent mr-2 flex-shrink-0" />
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-                
-                <CardFooter>
-                  {tier.buttonLink ? (
-                    <Button className="w-full" variant={tier.popular ? "default" : "outline"} asChild>
-                      <Link to={tier.buttonLink}>{tier.buttonText}</Link>
-                    </Button>
-                  ) : (
-                    <Button 
-                      className="w-full" 
-                      variant={tier.popular ? "default" : "outline"}
-                      onClick={tier.buttonAction}
-                    >
-                      {tier.buttonText}
-                    </Button>
-                  )}
-                </CardFooter>
-              </Card>
-            ))}
+      <main className="flex-grow pt-24">
+        <div className="container mx-auto px-4 py-12">
+          <div className="flex justify-between items-center mb-12">
+            <div>
+              <h1 className="text-4xl font-serif mb-2">Services</h1>
+              <p className="text-lg text-muted-foreground">
+                Expertise musicale et accompagnement artistique
+              </p>
+            </div>
+            <img 
+              src="/lovable-uploads/01e9bec9-0cde-4e57-a7c9-aa81659ce1c0.png" 
+              alt="EVRGRN Logo"
+              className="h-16"
+            />
           </div>
-        </section>
-
-        {/* Section services consulting */}
-        <section className="container mx-auto px-4 py-16 bg-evrgrn-darker/30 rounded-lg my-12">
-          <h2 className="text-3xl font-bold mb-10 text-center">Services de Consulting</h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {consultingServices.map((service, index) => (
-              <Card key={index} className="bg-background/80 backdrop-blur border border-evrgrn-accent/20">
-                <CardHeader>
-                  <CardTitle>{service.title}</CardTitle>
-                  <CardDescription>{service.description}</CardDescription>
-                </CardHeader>
-                
-                <CardContent>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {service.tags.map((tag, i) => (
-                      <Badge key={i} variant="secondary" className="bg-evrgrn-accent/10">
-                        {tag}
-                      </Badge>
-                    ))}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            {services.map((service, index) => (
+              <Card key={index} className="bg-evrgrn-muted border-evrgrn-accent/10 hover:border-evrgrn-accent/30 transition-all duration-300">
+                <CardContent className="p-6">
+                  <div className="mb-4">
+                    {service.icon}
                   </div>
-                  
-                  <div className="flex justify-between items-center mt-6">
-                    <div>
-                      <p className="text-sm text-muted-foreground">Disponible pour:</p>
-                      <Badge variant="outline" className="mt-1 bg-gray-800 text-white">
-                        {service.level}
-                      </Badge>
-                    </div>
-                    <Button variant="outline" size="sm" onClick={() => toast({
-                      title: "Demande de devis",
-                      description: "Le formulaire de demande sera disponible prochainement."
-                    })}>
-                      Sur devis
-                    </Button>
-                  </div>
+                  <h2 className="text-xl font-medium mb-3">{service.title}</h2>
+                  <p className="text-muted-foreground mb-6">{service.description}</p>
+                  <Button className="w-full bg-evrgrn-accent text-black hover:bg-evrgrn-accent/80">
+                    {service.cta}
+                  </Button>
                 </CardContent>
               </Card>
             ))}
           </div>
           
-          <div className="text-center mt-12">
-            <Button size="lg" className="bg-evrgrn-accent hover:bg-evrgrn-accent/80" onClick={() => toast({
-              title: "Demande de devis personnalisé",
-              description: "Le formulaire de demande sera disponible prochainement."
-            })}>
-              Demander un devis personnalisé
-            </Button>
-            <p className="text-sm text-muted-foreground mt-4">
-              Tous nos services de consulting sont disponibles sur devis. Contactez-nous pour une évaluation personnalisée.
+          <div className="bg-evrgrn-muted border border-evrgrn-accent/10 rounded-lg p-8 mb-12">
+            <h2 className="text-2xl font-serif mb-4">Services sur mesure</h2>
+            <p className="text-muted-foreground mb-6">
+              Vous avez un projet spécifique qui nécessite une approche personnalisée ? 
+              Contactez-nous pour discuter de vos besoins et nous vous proposerons une solution adaptée.
             </p>
+            <Button className="bg-evrgrn-darker hover:bg-evrgrn-accent hover:text-black transition-colors">
+              Nous contacter
+            </Button>
           </div>
-        </section>
-        
-        {/* Section FAQ */}
-        <section className="container mx-auto px-4 py-12">
-          <h2 className="text-3xl font-bold mb-10 text-center">Questions fréquentes</h2>
           
-          <div className="max-w-3xl mx-auto space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-xl">Comment fonctionnent les niveaux d'adhésion ?</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p>Chaque niveau d'adhésion vous donne accès à des avantages spécifiques. La Ceinture Blanche est gratuite et s'obtient dès la création d'un compte. La Ceinture Verte offre des avantages premium avec un abonnement mensuel. La Ceinture Noire propose un accompagnement personnalisé avec des services sur devis.</p>
-              </CardContent>
-            </Card>
+          <div className="bg-evrgrn-muted border border-evrgrn-accent/10 rounded-lg p-8">
+            <h2 className="text-2xl font-serif mb-4">Foire aux questions</h2>
             
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-xl">Puis-je changer de niveau d'adhésion ?</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p>Oui, vous pouvez passer à un niveau supérieur ou inférieur à tout moment. Les changements prendront effet à votre prochaine période de facturation.</p>
-              </CardContent>
-            </Card>
-            
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-xl">Comment se déroulent les services de consulting ?</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p>Les services de consulting de la Ceinture Noire sont personnalisés et adaptés à vos besoins spécifiques. Après votre demande de devis, nous vous contacterons pour définir précisément vos objectifs et vous proposer un accompagnement sur mesure.</p>
-              </CardContent>
-            </Card>
+            <div className="space-y-6">
+              <div>
+                <h3 className="text-lg font-medium mb-2">Comment se déroule une session de consulting ?</h3>
+                <p className="text-muted-foreground">
+                  Les sessions de consulting débutent par un entretien initial pour comprendre vos besoins, 
+                  suivi d'une analyse approfondie de vos projets. Nous vous fournissons ensuite des 
+                  recommandations détaillées et un suivi personnalisé.
+                </p>
+              </div>
+              
+              <div>
+                <h3 className="text-lg font-medium mb-2">Les formations sont-elles accessibles aux débutants ?</h3>
+                <p className="text-muted-foreground">
+                  Absolument ! Nos formations sont adaptées à tous les niveaux, du débutant au professionnel. 
+                  Le contenu est personnalisé en fonction de vos connaissances préalables et de vos objectifs.
+                </p>
+              </div>
+              
+              <div>
+                <h3 className="text-lg font-medium mb-2">Quel est le délai pour obtenir un accompagnement ?</h3>
+                <p className="text-muted-foreground">
+                  En fonction de nos disponibilités, nous pouvons généralement vous proposer un premier 
+                  rendez-vous dans un délai de 1 à 2 semaines après votre demande initiale.
+                </p>
+              </div>
+            </div>
           </div>
-        </section>
+        </div>
       </main>
-
+      
       <Footer />
     </div>
   );

@@ -1,10 +1,11 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
-import { ExternalLink, Music } from 'lucide-react';
+import { ExternalLink, Music, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Album } from '@/data/albumData';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 const AlbumDetail: React.FC<Album> = ({
   id,
@@ -13,6 +14,7 @@ const AlbumDetail: React.FC<Album> = ({
   month,
   collaborators,
   image = "/placeholder.svg",
+  additionalImages = [],
   isUnreleased = false,
   spotifyLink,
   format,
@@ -25,16 +27,72 @@ const AlbumDetail: React.FC<Album> = ({
     realityFiction: 70
   }
 }) => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const allImages = [image, ...additionalImages].filter(img => img && img !== "/placeholder.svg");
+  
+  const handlePrevImage = () => {
+    setCurrentImageIndex((prev) => 
+      prev === 0 ? allImages.length - 1 : prev - 1
+    );
+  };
+  
+  const handleNextImage = () => {
+    setCurrentImageIndex((prev) => 
+      prev === allImages.length - 1 ? 0 : prev + 1
+    );
+  };
+
   return (
     <div className="bg-evrgrn-darker rounded-lg overflow-hidden border border-evrgrn-accent/10">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
-        {/* Album artwork */}
+        {/* Album artwork with slider if multiple images */}
         <div className="relative aspect-square md:aspect-auto md:h-full bg-evrgrn-darker">
-          <img
-            src={image}
-            alt={title}
-            className="w-full h-full object-cover"
-          />
+          {allImages.length > 0 ? (
+            <>
+              <img
+                src={allImages[currentImageIndex]}
+                alt={title}
+                className="w-full h-full object-cover"
+              />
+              
+              {allImages.length > 1 && (
+                <div className="absolute inset-0 flex items-center justify-between p-2">
+                  <Button 
+                    variant="ghost" 
+                    size="icon" 
+                    className="bg-black/30 hover:bg-black/50 text-white rounded-full" 
+                    onClick={handlePrevImage}
+                  >
+                    <ChevronLeft className="h-8 w-8" />
+                  </Button>
+                  <Button 
+                    variant="ghost" 
+                    size="icon" 
+                    className="bg-black/30 hover:bg-black/50 text-white rounded-full" 
+                    onClick={handleNextImage}
+                  >
+                    <ChevronRight className="h-8 w-8" />
+                  </Button>
+                </div>
+              )}
+              
+              {allImages.length > 1 && (
+                <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-1">
+                  {allImages.map((_, index) => (
+                    <div 
+                      key={index} 
+                      className={`h-2 w-2 rounded-full ${currentImageIndex === index ? 'bg-evrgrn-accent' : 'bg-white/50'}`}
+                      onClick={() => setCurrentImageIndex(index)}
+                    />
+                  ))}
+                </div>
+              )}
+            </>
+          ) : (
+            <div className="w-full h-full flex items-center justify-center bg-evrgrn-darker">
+              <p className="text-muted-foreground">Image non disponible</p>
+            </div>
+          )}
           
           {isUnreleased && (
             <div className="absolute top-4 left-4 bg-evrgrn-darker/80 text-sm font-medium text-evrgrn-accent py-1 px-4 rounded-full">
@@ -64,56 +122,68 @@ const AlbumDetail: React.FC<Album> = ({
             )}
           </div>
           
-          <div className="mb-6">
-            <h2 className="text-xl font-medium text-foreground mb-3">Description</h2>
-            <p className="text-muted-foreground">{description}</p>
-          </div>
-          
-          {credits && (
-            <div className="mb-6">
-              <h2 className="text-xl font-medium text-foreground mb-3">Crédits</h2>
-              <p className="text-muted-foreground">{credits}</p>
-            </div>
-          )}
-
-          {visualConcept && (
-            <div className="mb-6">
-              <h2 className="text-xl font-medium text-foreground mb-3">Concept Visuel</h2>
-              <p className="text-muted-foreground">{visualConcept}</p>
-            </div>
-          )}
-          
-          <div className="mb-8">
-            <h2 className="text-xl font-medium text-foreground mb-4">Caractéristiques</h2>
+          <Tabs defaultValue="description" className="flex-1">
+            <TabsList className="mb-4 bg-evrgrn-darker">
+              <TabsTrigger value="description">Description</TabsTrigger>
+              {credits && <TabsTrigger value="credits">Crédits</TabsTrigger>}
+              {visualConcept && <TabsTrigger value="concept">Concept</TabsTrigger>}
+              {musicCharacteristics && <TabsTrigger value="characteristics">Caractéristiques</TabsTrigger>}
+            </TabsList>
             
-            <div className="space-y-6">
-              <div className="space-y-2">
-                <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">Calme</span>
-                  <span className="text-muted-foreground">Dansant</span>
-                </div>
-                <Progress value={musicCharacteristics.calmDancing} className="h-2 bg-evrgrn-muted" />
+            <TabsContent value="description" className="mt-0">
+              <div className="mb-6">
+                <p className="text-muted-foreground">{description}</p>
               </div>
-              
-              <div className="space-y-2">
-                <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">Engagé</span>
-                  <span className="text-muted-foreground">Stupide</span>
+            </TabsContent>
+            
+            {credits && (
+              <TabsContent value="credits" className="mt-0">
+                <div className="mb-6">
+                  <p className="text-muted-foreground">{credits}</p>
                 </div>
-                <Progress value={musicCharacteristics.engagedSilly} className="h-2 bg-evrgrn-muted" />
-              </div>
-              
-              <div className="space-y-2">
-                <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">Réalité</span>
-                  <span className="text-muted-foreground">Fiction</span>
+              </TabsContent>
+            )}
+
+            {visualConcept && (
+              <TabsContent value="concept" className="mt-0">
+                <div className="mb-6">
+                  <p className="text-muted-foreground">{visualConcept}</p>
                 </div>
-                <Progress value={musicCharacteristics.realityFiction} className="h-2 bg-evrgrn-muted" />
-              </div>
-            </div>
-          </div>
+              </TabsContent>
+            )}
+            
+            {musicCharacteristics && (
+              <TabsContent value="characteristics" className="mt-0">
+                <div className="space-y-6">
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-muted-foreground">Calme</span>
+                      <span className="text-muted-foreground">Dansant</span>
+                    </div>
+                    <Progress value={musicCharacteristics.calmDancing} className="h-2 bg-evrgrn-muted" />
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-muted-foreground">Engagé</span>
+                      <span className="text-muted-foreground">Stupide</span>
+                    </div>
+                    <Progress value={musicCharacteristics.engagedSilly} className="h-2 bg-evrgrn-muted" />
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-muted-foreground">Réalité</span>
+                      <span className="text-muted-foreground">Fiction</span>
+                    </div>
+                    <Progress value={musicCharacteristics.realityFiction} className="h-2 bg-evrgrn-muted" />
+                  </div>
+                </div>
+              </TabsContent>
+            )}
+          </Tabs>
           
-          <div className="mt-auto flex space-x-4">
+          <div className="mt-auto flex space-x-4 pt-6">
             {!isUnreleased ? (
               <>
                 {spotifyLink ? (
