@@ -73,7 +73,6 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
         <button 
           className="md:hidden flex items-center" 
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          aria-label="Toggle menu"
         >
           <span className="sr-only">Menu</span>
           <div className="w-6 h-5 flex flex-col justify-between">
