@@ -2,24 +2,11 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
+import { ExternalLink, Music } from 'lucide-react';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Album } from '@/data/albumData';
 
-interface AlbumDetailProps {
-  id: string;
-  title: string;
-  year: string;
-  month?: string;
-  collaborators?: string;
-  image?: string;
-  isUnreleased?: boolean;
-  description?: string;
-  musicCharacteristics?: {
-    calmDancing: number; // 0 = calm, 100 = dancing
-    engagedSilly: number; // 0 = engaged, 100 = silly
-    realityFiction: number; // 0 = reality, 100 = fiction
-  };
-}
-
-const AlbumDetail: React.FC<AlbumDetailProps> = ({
+const AlbumDetail: React.FC<Album> = ({
   id,
   title,
   year,
@@ -27,7 +14,11 @@ const AlbumDetail: React.FC<AlbumDetailProps> = ({
   collaborators,
   image = "/placeholder.svg",
   isUnreleased = false,
-  description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+  spotifyLink,
+  format,
+  description = "Description non disponible pour le moment.",
+  credits,
+  visualConcept,
   musicCharacteristics = {
     calmDancing: 50,
     engagedSilly: 30,
@@ -65,12 +56,32 @@ const AlbumDetail: React.FC<AlbumDetailProps> = ({
                 En collaboration avec {collaborators}
               </p>
             )}
+
+            {format && (
+              <p className="text-sm font-medium text-muted-foreground">
+                {format}
+              </p>
+            )}
           </div>
           
-          <div className="mb-8">
+          <div className="mb-6">
             <h2 className="text-xl font-medium text-foreground mb-3">Description</h2>
             <p className="text-muted-foreground">{description}</p>
           </div>
+          
+          {credits && (
+            <div className="mb-6">
+              <h2 className="text-xl font-medium text-foreground mb-3">Crédits</h2>
+              <p className="text-muted-foreground">{credits}</p>
+            </div>
+          )}
+
+          {visualConcept && (
+            <div className="mb-6">
+              <h2 className="text-xl font-medium text-foreground mb-3">Concept Visuel</h2>
+              <p className="text-muted-foreground">{visualConcept}</p>
+            </div>
+          )}
           
           <div className="mb-8">
             <h2 className="text-xl font-medium text-foreground mb-4">Caractéristiques</h2>
@@ -105,11 +116,21 @@ const AlbumDetail: React.FC<AlbumDetailProps> = ({
           <div className="mt-auto flex space-x-4">
             {!isUnreleased ? (
               <>
-                <Button 
-                  className="flex-1 bg-evrgrn-accent text-black hover:bg-evrgrn-accent/80"
-                >
-                  Écouter
-                </Button>
+                {spotifyLink ? (
+                  <Button 
+                    className="flex-1 bg-evrgrn-accent text-black hover:bg-evrgrn-accent/80"
+                    onClick={() => window.open(spotifyLink, '_blank')}
+                  >
+                    <Music className="mr-2 h-4 w-4" />
+                    Écouter sur Spotify
+                  </Button>
+                ) : (
+                  <Button 
+                    className="flex-1 bg-evrgrn-accent text-black hover:bg-evrgrn-accent/80"
+                  >
+                    Écouter
+                  </Button>
+                )}
                 <Button 
                   variant="outline"
                   className="flex-1 border-evrgrn-accent/50 text-evrgrn-accent hover:bg-evrgrn-accent/10"

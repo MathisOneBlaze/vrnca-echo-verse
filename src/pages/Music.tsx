@@ -1,47 +1,13 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
-import { Search } from 'lucide-react';
-
-interface Album {
-  id: string;
-  title: string;
-  year: string;
-  month?: string;
-  collaborators?: string;
-  collection?: string;
-  isUnreleased?: boolean;
-  image?: string;
-}
-
-const albumData: Album[] = [
-  { id: "1", title: "TEDDY BLAZE 2", year: "2024", collection: "EVRGRN" },
-  { id: "2", title: "EVRGRN, Le projet", year: "2024" },
-  { id: "3", title: "LETTERS II", year: "2024" },
-  { id: "4", title: "Maëlstrom", year: "2024", collaborators: "LeTrom Beats", isUnreleased: true },
-  { id: "5", title: "VRNCA-Patch 1.2 Bug Fixing.exe", year: "2023", month: "11", collaborators: "SEDJRO WESKER" },
-  { id: "6", title: "Trip Material MMXIII", year: "2023", month: "12" },
-  { id: "7", title: "Evil Blazy Vilain Teddy", year: "2022", month: "10", collaborators: "SEDJRO WESKER & USLE BELMONDO" },
-  { id: "8", title: "VRNCA.exe", year: "2022", month: "05", collaborators: "SEDJRO WESKER" },
-  { id: "9", title: "L'Avenue", year: "2022", month: "05", collaborators: "itsFkingTrack**" },
-  { id: "10", title: "TRAP TEDDY 2", year: "2021", month: "07" },
-  { id: "11", title: "TRAP TEDDY", year: "2020", month: "07" },
-  { id: "12", title: "#TeddyBlaze", year: "2018", month: "06" },
-  { id: "13", title: "LETTERS ON FALLEN FALL LEAVES", year: "2016", month: "11" },
-  { id: "14", title: "MAGNUM 2 (Œuvre au Blanc)", year: "2016", month: "04" },
-  { id: "15", title: "MAGNUM (Œuvre au Noir)", year: "2015", month: "09" },
-  { id: "16", title: "AUDIO DOPE", year: "2015", month: "04", collaborators: "CIDOTT" },
-  { id: "17", title: "CECI N'EST PAS DU TRAP", year: "2014", collaborators: "LETROM BEATS" },
-  { id: "18", title: "OPUS (EP)", year: "2014", month: "09" },
-  { id: "19", title: "SMOKE MATERIAL (EP)", year: "2014", month: "04" },
-  { id: "20", title: "#KonewingWay", year: "2014", month: "07", collaborators: "YRHN" },
-  { id: "21", title: "#KeepKonewing", year: "2013", month: "07", collaborators: "YRHN" },
-  { id: "22", title: "#StartKonewing", year: "2012", month: "09", collaborators: "YRHN" }
-];
+import { Search, ArrowUpRight } from 'lucide-react';
+import albumData, { Album } from '../data/albumData';
 
 const Music = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -64,6 +30,10 @@ const Music = () => {
       filtered = filtered.filter(album => album.title.toLowerCase().includes("vrnca"));
     } else if (activeTab === "collab") {
       filtered = filtered.filter(album => album.collaborators);
+    } else if (activeTab === "magnum") {
+      filtered = filtered.filter(album => album.title.toLowerCase().includes("magnum"));
+    } else if (activeTab === "letters") {
+      filtered = filtered.filter(album => album.title.toLowerCase().includes("letters"));
     }
     
     // Sort albums
@@ -89,7 +59,7 @@ const Music = () => {
   };
 
   // Effect to filter albums when search or sort options change
-  React.useEffect(() => {
+  useEffect(() => {
     handleFilterAlbums();
   }, [searchQuery, sortOption, activeTab]);
 
@@ -146,7 +116,8 @@ const Music = () => {
               <TabsTrigger value="all">Tous les projets</TabsTrigger>
               <TabsTrigger value="teddy">Teddy Blaze</TabsTrigger>
               <TabsTrigger value="vrnca">VRNCA</TabsTrigger>
-              <TabsTrigger value="EP">EP</TabsTrigger>
+              <TabsTrigger value="magnum">Magnum</TabsTrigger>
+              <TabsTrigger value="letters">Letters</TabsTrigger>
               <TabsTrigger value="collab">Collaborations</TabsTrigger>
             </TabsList>
             
@@ -178,46 +149,55 @@ interface AlbumCardProps {
 
 const AlbumCard: React.FC<AlbumCardProps> = ({ album }) => {
   return (
-    <div className="bg-evrgrn-muted border border-evrgrn-accent/10 rounded-lg overflow-hidden hover:border-evrgrn-accent/30 transition-all duration-300">
-      <div className="relative aspect-square bg-evrgrn-darker">
-        <img
-          src={album.image || "/placeholder.svg"}
-          alt={album.title}
-          className="w-full h-full object-cover"
-        />
-        
-        {album.isUnreleased && (
-          <div className="absolute top-0 left-0 w-full bg-evrgrn-darker/80 text-xs font-medium text-evrgrn-accent py-1 text-center">
-            À venir
-          </div>
-        )}
-        
-        {album.collaborators && (
-          <div className="absolute bottom-0 left-0 w-full bg-evrgrn-darker/80 text-xs font-medium text-foreground py-1 px-2">
-            avec {album.collaborators}
-          </div>
-        )}
-      </div>
-      
-      <div className="p-4">
-        <div className="flex justify-between items-start">
-          <div>
-            <h3 className="font-medium text-foreground mb-1">{album.title}</h3>
-            <p className="text-sm text-evrgrn-accent">
-              {album.year}{album.month && `.${album.month}`}
-            </p>
-          </div>
+    <Link to={`/album/${album.id}`} className="block">
+      <div className="bg-evrgrn-muted border border-evrgrn-accent/10 rounded-lg overflow-hidden hover:border-evrgrn-accent/30 transition-all duration-300 group h-full">
+        <div className="relative aspect-square bg-evrgrn-darker">
+          <img
+            src={album.image || "/placeholder.svg"}
+            alt={album.title}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+          
+          {album.isUnreleased && (
+            <div className="absolute top-0 left-0 w-full bg-evrgrn-darker/80 text-xs font-medium text-evrgrn-accent py-1 text-center">
+              À venir
+            </div>
+          )}
+          
+          {album.collaborators && (
+            <div className="absolute bottom-0 left-0 w-full bg-evrgrn-darker/80 text-xs font-medium text-foreground py-1 px-2">
+              avec {album.collaborators}
+            </div>
+          )}
         </div>
         
-        <Button
-          variant="outline" 
-          size="sm"
-          className="mt-4 w-full border-evrgrn-accent/30 text-evrgrn-accent hover:bg-evrgrn-accent/10"
-        >
-          Voir l'album
-        </Button>
+        <div className="p-4">
+          <div className="flex justify-between items-start mb-2">
+            <div>
+              <h3 className="font-medium text-foreground mb-1">{album.title}</h3>
+              <p className="text-sm text-evrgrn-accent">
+                {album.year}{album.month && `.${album.month}`}
+              </p>
+            </div>
+          </div>
+          
+          {album.format && (
+            <p className="text-xs text-muted-foreground mb-3">{album.format}</p>
+          )}
+          
+          <div className="flex items-center justify-between mt-4">
+            <Button
+              variant="outline" 
+              size="sm"
+              className="w-full border-evrgrn-accent/30 text-evrgrn-accent hover:bg-evrgrn-accent/10 group-hover:bg-evrgrn-accent/20"
+            >
+              Voir l'album
+              <ArrowUpRight className="h-3 w-3 ml-1" />
+            </Button>
+          </div>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
