@@ -6,54 +6,7 @@ import Footer from '../components/layout/Footer';
 import AlbumDetail from '../components/music/AlbumDetail';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
-
-// Sample album data - in a real app this would be fetched from an API
-const albumData = [
-  { 
-    id: "1", 
-    title: "TEDDY BLAZE 2", 
-    year: "2024", 
-    collection: "EVRGRN",
-    musicCharacteristics: {
-      calmDancing: 85,
-      engagedSilly: 40,
-      realityFiction: 60
-    }
-  },
-  { 
-    id: "2", 
-    title: "EVRGRN, Le projet", 
-    year: "2024",
-    musicCharacteristics: {
-      calmDancing: 70,
-      engagedSilly: 20,
-      realityFiction: 50
-    }
-  },
-  { 
-    id: "3", 
-    title: "LETTERS II", 
-    year: "2024",
-    musicCharacteristics: {
-      calmDancing: 30,
-      engagedSilly: 80,
-      realityFiction: 65
-    }
-  },
-  { 
-    id: "4", 
-    title: "Maëlstrom", 
-    year: "2024", 
-    collaborators: "LeTrom Beats", 
-    isUnreleased: true,
-    musicCharacteristics: {
-      calmDancing: 60,
-      engagedSilly: 35,
-      realityFiction: 75
-    }
-  }
-  // Add more albums as needed
-];
+import albumData from '../data/albumData';
 
 const AlbumPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
