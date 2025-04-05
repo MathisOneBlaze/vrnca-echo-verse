@@ -1,13 +1,35 @@
 
 import React, { useRef, useState } from 'react';
-import { Canvas, useFrame, useLoader } from '@react-three/fiber';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { OrbitControls } from '@react-three/drei';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { OrbitControls, useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 
-const VrncaModelInner = () => {
-  // Update the file path to point to the correct location in the public folder
-  const gltf = useLoader(GLTFLoader, '/vrnca head/VRNCA_4__0404022903_texture.glb');
+// 3D Model component
+const Model = () => {
+  const modelRef = useRef<THREE.Group>(null);
+  const { scene } = useGLTF('/vrnca-heead/VRNCA_4__0404022903_texture.glb');
+  
+  useFrame(({ clock }) => {
+    if (modelRef.current) {
+      // Gentle floating animation
+      modelRef.current.position.y = Math.sin(clock.getElapsedTime() * 0.5) * 0.1;
+      // Gentle rotation
+      modelRef.current.rotation.y = clock.getElapsedTime() * 0.2;
+    }
+  });
+  
+  return (
+    <primitive 
+      ref={modelRef} 
+      object={scene} 
+      scale={1.5} 
+      position={[0, 0, 0]} 
+    />
+  );
+};
+
+// Simple fallback model when the GLTF fails to load
+const FallbackModel = () => {
   const modelRef = useRef<THREE.Group>(null);
   
   useFrame(({ clock }) => {
@@ -21,7 +43,27 @@ const VrncaModelInner = () => {
   
   return (
     <group ref={modelRef} position={[0, 0, 0]} scale={1.5}>
-      <primitive object={gltf.scene} />
+      {/* Main head sphere */}
+      <mesh>
+        <sphereGeometry args={[0.7, 32, 32]} />
+        <meshStandardMaterial color="#00f5d4" wireframe />
+      </mesh>
+      
+      {/* Orbital elements */}
+      <group rotation={[Math.PI / 4, 0, 0]}>
+        <mesh>
+          <sphereGeometry args={[0.9, 16, 8]} />
+          <meshStandardMaterial color="#00f5d4" opacity={0.3} transparent={true} />
+          <meshStandardMaterial color="#00f5d4" opacity={0.3} transparent={true} />
+        </mesh>
+      </group>
+      
+      <group rotation={[0, 0, Math.PI / 4]}>
+        <mesh>
+          <sphereGeometry args={[1.1, 16, 8]} />
+          <meshStandardMaterial color="#00f5d4" opacity={0.2} transparent={true} />
+        </mesh>
+      </group>
     </group>
   );
 };
@@ -59,8 +101,8 @@ const VrncaModel: React.FC<VrncaModelProps> = ({ className, scale = 1.5, showLoa
         <directionalLight position={[10, 10, 5]} intensity={1} />
         <directionalLight position={[-10, -10, -5]} intensity={0.3} />
         <spotLight position={[0, 5, 10]} angle={0.3} penumbra={1} intensity={1} castShadow />
-        <React.Suspense fallback={null}>
-          <VrncaModelInner />
+        <React.Suspense fallback={<FallbackModel />}>
+          <Model />
           <OrbitControls 
             enablePan={false}
             enableZoom={false}
