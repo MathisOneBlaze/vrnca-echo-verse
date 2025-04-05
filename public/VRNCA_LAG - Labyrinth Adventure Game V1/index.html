@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VRNCA: LAG - Labyrinth Adventure Game</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Écran d'accueil -->
+    <div id="welcome-screen" class="screen active">
+        <div class="logo-container">
+            <h1 class="title">VRNCA: LAG</h1>
+            <p class="subtitle">Labyrinth Adventure Game</p>
+        </div>
+        <div class="login-container">
+            <div class="input-wrapper">
+                <label for="player-name">Identifiant :</label>
+                <input type="text" id="player-name" placeholder="Entrez votre nom">
+            </div>
+            <button id="start-button" class="pulse-button">START</button>
+            <button id="leaderboard-button" class="pulse-button">CLASSEMENT</button>
+        </div>
+        <div id="leaderboard" class="leaderboard">
+            <h2>Classement</h2>
+            <div id="leaderboard-content"></div>
+        </div>
+    </div>
+
+    <!-- Écran de jeu -->
+    <div id="game-screen" class="screen">
+        <div class="hud">
+            <div class="hud-left">
+                <div class="player-info">
+                    <span id="player-name-display"></span>
+                </div>
+                <div class="score-display">Score: <span id="score-display">0</span></div>
+                <span id="level-display">Niveau 1/10</span>
+            </div>
+            <div class="hud-center">
+                <div class="game-title">
+                    <div class="title-main">VRNCA</div>
+                    <div class="title-sub">Labyrinth Adventure Game</div>
+                </div>
+                <div class="game-controls">
+                    <button id="restart-button" class="pulse-button smaller">Re-start</button>
+                    <button id="abandon-button" class="pulse-button smaller">Abandon</button>
+                    <button id="game-leaderboard-button" class="pulse-button smaller">Classement</button>
+                </div>
+            </div>
+            <div class="hud-right">
+                <div class="battery-container">
+                    <span>Batterie:</span>
+                    <div class="battery-bar">
+                        <div id="battery-level" class="high" style="width: 100%"></div>
+                    </div>
+                    <span id="battery-percentage">100%</span>
+                </div>
+            </div>
+        </div>
+        <div id="maze-container"></div>
+        <div id="notification-area"></div>
+        <div class="audio-controls">
+            <button id="music-toggle" class="audio-btn">🎵</button>
+            <input type="range" id="volume-slider" min="0" max="100" value="50" class="volume-slider">
+            <button id="sound-toggle" class="audio-btn">🔊</button>
+        </div>
+        <div id="quiz-modal" class="modal">
+            <div class="modal-content">
+                <h2>Question de sécurité</h2>
+                <p id="quiz-question"></p>
+                <div id="quiz-choices" class="choices-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html> 
