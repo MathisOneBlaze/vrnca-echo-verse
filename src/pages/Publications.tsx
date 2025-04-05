@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -103,23 +104,23 @@ interface PublicationItem {
 
 const publications: PublicationItem[] = [
   {
-    id: "1",
+    id: "le-trousseau",
     title: "Le Trousseau",
     type: "livre",
     date: "2023",
     description: "Un recueil de réflexions sur l'indépendance artistique et les clés pour développer son propre univers créatif.",
-    image: "/placeholder.svg"
+    image: "/LE TROUSSEAU cover.jpg"
   },
   {
-    id: "2",
+    id: "manifesto",
     title: "mănĭfesto",
     type: "livre",
     date: "2022",
     description: "Un manifeste pour une nouvelle approche de la création musicale indépendante.",
-    image: "/placeholder.svg"
+    image: "/livre/manifesto.png"
   },
   {
-    id: "3",
+    id: "comprendre-flow-rap",
     title: "Comprendre le flow en rap - Théorie et application",
     type: "article",
     date: "2021",
@@ -127,13 +128,31 @@ const publications: PublicationItem[] = [
     image: "/placeholder.svg"
   },
   {
-    id: "4",
+    id: "production-minimaliste",
     title: "Production musicale: l'approche minimaliste",
     type: "video",
     date: "2022",
     description: "Tutoriel vidéo sur l'art de créer un impact maximal avec un minimum d'éléments dans la production musicale.",
     image: "/placeholder.svg",
     url: "https://youtube.com/example"
+  },
+  {
+    id: "top-50-france-2023",
+    title: "#1 Single du TOP 50 France - 2023",
+    type: "article",
+    date: "2023",
+    description: "Analyse des singles ayant atteint la première place du TOP 50 en France en 2023.",
+    image: "/placeholder.svg",
+    url: "/top-50-france-2023"
+  },
+  {
+    id: "top-50-france-2024",
+    title: "#1 Single du TOP 50 France - 2024",
+    type: "article",
+    date: "2024",
+    description: "Analyse des singles ayant atteint la première place du TOP 50 en France en 2024.",
+    image: "/placeholder.svg",
+    url: "/top-50-france-2024"
   }
 ];
 
@@ -281,8 +300,9 @@ const PublicationCard: React.FC<PublicationCardProps> = ({ publication }) => {
         ) : (
           <Button 
             className="w-full bg-evrgrn-darker hover:bg-evrgrn-accent hover:text-black transition-colors"
+            asChild
           >
-            En savoir plus
+            <Link to={`/publication/${publication.id}`}>En savoir plus</Link>
           </Button>
         )}
       </div>

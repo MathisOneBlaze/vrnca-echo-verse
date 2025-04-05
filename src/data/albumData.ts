@@ -8,6 +8,7 @@ export interface Album {
   collection?: string;
   isUnreleased?: boolean;
   image?: string;
+  additionalImages?: string[];
   spotifyLink?: string;
   format?: string;
   description?: string;
@@ -25,7 +26,8 @@ const albumData: Album[] = [
     id: "vrnca-patch-1-2-exe",
     title: "VRNCA Patch 1.2.exe",
     year: "2024",
-    image: "/lovable-uploads/ab3f2594-f0b8-44d7-a839-d3a957a32f1b.png",
+    image: "/Cover Art/VRNCA-PATCH 1.2.exe ;/COVER-VRNCA-1.2.exe3-1200x1200.jpeg",
+    additionalImages: [],
     spotifyLink: "https://open.spotify.com/album/vrnca-patch-1.2-exe",
     format: "18 titres – 42 min 31 s",
     description: "Cette mise à jour tant attendue du programme VRNCA complète l'album VRNCA.exe de 2022. Cette version dévoile la totalité du code et permet de comprendre pleinement le message de lutte contre la censure et le shadow ban, évoquant avec force la captivité et la libération symbolique que représente cette œuvre.",
@@ -43,7 +45,12 @@ const albumData: Album[] = [
     year: "2022",
     month: "10",
     collaborators: "SEDJRO WESKER & USLE BELMONDO",
-    image: "/lovable-uploads/11a5dd84-152b-4cfb-bbeb-d8ebfc14afc3.png",
+    image: "/Cover Art/Evil blazy : Vilain Teddy/Evil Blazy : Vilain Tedy COVER-13-1200x1200.jpeg",
+    additionalImages: [
+      "/Cover Art/Evil blazy : Vilain Teddy/Evil Blazy : Vilain Tedy 00-TRACKLIST-11.jpeg",
+      "/Cover Art/Evil blazy : Vilain Teddy/Evil blazy comic/EVIL-BLAZY-VILAIN-TEDDY-COMIC-4-1200x1200.jpeg",
+      "/Cover Art/Evil blazy : Vilain Teddy/Evil blazy comic/TITRE-EVIL-BLAZY-VILAIN-TEDDY.png"
+    ],
     spotifyLink: "https://open.spotify.com/album/evil-blazy-vilain-teddy",
     format: "10 titres",
     description: "Cet album s'inscrit dans le Teddy Verse et explore la dualité fascinante du personnage 'Teddy Blaze' se transformant en 'Vilain Teddy'. L'atmosphère sombre et introspective de ce projet illustre la symbolique de la libération intérieure et la confrontation avec ses propres démons.",
@@ -62,6 +69,7 @@ const albumData: Album[] = [
     month: "05",
     collaborators: "SEDJRO WESKER",
     image: "/placeholder.svg",
+    additionalImages: [],
     spotifyLink: "https://open.spotify.com/album/vrnca-exe",
     format: "8 titres",
     description: "Cet album fondateur a été créé pour combattre la censure et le shadow ban qui affectent de nombreux artistes indépendants. VRNCA y agit comme un guide numérique et un ange gardien, illustrant la première incursion dans cet univers narratif où technologie et humanité s'entremêlent.",
@@ -78,7 +86,10 @@ const albumData: Album[] = [
     title: "Trap Teddy 2",
     year: "2021",
     month: "07",
-    image: "/placeholder.svg",
+    image: "/Cover Art/TRAP TEDDY 2/00-COVER-Trap-Teddy-2-1200x1200.jpg",
+    additionalImages: [
+      "/Cover Art/TRAP TEDDY 2/Trap teddy 2 comics/Metro-Studio-Bingo-BD-Comic-1980x2801.jpg"
+    ],
     spotifyLink: "https://open.spotify.com/album/trap-teddy-2",
     format: "10 titres",
     description: "Ce second opus poursuit l'aventure de l'alter ego 'Teddy' dans un univers trap aux influences caribéennes distinctives. L'album affine considérablement le style et la production par rapport à son prédécesseur, marquant une évolution significative dans la maîtrise artistique.",
@@ -95,7 +106,12 @@ const albumData: Album[] = [
     title: "Trap Teddy",
     year: "2020",
     month: "07",
-    image: "/placeholder.svg",
+    image: "/Cover Art/TRAP TEDDY 1/01-MERCI-mp3-image-1200x1200.jpg",
+    additionalImages: [
+      "/Cover Art/TRAP TEDDY 1/Other Trazp teddy 1 visuals/teddy-neutre-300x300.png",
+      "/Cover Art/TRAP TEDDY 1/trap teddy 1 comics/Battle-Royal-BD-Comic-1980x2801.jpg",
+      "/Cover Art/TRAP TEDDY 1/trap teddy 1 comics/Bol-Toloman-BD-Comic-1980x2801.jpg"
+    ],
     spotifyLink: "https://open.spotify.com/album/trap-teddy",
     format: "10 titres",
     description: "Cet album introduit le personnage de 'Teddy' et pose les fondations de l'univers musical qui deviendra plus tard le Teddy Verse. Une fusion unique entre influences caribéennes authentiques et sonorités trap contemporaines y crée un langage musical distinctif.",
@@ -112,7 +128,8 @@ const albumData: Album[] = [
     title: "#TeddyBlaze",
     year: "2018",
     month: "06",
-    image: "/placeholder.svg",
+    image: "/Cover Art/Teddy Blaze/00-Cover-TEDDYBLAZE-1200x1200.jpg",
+    additionalImages: [],
     spotifyLink: "https://open.spotify.com/album/teddyblaze",
     format: "8 titres",
     description: "Aux origines du concept 'Teddy' qui sera développé dans les projets futurs, cet album introductif esquisse les premières lignes d'un univers narratif riche. Chaque morceau constitue une exploration brute et authentique des thématiques qui deviendront centrales dans l'œuvre artistique.",
@@ -131,6 +148,7 @@ const albumData: Album[] = [
     month: "05",
     collaborators: "itsFkingTrack**",
     image: "/placeholder.svg",
+    additionalImages: [],
     spotifyLink: "https://open.spotify.com/album/l-avenue",
     format: "8 titres",
     description: "Cette collaboration marquante avec itsFkingTrack** explore des territoires sonores inédits tout en apportant une ambiance unique à l'univers musical. Chaque morceau dévoile une facette différente du talent des artistes réunis dans ce projet commun.",
@@ -147,7 +165,8 @@ const albumData: Album[] = [
     title: "Letters on Fallen Fall Leaves",
     year: "2016",
     month: "11",
-    image: "/placeholder.svg",
+    image: "/Cover Art/LETTERS ON FALLEN FALL LEAVES/02-D-T-R-m4a-image-1200x1200.jpg",
+    additionalImages: [],
     spotifyLink: "https://open.spotify.com/album/letters-on-fallen-fall-leaves",
     format: "11 titres",
     description: "Un voyage introspectif aux tonalités poétiques, où chaque morceau évoque la fragilité et la beauté des émotions humaines, tel un courrier intime écrit sur des feuilles d'automne tombées. L'album invite à contempler le cycle naturel des sentiments et des saisons intérieures.",
@@ -164,7 +183,8 @@ const albumData: Album[] = [
     title: "Magnum 2 (Œuvre au Blanc)",
     year: "2016",
     month: "04",
-    image: "/placeholder.svg",
+    image: "/Cover Art/MAGNUM 2/00 Coveer Magnum 2.jpg",
+    additionalImages: [],
     spotifyLink: "https://open.spotify.com/album/magnum-2",
     format: "15 titres",
     description: "Deuxième volet d'une trilogie alchimique, symbolisant la phase de purification (l'œuvre au blanc) après les ténèbres. Ces 15 morceaux explorent la transformation personnelle et spirituelle, incarnant la recherche de clarté et de lumière après l'obscurité du premier opus.",
@@ -181,7 +201,11 @@ const albumData: Album[] = [
     title: "MAGNUM (Œuvre au Noir)",
     year: "2015",
     month: "09",
-    image: "/placeholder.svg",
+    image: "/Cover Art/MAGNUM 1/01-Chapitre-1-_-OEuvre-au-Noir-mp3-image-1200x1200.jpg",
+    additionalImages: [
+      "/Cover Art/MAGNUM 1/OTHER VISUALS/11850546_10207831770821690_1109974502677971053_o-1200x675.jpeg",
+      "/Cover Art/MAGNUM 1/OTHER VISUALS/12022457_10207831770701687_5478693939138506144_o-1200x675.jpeg"
+    ],
     spotifyLink: "https://open.spotify.com/album/magnum-oeuvre-au-noir",
     format: "Album",
     description: "Premier volet de la trilogie alchimique, marqué par la décomposition et la confrontation aux ténèbres (nigredo). Cet album fondateur établit les bases du concept de transformation artistique et personnelle qui traversera l'ensemble de l'œuvre à venir.",
@@ -200,6 +224,7 @@ const albumData: Album[] = [
     collaborators: "LeTrom Beats",
     isUnreleased: true,
     image: "/placeholder.svg",
+    additionalImages: [],
     musicCharacteristics: {
       calmDancing: 60,
       engagedSilly: 35,
