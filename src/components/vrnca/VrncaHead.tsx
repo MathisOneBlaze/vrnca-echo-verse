@@ -61,8 +61,8 @@ const VrncaHead: React.FC<VrncaHeadProps> = ({
     'custom': '',
   };
 
-  // Use the placeholder image since we don't have the actual asset
-  const placeholderImage = "/lovable-uploads/01e9bec9-0cde-4e57-a7c9-aa81659ce1c0.png";
+  // Use the correct path to the VRNCA head model
+  const vrncaHeadImage = "/vrnca head/VRNCA_4__0404022903_texture.glb";
 
   return (
     <div 
@@ -79,7 +79,7 @@ const VrncaHead: React.FC<VrncaHeadProps> = ({
       }}
     >
       <img 
-        src={placeholderImage} 
+        src="/lovable-uploads/01e9bec9-0cde-4e57-a7c9-aa81659ce1c0.png" 
         alt="VRNCA" 
         className="w-full h-full object-contain"
         style={{ 
