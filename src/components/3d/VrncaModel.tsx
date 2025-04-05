@@ -6,7 +6,8 @@ import { OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
 
 const VrncaModelInner = () => {
-  const gltf = useLoader(GLTFLoader, '/VRNCA_4__0404022903_texture.glb');
+  // Update the file path to point to the correct location in the public folder
+  const gltf = useLoader(GLTFLoader, '/vrnca head/VRNCA_4__0404022903_texture.glb');
   const modelRef = useRef<THREE.Group>(null);
   
   useFrame(({ clock }) => {
