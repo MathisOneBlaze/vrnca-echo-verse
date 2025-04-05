@@ -1,12 +1,11 @@
 
-import React, { useRef } from 'react';
-import { Canvas, useFrame, useLoader } from '@react-three/fiber';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import React, { useRef, useState } from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { Box, Sphere } from '@react-three/drei';
 import * as THREE from 'three';
 
-const MiniVrncaModelInner = () => {
-  // Update the file path to point to the correct location in the public folder
-  const gltf = useLoader(GLTFLoader, '/vrnca head/VRNCA_4__0404022903_texture.glb');
+// Simple fallback model when the GLTF fails to load
+const FallbackModel = () => {
   const modelRef = useRef<THREE.Group>(null);
   
   useFrame(({ clock }) => {
@@ -17,8 +16,13 @@ const MiniVrncaModelInner = () => {
   });
   
   return (
-    <group ref={modelRef} position={[0, 0, 0]} scale={2}>
-      <primitive object={gltf.scene} />
+    <group ref={modelRef} position={[0, 0, 0]} scale={1}>
+      <Sphere args={[0.7, 16, 16]}>
+        <meshStandardMaterial color="#00f5d4" />
+      </Sphere>
+      <Box args={[0.2, 0.2, 0.8]} position={[0, 0, 0.5]}>
+        <meshStandardMaterial color="#00f5d4" />
+      </Box>
     </group>
   );
 };
@@ -37,7 +41,7 @@ const MiniVrncaModel: React.FC<MiniVrncaModelProps> = ({ className }) => {
         <ambientLight intensity={0.5} />
         <directionalLight position={[10, 10, 5]} intensity={1} />
         <React.Suspense fallback={null}>
-          <MiniVrncaModelInner />
+          <FallbackModel />
         </React.Suspense>
       </Canvas>
     </div>
