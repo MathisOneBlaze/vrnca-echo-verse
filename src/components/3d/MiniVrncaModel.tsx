@@ -1,13 +1,11 @@
 
 import React, { useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 
-// Mini 3D Model component
+// Simple custom model since the GLTF is not loading properly
 const MiniModel = () => {
   const modelRef = useRef<THREE.Group>(null);
-  const { scene } = useGLTF('/vrnca-heead/VRNCA_4__0404022903_texture.glb');
   
   useFrame(({ clock }) => {
     if (modelRef.current) {
@@ -17,16 +15,32 @@ const MiniModel = () => {
   });
   
   return (
-    <primitive 
-      ref={modelRef} 
-      object={scene} 
-      scale={0.8} 
-      position={[0, 0, 0]} 
-    />
+    <group ref={modelRef} position={[0, 0, 0]} scale={0.8}>
+      {/* Main head sphere */}
+      <mesh>
+        <sphereGeometry args={[0.7, 32, 32]} />
+        <meshStandardMaterial color="#00f5d4" wireframe />
+      </mesh>
+      
+      {/* Orbital elements */}
+      <group rotation={[Math.PI / 4, 0, 0]}>
+        <mesh>
+          <sphereGeometry args={[0.9, 16, 8]} />
+          <meshStandardMaterial color="#00f5d4" opacity={0.3} transparent={true} />
+        </mesh>
+      </group>
+      
+      <group rotation={[0, 0, Math.PI / 4]}>
+        <mesh>
+          <sphereGeometry args={[1.1, 16, 8]} />
+          <meshStandardMaterial color="#00f5d4" opacity={0.2} transparent={true} />
+        </mesh>
+      </group>
+    </group>
   );
 };
 
-// Simple fallback model when the GLTF fails to load
+// Simple fallback model is now our main model
 const FallbackModel = () => {
   const modelRef = useRef<THREE.Group>(null);
   
