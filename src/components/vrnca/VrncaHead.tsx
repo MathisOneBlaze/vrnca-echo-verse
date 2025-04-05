@@ -76,7 +76,7 @@ const VrncaHead: React.FC<VrncaHeadProps> = ({
       }}
     >
       <img 
-        src="/lovable-uploads/11a5dd84-152b-4cfb-bbeb-d8ebfc14afc3.png" 
+        src="/livres/Le trousseau.jpg" 
         alt="VRNCA" 
         className="w-full h-full object-contain"
         style={{ 

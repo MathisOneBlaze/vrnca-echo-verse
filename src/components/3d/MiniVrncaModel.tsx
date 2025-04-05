@@ -1,12 +1,33 @@
 
 import React, { useRef } from 'react';
-import { Canvas, useFrame, useLoader } from '@react-three/fiber';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 
-const MiniVrncaModelInner = () => {
-  // Update the file path to point to the correct location in the public folder
-  const gltf = useLoader(GLTFLoader, '/vrnca head/VRNCA_4__0404022903_texture.glb');
+// Mini 3D Model component
+const MiniModel = () => {
+  const modelRef = useRef<THREE.Group>(null);
+  const { scene } = useGLTF('/vrnca-heead/VRNCA_4__0404022903_texture.glb');
+  
+  useFrame(({ clock }) => {
+    if (modelRef.current) {
+      // Constant rotation
+      modelRef.current.rotation.y = clock.getElapsedTime() * 0.5;
+    }
+  });
+  
+  return (
+    <primitive 
+      ref={modelRef} 
+      object={scene} 
+      scale={0.8} 
+      position={[0, 0, 0]} 
+    />
+  );
+};
+
+// Simple fallback model when the GLTF fails to load
+const FallbackModel = () => {
   const modelRef = useRef<THREE.Group>(null);
   
   useFrame(({ clock }) => {
@@ -17,8 +38,15 @@ const MiniVrncaModelInner = () => {
   });
   
   return (
-    <group ref={modelRef} position={[0, 0, 0]} scale={2}>
-      <primitive object={gltf.scene} />
+    <group ref={modelRef} position={[0, 0, 0]} scale={1}>
+      <mesh>
+        <sphereGeometry args={[0.7, 16, 16]} />
+        <meshStandardMaterial color="#00f5d4" />
+      </mesh>
+      <mesh position={[0, 0, 0.5]}>
+        <boxGeometry args={[0.2, 0.2, 0.8]} />
+        <meshStandardMaterial color="#00f5d4" />
+      </mesh>
     </group>
   );
 };
@@ -36,8 +64,8 @@ const MiniVrncaModel: React.FC<MiniVrncaModelProps> = ({ className }) => {
       >
         <ambientLight intensity={0.5} />
         <directionalLight position={[10, 10, 5]} intensity={1} />
-        <React.Suspense fallback={null}>
-          <MiniVrncaModelInner />
+        <React.Suspense fallback={<FallbackModel />}>
+          <MiniModel />
         </React.Suspense>
       </Canvas>
     </div>
