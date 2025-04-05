@@ -1,13 +1,11 @@
 
 import React, { useRef, useState } from 'react';
-import { Canvas, useFrame, useLoader } from '@react-three/fiber';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { OrbitControls } from '@react-three/drei';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { OrbitControls, Sphere, Box, Text } from '@react-three/drei';
 import * as THREE from 'three';
 
-const VrncaModelInner = () => {
-  // Update the file path to point to the correct location in the public folder
-  const gltf = useLoader(GLTFLoader, '/vrnca head/VRNCA_4__0404022903_texture.glb');
+// Simple fallback model when the GLTF fails to load
+const FallbackModel = () => {
   const modelRef = useRef<THREE.Group>(null);
   
   useFrame(({ clock }) => {
@@ -21,7 +19,34 @@ const VrncaModelInner = () => {
   
   return (
     <group ref={modelRef} position={[0, 0, 0]} scale={1.5}>
-      <primitive object={gltf.scene} />
+      {/* Main head sphere */}
+      <Sphere args={[0.7, 32, 32]}>
+        <meshStandardMaterial color="#00f5d4" wireframe />
+      </Sphere>
+      
+      {/* Display "VRNCA" text */}
+      <Text
+        position={[0, 0, 0.8]}
+        fontSize={0.2}
+        color="#00f5d4"
+        anchorX="center"
+        anchorY="middle"
+      >
+        VRNCA
+      </Text>
+      
+      {/* Orbital elements */}
+      <group rotation={[Math.PI / 4, 0, 0]}>
+        <Sphere args={[0.9, 16, 8]} scale={[1, 0.05, 1]}>
+          <meshStandardMaterial color="#00f5d4" opacity={0.3} transparent={true} />
+        </Sphere>
+      </group>
+      
+      <group rotation={[0, 0, Math.PI / 4]}>
+        <Sphere args={[1.1, 16, 8]} scale={[1, 0.05, 1]}>
+          <meshStandardMaterial color="#00f5d4" opacity={0.2} transparent={true} />
+        </Sphere>
+      </group>
     </group>
   );
 };
@@ -60,7 +85,7 @@ const VrncaModel: React.FC<VrncaModelProps> = ({ className, scale = 1.5, showLoa
         <directionalLight position={[-10, -10, -5]} intensity={0.3} />
         <spotLight position={[0, 5, 10]} angle={0.3} penumbra={1} intensity={1} castShadow />
         <React.Suspense fallback={null}>
-          <VrncaModelInner />
+          <FallbackModel />
           <OrbitControls 
             enablePan={false}
             enableZoom={false}
