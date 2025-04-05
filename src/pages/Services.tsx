@@ -5,6 +5,7 @@ import Footer from '../components/layout/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Headphones, BookOpen, BarChart3, Mic2 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Services = () => {
   const services = [
@@ -12,25 +13,29 @@ const Services = () => {
       title: "Consulting Production Musicale",
       icon: <Headphones className="w-10 h-10 text-evrgrn-accent" />,
       description: "Bénéficiez de nos conseils experts pour améliorer vos productions musicales. Notre équipe vous guide dans le choix des techniques de production, l'optimisation de vos arrangements et la finalisation de vos projets audio.",
-      cta: "Obtenir un devis"
+      cta: "Obtenir un devis",
+      to: "/contact?service=consulting"
     },
     {
       title: "Formation Théorie Musicale",
       icon: <BookOpen className="w-10 h-10 text-evrgrn-accent" />,
       description: "Apprenez les fondamentaux de la théorie musicale adaptés à vos projets créatifs. Nos formations sur mesure vous permettent de développer vos compétences en composition, harmonie et arrangements.",
-      cta: "Demander plus d'infos"
+      cta: "Demander plus d'infos",
+      to: "/contact?service=formation"
     },
     {
       title: "Stratégie Carrière Artistique",
       icon: <BarChart3 className="w-10 h-10 text-evrgrn-accent" />,
       description: "Développez votre carrière d'artiste avec notre accompagnement stratégique. Nous vous aidons à définir votre identité artistique, à élaborer votre plan de communication et à maximiser votre impact dans l'industrie musicale.",
-      cta: "Planifier un entretien"
+      cta: "Planifier un entretien",
+      to: "/contact?service=strategie"
     },
     {
       title: "Session Studio",
       icon: <Mic2 className="w-10 h-10 text-evrgrn-accent" />,
       description: "Enregistrez vos projets musicaux dans des conditions professionnelles. Notre studio vous offre un équipement de qualité et l'expertise technique nécessaire pour donner vie à vos créations sonores.",
-      cta: "Réserver une session"
+      cta: "Réserver une session",
+      to: "/contact?service=studio"
     }
   ];
 
@@ -63,8 +68,8 @@ const Services = () => {
                   </div>
                   <h2 className="text-xl font-medium mb-3">{service.title}</h2>
                   <p className="text-muted-foreground mb-6">{service.description}</p>
-                  <Button className="w-full bg-evrgrn-accent text-black hover:bg-evrgrn-accent/80">
-                    {service.cta}
+                  <Button asChild className="w-full bg-evrgrn-accent text-black hover:bg-evrgrn-accent/80">
+                    <Link to={service.to}>{service.cta}</Link>
                   </Button>
                 </CardContent>
               </Card>
@@ -77,8 +82,8 @@ const Services = () => {
               Vous avez un projet spécifique qui nécessite une approche personnalisée ? 
               Contactez-nous pour discuter de vos besoins et nous vous proposerons une solution adaptée.
             </p>
-            <Button className="bg-evrgrn-darker hover:bg-evrgrn-accent hover:text-black transition-colors">
-              Nous contacter
+            <Button asChild className="bg-evrgrn-darker hover:bg-evrgrn-accent hover:text-black transition-colors">
+              <Link to="/contact?service=custom">Nous contacter</Link>
             </Button>
           </div>
           
