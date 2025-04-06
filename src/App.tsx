@@ -24,6 +24,8 @@ import Dashboard from "./pages/Dashboard";
 import Register from "./pages/Register";
 import MentionsLegales from "./pages/MentionsLegales";
 import Confidentialite from "./pages/Confidentialite";
+import Game from "./pages/Game";
+import Ateliers from "./pages/Ateliers";
 
 const queryClient = new QueryClient();
 
@@ -46,6 +48,8 @@ const App = () => (
             <Route path="/publications" element={<Publications />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/services" element={<Services />} />
+            <Route path="/ateliers" element={<Ateliers />} />
+            <Route path="/game" element={<Game />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/dashboard" element={<Dashboard />} />

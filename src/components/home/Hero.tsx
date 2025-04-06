@@ -91,6 +91,15 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
               </Suspense>
             </div>
             
+            {/* Play VRNCA LAG button */}
+            <div className="mt-4 flex justify-center mask-reveal" style={{ '--delay': '700ms' } as React.CSSProperties}>
+              <Link to="/game">
+                <Button variant="default" className="bg-evrgrn-accent text-black hover:bg-evrgrn-accent/80">
+                  Jouer à VRNCA LAG
+                </Button>
+              </Link>
+            </div>
+            
             {/* VRNCA dialog */}
             {showDialog && (
               <div className="mt-8 max-w-lg mx-auto animate-fade-in">

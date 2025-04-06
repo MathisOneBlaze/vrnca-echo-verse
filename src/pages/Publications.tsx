@@ -1,11 +1,11 @@
 
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, ExternalLink } from 'lucide-react';
 
 interface PressArticle {
   id: string;
@@ -109,7 +109,7 @@ const publications: PublicationItem[] = [
     type: "livre",
     date: "2023",
     description: "Un recueil de réflexions sur l'indépendance artistique et les clés pour développer son propre univers créatif.",
-    image: "/LE TROUSSEAU cover.jpg"
+    image: "/livres/LE TROUSSEAU cover.jpg"
   },
   {
     id: "manifesto",
@@ -117,7 +117,7 @@ const publications: PublicationItem[] = [
     type: "livre",
     date: "2022",
     description: "Un manifeste pour une nouvelle approche de la création musicale indépendante.",
-    image: "/livre/manifesto.png"
+    image: "/livres/mănĭfesto.png"
   },
   {
     id: "comprendre-flow-rap",
@@ -156,8 +156,85 @@ const publications: PublicationItem[] = [
   }
 ];
 
+interface YouTubeVideo {
+  id: string;
+  title: string;
+  description: string;
+  thumbnail: string;
+  url: string;
+  date: string;
+}
+
+const youtubeVideos: YouTubeVideo[] = [
+  {
+    id: "4sCd4DrxTTc",
+    title: "Mathis OneBlaze - AK47 (Prod by Mathis Oneblaze)",
+    description: "Clip officiel du titre AK47, produit par Mathis OneBlaze.",
+    thumbnail: "https://img.youtube.com/vi/4sCd4DrxTTc/maxresdefault.jpg",
+    url: "https://www.youtube.com/watch?v=4sCd4DrxTTc",
+    date: "2022"
+  },
+  {
+    id: "dZeE5Dh0mVk",
+    title: "Mathis Oneblaze - STBB 762 (How deep is your funk)",
+    description: "Participation au Smokers Text Beat Battle (STBB) 762.",
+    thumbnail: "https://img.youtube.com/vi/dZeE5Dh0mVk/maxresdefault.jpg",
+    url: "https://www.youtube.com/watch?v=dZeE5Dh0mVk",
+    date: "2022"
+  },
+  {
+    id: "O2Vba1EwxzU",
+    title: "LES ALÉAS DU COSMOS - Mathis OneBlaze - Divertimento pour voix & piano",
+    description: "Performance vocale et pianistique sur le thème des aléas du cosmos.",
+    thumbnail: "https://img.youtube.com/vi/O2Vba1EwxzU/maxresdefault.jpg",
+    url: "https://www.youtube.com/watch?v=O2Vba1EwxzU",
+    date: "2022"
+  },
+  {
+    id: "h0ELPmCKV0U",
+    title: "Comment j'ai créé White Line ?",
+    description: "Découvrez l'histoire derrière la création du projet White Line.",
+    thumbnail: "https://img.youtube.com/vi/h0ELPmCKV0U/maxresdefault.jpg",
+    url: "https://www.youtube.com/watch?v=h0ELPmCKV0U",
+    date: "2020"
+  },
+  {
+    id: "i7YP8l6-2rE",
+    title: "ONEBLAZE - PSYCHORAMA / CLAP BACK (LIVE)",
+    description: "Performance live des titres PSYCHORAMA et CLAP BACK.",
+    thumbnail: "https://img.youtube.com/vi/i7YP8l6-2rE/maxresdefault.jpg",
+    url: "https://www.youtube.com/watch?v=i7YP8l6-2rE",
+    date: "2020"
+  },
+  {
+    id: "HiFo0QRUkjA",
+    title: "ONEBLAZE - MUSE (CLIP OFFICIEL)",
+    description: "Clip officiel du titre MUSE de OneBlaze.",
+    thumbnail: "https://img.youtube.com/vi/HiFo0QRUkjA/maxresdefault.jpg",
+    url: "https://www.youtube.com/watch?v=HiFo0QRUkjA",
+    date: "2018"
+  }
+];
+
 const Publications = () => {
   const [activeTab, setActiveTab] = useState("presse");
+  const location = useLocation();
+  const navigate = useNavigate();
+  
+  // Check if URL has a tab parameter and set active tab accordingly
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const tabParam = searchParams.get('tab');
+    if (tabParam && ["presse", "livres", "articles", "videos"].includes(tabParam)) {
+      setActiveTab(tabParam);
+    }
+  }, [location]);
+
+  // Update URL when tab changes
+  const handleTabChange = (value: string) => {
+    setActiveTab(value);
+    navigate(`/publications?tab=${value}`, { replace: true });
+  };
   
   return (
     <div className="bg-evrgrn-dark text-foreground min-h-screen flex flex-col">
@@ -179,7 +256,7 @@ const Publications = () => {
             />
           </div>
           
-          <Tabs defaultValue="presse" value={activeTab} onValueChange={setActiveTab} className="mb-8">
+          <Tabs value={activeTab} onValueChange={handleTabChange} className="mb-8">
             <TabsList className="bg-evrgrn-muted border border-evrgrn-accent/10 w-full flex justify-start overflow-x-auto">
               <TabsTrigger value="presse">Presse</TabsTrigger>
               <TabsTrigger value="livres">Livres</TabsTrigger>
@@ -218,13 +295,48 @@ const Publications = () => {
             </TabsContent>
             
             <TabsContent value="videos" className="mt-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {publications
-                  .filter(pub => pub.type === 'video')
-                  .map(publication => (
-                    <PublicationCard key={publication.id} publication={publication} />
-                  ))
-                }
+              <div>
+                <h2 className="text-2xl font-serif mb-6">Chaîne YouTube</h2>
+                
+                {/* Featured video section */}
+                <div className="mb-8">
+                  <div className="bg-evrgrn-muted rounded-lg overflow-hidden">
+                    <div className="aspect-video w-full">
+                      <iframe 
+                        src="https://www.youtube.com/embed/4sCd4DrxTTc" 
+                        title="YouTube Video Player"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowFullScreen
+                        className="w-full h-full"
+                      ></iframe>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Video grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {youtubeVideos.map((video) => (
+                    <VideoCard key={video.id} video={video} />
+                  ))}
+                </div>
+                
+                {/* Link to full channel */}
+                <div className="mt-8 text-center">
+                  <Button 
+                    asChild
+                    variant="outline" 
+                    className="border-evrgrn-accent/50 hover:bg-evrgrn-accent hover:text-black"
+                  >
+                    <a 
+                      href="https://www.youtube.com/playlist?list=PLFDJzERePP0FhZolqb1dBHflCxifjD7s9" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                    >
+                      Voir toutes les vidéos
+                      <ExternalLink className="ml-2 h-4 w-4" />
+                    </a>
+                  </Button>
+                </div>
               </div>
             </TabsContent>
           </Tabs>
@@ -277,6 +389,10 @@ const PublicationCard: React.FC<PublicationCardProps> = ({ publication }) => {
           src={publication.image || "/placeholder.svg"}
           alt={publication.title}
           className="w-full h-full object-cover"
+          onError={(e) => {
+            const target = e.target as HTMLImageElement;
+            target.src = "/placeholder.svg";
+          }}
         />
         <div className="absolute top-2 right-2 bg-evrgrn-darker px-2 py-1 text-xs font-medium rounded-md text-evrgrn-accent">
           {publication.type === 'livre' && 'Livre'}
@@ -305,6 +421,62 @@ const PublicationCard: React.FC<PublicationCardProps> = ({ publication }) => {
             <Link to={`/publication/${publication.id}`}>En savoir plus</Link>
           </Button>
         )}
+      </div>
+    </div>
+  );
+};
+
+interface VideoCardProps {
+  video: YouTubeVideo;
+}
+
+const VideoCard: React.FC<VideoCardProps> = ({ video }) => {
+  return (
+    <div className="bg-evrgrn-muted border border-evrgrn-accent/10 rounded-lg overflow-hidden hover:border-evrgrn-accent/30 transition-all duration-300">
+      <a 
+        href={video.url} 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        className="block relative aspect-video"
+      >
+        <img
+          src={video.thumbnail}
+          alt={video.title}
+          className="w-full h-full object-cover"
+          onError={(e) => {
+            const target = e.target as HTMLImageElement;
+            target.src = "/placeholder.svg";
+          }}
+        />
+        <div className="absolute inset-0 bg-black opacity-0 hover:opacity-40 transition-opacity flex items-center justify-center">
+          <div className="w-16 h-16 rounded-full bg-evrgrn-accent/80 flex items-center justify-center">
+            <svg 
+              width="24" 
+              height="24" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              xmlns="http://www.w3.org/2000/svg"
+              className="text-black"
+            >
+              <path d="M8 5.14v14l11-7-11-7z" fill="currentColor" />
+            </svg>
+          </div>
+        </div>
+      </a>
+      
+      <div className="p-6">
+        <div className="text-sm text-evrgrn-accent mb-1">{video.date}</div>
+        <h3 className="font-medium text-lg mb-3">{video.title}</h3>
+        <p className="text-muted-foreground text-sm mb-4">{video.description}</p>
+        
+        <Button 
+          asChild
+          className="w-full bg-evrgrn-darker hover:bg-evrgrn-accent hover:text-black transition-colors"
+        >
+          <a href={video.url} target="_blank" rel="noopener noreferrer">
+            Regarder
+          </a>
+        </Button>
       </div>
     </div>
   );

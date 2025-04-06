@@ -4,12 +4,13 @@ import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Headphones, BookOpen, BarChart3, Mic2 } from 'lucide-react';
+import { Headphones, BookOpen, BarChart3, Mic2, Users, Music } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Services = () => {
   const services = [
     {
+      id: "consulting",
       title: "Consulting Production Musicale",
       icon: <Headphones className="w-10 h-10 text-evrgrn-accent" />,
       description: "Bénéficiez de nos conseils experts pour améliorer vos productions musicales. Notre équipe vous guide dans le choix des techniques de production, l'optimisation de vos arrangements et la finalisation de vos projets audio.",
@@ -17,6 +18,7 @@ const Services = () => {
       to: "/contact?service=consulting"
     },
     {
+      id: "formation",
       title: "Formation Théorie Musicale",
       icon: <BookOpen className="w-10 h-10 text-evrgrn-accent" />,
       description: "Apprenez les fondamentaux de la théorie musicale adaptés à vos projets créatifs. Nos formations sur mesure vous permettent de développer vos compétences en composition, harmonie et arrangements.",
@@ -24,6 +26,7 @@ const Services = () => {
       to: "/contact?service=formation"
     },
     {
+      id: "strategie",
       title: "Stratégie Carrière Artistique",
       icon: <BarChart3 className="w-10 h-10 text-evrgrn-accent" />,
       description: "Développez votre carrière d'artiste avec notre accompagnement stratégique. Nous vous aidons à définir votre identité artistique, à élaborer votre plan de communication et à maximiser votre impact dans l'industrie musicale.",
@@ -31,6 +34,7 @@ const Services = () => {
       to: "/contact?service=strategie"
     },
     {
+      id: "studio",
       title: "Session Studio",
       icon: <Mic2 className="w-10 h-10 text-evrgrn-accent" />,
       description: "Enregistrez vos projets musicaux dans des conditions professionnelles. Notre studio vous offre un équipement de qualité et l'expertise technique nécessaire pour donner vie à vos créations sonores.",
@@ -61,7 +65,7 @@ const Services = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
             {services.map((service, index) => (
-              <Card key={index} className="bg-evrgrn-muted border-evrgrn-accent/10 hover:border-evrgrn-accent/30 transition-all duration-300">
+              <Card key={index} id={service.id} className="bg-evrgrn-muted border-evrgrn-accent/10 hover:border-evrgrn-accent/30 transition-all duration-300">
                 <CardContent className="p-6">
                   <div className="mb-4">
                     {service.icon}
@@ -87,7 +91,48 @@ const Services = () => {
             </Button>
           </div>
           
-          <div className="bg-evrgrn-muted border border-evrgrn-accent/10 rounded-lg p-8">
+          {/* New section for Ateliers */}
+          <div className="bg-evrgrn-muted border border-evrgrn-accent/10 rounded-lg p-8 mb-12">
+            <div className="flex flex-col md:flex-row gap-6">
+              <div className="md:w-2/3">
+                <h2 className="text-2xl font-serif mb-4">Ateliers Création & Production Musicale</h2>
+                <p className="text-muted-foreground mb-4">
+                  EVRGRN propose des ateliers collectifs de création et production musicale adaptés 
+                  à tous les publics. Idéals pour les centres sociaux, établissements scolaires, 
+                  structures culturelles et associations, ces ateliers permettent aux participants 
+                  de découvrir l'univers de la musique et de développer leurs compétences artistiques.
+                </p>
+                <div className="flex flex-wrap gap-4 mb-6">
+                  <div className="flex items-center">
+                    <Users className="w-5 h-5 text-evrgrn-accent mr-2" />
+                    <span className="text-sm">Tous niveaux</span>
+                  </div>
+                  <div className="flex items-center">
+                    <Music className="w-5 h-5 text-evrgrn-accent mr-2" />
+                    <span className="text-sm">Tous styles</span>
+                  </div>
+                  <div className="flex items-center">
+                    <Headphones className="w-5 h-5 text-evrgrn-accent mr-2" />
+                    <span className="text-sm">Matériel fourni</span>
+                  </div>
+                </div>
+                <Button asChild className="bg-evrgrn-accent text-black hover:bg-evrgrn-accent/80">
+                  <Link to="/ateliers">Plus d'informations</Link>
+                </Button>
+              </div>
+              <div className="md:w-1/3">
+                <div className="bg-evrgrn-darker rounded-lg overflow-hidden h-full">
+                  <img 
+                    src="/P1320893_optimized.jpg" 
+                    alt="Atelier de production musicale" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div id="faq" className="bg-evrgrn-muted border border-evrgrn-accent/10 rounded-lg p-8">
             <h2 className="text-2xl font-serif mb-4">Foire aux questions</h2>
             
             <div className="space-y-6">
@@ -113,6 +158,16 @@ const Services = () => {
                 <p className="text-muted-foreground">
                   En fonction de nos disponibilités, nous pouvons généralement vous proposer un premier 
                   rendez-vous dans un délai de 1 à 2 semaines après votre demande initiale.
+                </p>
+              </div>
+              
+              <div>
+                <h3 className="text-lg font-medium mb-2">Comment organiser un atelier dans ma structure ?</h3>
+                <p className="text-muted-foreground">
+                  Pour organiser un atelier, contactez-nous via notre formulaire en spécifiant vos besoins, 
+                  le public concerné et les dates souhaitées. Nous vous proposerons un programme 
+                  adapté et un devis personnalisé. Le matériel peut être fourni et les ateliers 
+                  sont modulables en durée et en contenu.
                 </p>
               </div>
             </div>
