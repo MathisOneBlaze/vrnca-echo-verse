@@ -1,7 +1,5 @@
-
 import React, { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
-import VrncaAvatar from './VrncaAvatar';
 import VrncaDialog from './VrncaDialog';
 import GlitchText from '../ui/GlitchText';
 import VrncaFaceAnimation, { VrncaFaceExpression } from './VrncaFaceAnimation';

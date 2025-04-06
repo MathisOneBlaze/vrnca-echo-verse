@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
 import VrncaDialog from '../vrnca/VrncaDialog';
@@ -35,6 +34,19 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
+
+  // Scroll to chatbot when button is clicked
+  const scrollToChatbot = () => {
+    setShowDialog(true);
+    // Find the footer which contains the chatbot
+    const footer = document.querySelector('footer');
+    if (footer) {
+      // Use a slight delay to ensure UI updates before scrolling
+      setTimeout(() => {
+        footer.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+  };
 
   return (
     <section 
@@ -109,7 +121,7 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
               <Button
                 variant="outline"
                 className="btn-secondary text-base"
-                onClick={() => setShowDialog(true)}
+                onClick={scrollToChatbot}
               >
                 Communiquer avec VRNCA
               </Button>
