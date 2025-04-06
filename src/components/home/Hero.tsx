@@ -1,11 +1,12 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
 import VrncaDialog from '../vrnca/VrncaDialog';
 import GlitchText from '../ui/GlitchText';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
+import VrncaHead from '../vrnca/VrncaHead';
 
 // Lazy load the 3D model component to improve initial page load
 const VrncaModel = lazy(() => import('../3d/VrncaModel'));
@@ -16,9 +17,28 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ className }) => {
   const [showDialog, setShowDialog] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const heroRef = useRef<HTMLDivElement>(null);
+
+  // Track mouse movement for the VrncaHead
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (heroRef.current) {
+        const { left, top, width, height } = heroRef.current.getBoundingClientRect();
+        // Calculate mouse position relative to hero section
+        const x = ((e.clientX - left) / width) * 2 - 1; // -1 to 1
+        const y = ((e.clientY - top) / height) * 2 - 1; // -1 to 1
+        setMousePosition({ x, y });
+      }
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
   return (
     <section 
+      ref={heroRef}
       className={cn(
         'min-h-screen flex items-center relative overflow-hidden py-24',
         className
@@ -41,6 +61,17 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
         <div className="absolute top-0 left-1/4 h-full w-px bg-evrgrn-accent/10"></div>
         <div className="absolute top-0 left-1/2 h-full w-px bg-evrgrn-accent/15"></div>
         <div className="absolute top-0 left-3/4 h-full w-px bg-evrgrn-accent/10"></div>
+      </div>
+      
+      {/* VrncaHead that follows mouse */}
+      <div className="absolute inset-0 z-10 pointer-events-none flex items-center justify-center">
+        <VrncaHead 
+          size="lg"
+          initialRotation={{ 
+            x: mousePosition.y * -10, // Invert Y for natural feel
+            y: mousePosition.x * 10 
+          }}
+        />
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
@@ -84,18 +115,14 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
               </Button>
             </div>
             
-            {/* VRNCA 3D Model centered */}
-            <div className="flex justify-center mb-12 h-80 w-80 mx-auto">
-              <Suspense fallback={<div className="text-evrgrn-accent">Chargement de VRNCA...</div>}>
-                <VrncaModel />
-              </Suspense>
-            </div>
+            {/* Space reserved for VrncaHead - this is just to maintain layout */}
+            <div className="h-80 w-80 mx-auto mb-12 opacity-0"></div>
             
             {/* Play VRNCA LAG button */}
             <div className="mt-4 flex justify-center mask-reveal" style={{ '--delay': '700ms' } as React.CSSProperties}>
-              <Link to="/game">
+              <Link to="/jeux">
                 <Button variant="default" className="bg-evrgrn-accent text-black hover:bg-evrgrn-accent/80">
-                  Jouer à VRNCA LAG
+                  Découvrir les jeux
                 </Button>
               </Link>
             </div>
