@@ -163,6 +163,7 @@ interface YouTubeVideo {
   thumbnail: string;
   url: string;
   date: string;
+  category?: 'clip' | 'trousseau';
 }
 
 const youtubeVideos: YouTubeVideo[] = [
@@ -172,7 +173,8 @@ const youtubeVideos: YouTubeVideo[] = [
     description: "Clip officiel du titre AK47, produit par Mathis OneBlaze.",
     thumbnail: "https://img.youtube.com/vi/4sCd4DrxTTc/maxresdefault.jpg",
     url: "https://www.youtube.com/watch?v=4sCd4DrxTTc",
-    date: "2022"
+    date: "2022",
+    category: 'clip'
   },
   {
     id: "dZeE5Dh0mVk",
@@ -180,7 +182,8 @@ const youtubeVideos: YouTubeVideo[] = [
     description: "Participation au Smokers Text Beat Battle (STBB) 762.",
     thumbnail: "https://img.youtube.com/vi/dZeE5Dh0mVk/maxresdefault.jpg",
     url: "https://www.youtube.com/watch?v=dZeE5Dh0mVk",
-    date: "2022"
+    date: "2022",
+    category: 'clip'
   },
   {
     id: "O2Vba1EwxzU",
@@ -188,7 +191,8 @@ const youtubeVideos: YouTubeVideo[] = [
     description: "Performance vocale et pianistique sur le thème des aléas du cosmos.",
     thumbnail: "https://img.youtube.com/vi/O2Vba1EwxzU/maxresdefault.jpg",
     url: "https://www.youtube.com/watch?v=O2Vba1EwxzU",
-    date: "2022"
+    date: "2022",
+    category: 'clip'
   },
   {
     id: "h0ELPmCKV0U",
@@ -196,7 +200,8 @@ const youtubeVideos: YouTubeVideo[] = [
     description: "Découvrez l'histoire derrière la création du projet White Line.",
     thumbnail: "https://img.youtube.com/vi/h0ELPmCKV0U/maxresdefault.jpg",
     url: "https://www.youtube.com/watch?v=h0ELPmCKV0U",
-    date: "2020"
+    date: "2020",
+    category: 'clip'
   },
   {
     id: "i7YP8l6-2rE",
@@ -204,7 +209,8 @@ const youtubeVideos: YouTubeVideo[] = [
     description: "Performance live des titres PSYCHORAMA et CLAP BACK.",
     thumbnail: "https://img.youtube.com/vi/i7YP8l6-2rE/maxresdefault.jpg",
     url: "https://www.youtube.com/watch?v=i7YP8l6-2rE",
-    date: "2020"
+    date: "2020",
+    category: 'clip'
   },
   {
     id: "HiFo0QRUkjA",
@@ -212,7 +218,35 @@ const youtubeVideos: YouTubeVideo[] = [
     description: "Clip officiel du titre MUSE de OneBlaze.",
     thumbnail: "https://img.youtube.com/vi/HiFo0QRUkjA/maxresdefault.jpg",
     url: "https://www.youtube.com/watch?v=HiFo0QRUkjA",
-    date: "2018"
+    date: "2018",
+    category: 'clip'
+  },
+  {
+    id: "X8WA2vuBvFM",
+    title: "Le Trousseau - Introduction au concept",
+    description: "Présentation du concept derrière le livre Le Trousseau et de la philosophie qui l'anime.",
+    thumbnail: "https://img.youtube.com/vi/X8WA2vuBvFM/maxresdefault.jpg",
+    url: "https://www.youtube.com/watch?v=X8WA2vuBvFM",
+    date: "2023",
+    category: 'trousseau'
+  },
+  {
+    id: "kLW3jNXQ2yQ",
+    title: "Le Trousseau - Chapitre 1: Les clés du savoir",
+    description: "Exploration du premier chapitre du Trousseau sur l'importance de l'apprentissage autodidacte.",
+    thumbnail: "https://img.youtube.com/vi/kLW3jNXQ2yQ/maxresdefault.jpg",
+    url: "https://www.youtube.com/watch?v=kLW3jNXQ2yQ",
+    date: "2023",
+    category: 'trousseau'
+  },
+  {
+    id: "RzF5Mxjd7LM",
+    title: "Le Trousseau - Chapitre 2: La clé de la persévérance",
+    description: "Discussion autour du deuxième chapitre du Trousseau sur la constance dans l'effort créatif.",
+    thumbnail: "https://img.youtube.com/vi/RzF5Mxjd7LM/maxresdefault.jpg",
+    url: "https://www.youtube.com/watch?v=RzF5Mxjd7LM",
+    date: "2023",
+    category: 'trousseau'
   }
 ];
 
@@ -225,7 +259,7 @@ const Publications = () => {
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
     const tabParam = searchParams.get('tab');
-    if (tabParam && ["presse", "livres", "articles", "videos"].includes(tabParam)) {
+    if (tabParam && ["presse", "livres", "articles", "clips", "letrousseau"].includes(tabParam)) {
       setActiveTab(tabParam);
     }
   }, [location]);
@@ -261,7 +295,8 @@ const Publications = () => {
               <TabsTrigger value="presse">Presse</TabsTrigger>
               <TabsTrigger value="livres">Livres</TabsTrigger>
               <TabsTrigger value="articles">Articles</TabsTrigger>
-              <TabsTrigger value="videos">Vidéos</TabsTrigger>
+              <TabsTrigger value="clips">Clips</TabsTrigger>
+              <TabsTrigger value="letrousseau">Le Trousseau</TabsTrigger>
             </TabsList>
             
             <TabsContent value="presse" className="mt-8">
@@ -294,9 +329,9 @@ const Publications = () => {
               </div>
             </TabsContent>
             
-            <TabsContent value="videos" className="mt-8">
+            <TabsContent value="clips" className="mt-8">
               <div>
-                <h2 className="text-2xl font-serif mb-6">Chaîne YouTube</h2>
+                <h2 className="text-2xl font-serif mb-6">Clips vidéo</h2>
                 
                 {/* Featured video section */}
                 <div className="mb-8">
@@ -315,9 +350,12 @@ const Publications = () => {
                 
                 {/* Video grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {youtubeVideos.map((video) => (
-                    <VideoCard key={video.id} video={video} />
-                  ))}
+                  {youtubeVideos
+                    .filter(video => video.category === 'clip')
+                    .map((video) => (
+                      <VideoCard key={video.id} video={video} />
+                    ))
+                  }
                 </div>
                 
                 {/* Link to full channel */}
@@ -328,7 +366,7 @@ const Publications = () => {
                     className="border-evrgrn-accent/50 hover:bg-evrgrn-accent hover:text-black"
                   >
                     <a 
-                      href="https://www.youtube.com/playlist?list=PLFDJzERePP0FhZolqb1dBHflCxifjD7s9" 
+                      href="https://www.youtube.com/channel/UCbKQr2lFR9C5jdf7gUDLfhQ" 
                       target="_blank" 
                       rel="noopener noreferrer"
                     >
@@ -336,6 +374,51 @@ const Publications = () => {
                       <ExternalLink className="ml-2 h-4 w-4" />
                     </a>
                   </Button>
+                </div>
+              </div>
+            </TabsContent>
+            
+            <TabsContent value="letrousseau" className="mt-8">
+              <div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                  <div>
+                    <h2 className="text-2xl font-serif mb-4">Le Trousseau</h2>
+                    <p className="text-muted-foreground mb-4">
+                      "Le Trousseau" est un livre qui rassemble les réflexions et l'expérience de Mathis OneBlaze sur l'indépendance artistique, l'authenticité créative et le développement d'un univers propre.
+                    </p>
+                    <p className="text-muted-foreground mb-6">
+                      Conçu comme un recueil de clés pour les artistes indépendants, cet ouvrage partage des principes et méthodes éprouvés pour naviguer dans le monde de la création sans compromis.
+                    </p>
+                    <Button asChild className="bg-evrgrn-accent text-black hover:bg-evrgrn-accent/80">
+                      <Link to="/publications?tab=livres">Découvrir le livre</Link>
+                    </Button>
+                  </div>
+                  <div>
+                    <img 
+                      src="/livres/LE TROUSSEAU cover.jpg" 
+                      alt="Le Trousseau" 
+                      className="w-full rounded-lg shadow-lg"
+                    />
+                  </div>
+                </div>
+                
+                <h3 className="text-xl font-medium mb-6">Vidéos sur le concept</h3>
+                
+                {/* Video grid for Trousseau videos */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                  {youtubeVideos
+                    .filter(video => video.category === 'trousseau')
+                    .map((video) => (
+                      <VideoCard key={video.id} video={video} />
+                    ))
+                  }
+                </div>
+                
+                <div className="bg-evrgrn-muted border border-evrgrn-accent/10 rounded-lg p-6 mt-8">
+                  <h3 className="text-xl font-medium mb-4">À propos de la série</h3>
+                  <p className="text-muted-foreground">
+                    Cette série de vidéos explore en profondeur les concepts présentés dans "Le Trousseau". Chaque vidéo se concentre sur un chapitre ou un aspect particulier du livre, offrant des explications complémentaires, des exemples concrets et des applications pratiques des principes discutés. L'objectif est d'enrichir l'expérience de lecture et d'offrir un format audiovisuel qui permet d'approfondir les idées introduites dans l'ouvrage.
+                  </p>
                 </div>
               </div>
             </TabsContent>

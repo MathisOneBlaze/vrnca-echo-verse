@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils';
 import VrncaAvatar from './VrncaAvatar';
 import VrncaDialog from './VrncaDialog';
 import GlitchText from '../ui/GlitchText';
+import VrncaFaceAnimation, { VrncaFaceExpression } from './VrncaFaceAnimation';
 
 interface VrncaIntroProps {
   onComplete: () => void;
@@ -13,6 +14,7 @@ interface VrncaIntroProps {
 const VrncaIntro: React.FC<VrncaIntroProps> = ({ onComplete, className }) => {
   const [stage, setStage] = useState<'initial' | 'connecting' | 'scanning' | 'intro' | 'complete'>('initial');
   const [glitchEffect, setGlitchEffect] = useState(false);
+  const [faceExpression, setFaceExpression] = useState<VrncaFaceExpression>('neutral');
 
   useEffect(() => {
     // Ajouter des effets de glitch aléatoires
@@ -36,6 +38,9 @@ const VrncaIntro: React.FC<VrncaIntroProps> = ({ onComplete, className }) => {
 
   useEffect(() => {
     if (stage === 'connecting') {
+      // Set face expression for connecting stage
+      setFaceExpression('neutral');
+      
       // After "connecting" move to scanning
       const timer = setTimeout(() => {
         setStage('scanning');
@@ -45,9 +50,14 @@ const VrncaIntro: React.FC<VrncaIntroProps> = ({ onComplete, className }) => {
     }
     
     if (stage === 'scanning') {
+      // Set face expression for scanning stage
+      setFaceExpression('shook1');
+      
       // After "scanning" move to intro
       const timer = setTimeout(() => {
         setStage('intro');
+        // Set face to talk
+        setFaceExpression('laugh1');
       }, 3000);
       
       return () => clearTimeout(timer);
@@ -110,7 +120,13 @@ const VrncaIntro: React.FC<VrncaIntroProps> = ({ onComplete, className }) => {
         {stage === 'initial' && (
           <div className="text-center animate-fade-in">
             <div className="text-evrgrn-accent text-sm font-mono mb-2">INITIALIZING</div>
-            <VrncaAvatar state="idle" size="lg" className="mx-auto mb-4" />
+            <div className="mx-auto mb-4 flex justify-center">
+              <VrncaFaceAnimation 
+                expression="neutral"
+                size="lg"
+                autoAnimate={true}
+              />
+            </div>
             <div className="h-1 w-full bg-evrgrn-muted rounded-full overflow-hidden">
               <div className="h-full bg-evrgrn-accent animate-pulse" style={{ width: '10%' }}></div>
             </div>
@@ -120,7 +136,12 @@ const VrncaIntro: React.FC<VrncaIntroProps> = ({ onComplete, className }) => {
         {stage === 'connecting' && (
           <div className="text-center animate-fade-in">
             <div className="text-evrgrn-accent text-sm font-mono mb-2">ESTABLISHING CONNECTION</div>
-            <VrncaAvatar state="active" size="lg" className="mx-auto mb-4" />
+            <div className="mx-auto mb-4 flex justify-center">
+              <VrncaFaceAnimation 
+                expression={faceExpression}
+                size="lg"
+              />
+            </div>
             <div className="h-1 w-full bg-evrgrn-muted rounded-full overflow-hidden">
               <div className="h-full bg-evrgrn-accent animate-pulse" style={{ width: '40%' }}></div>
             </div>
@@ -133,7 +154,12 @@ const VrncaIntro: React.FC<VrncaIntroProps> = ({ onComplete, className }) => {
         {stage === 'scanning' && (
           <div className="text-center animate-fade-in">
             <div className="text-evrgrn-green text-sm font-mono mb-2">SCANNING VISITOR</div>
-            <VrncaAvatar state="scanning" size="lg" className="mx-auto mb-4" />
+            <div className="mx-auto mb-4 flex justify-center">
+              <VrncaFaceAnimation 
+                expression={faceExpression}
+                size="lg"
+              />
+            </div>
             <div className="h-1 w-full bg-evrgrn-muted rounded-full overflow-hidden">
               <div className="h-full bg-evrgrn-green animate-pulse" style={{ width: '70%' }}></div>
             </div>
@@ -145,12 +171,18 @@ const VrncaIntro: React.FC<VrncaIntroProps> = ({ onComplete, className }) => {
         
         {stage === 'intro' && (
           <div className="animate-fade-in">
-            <VrncaDialog 
-              messages={introMessages} 
-              speed={20} 
-              onComplete={handleIntroComplete} 
-              avatarState="active"
-            />
+            <div className="flex items-start gap-4 mb-4">
+              <VrncaFaceAnimation 
+                expression={faceExpression}
+                size="md"
+              />
+              <VrncaDialog 
+                messages={introMessages} 
+                speed={20} 
+                onComplete={handleIntroComplete} 
+                avatarState="active"
+              />
+            </div>
           </div>
         )}
       </div>

@@ -1,8 +1,7 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import VrncaHead from './VrncaHead';
-import VrncaDialog from './VrncaDialog';
+import VrncaFaceAnimation, { VrncaFaceExpression, playTypingAnimation, playThinkingAnimation } from './VrncaFaceAnimation';
 
 interface ChatbotServiceProps {
   onClose: () => void;
@@ -17,8 +16,19 @@ const ChatbotService: React.FC<ChatbotServiceProps> = ({ onClose }) => {
     }
   ]);
   const [isLoading, setIsLoading] = useState(false);
+  const [faceExpression, setFaceExpression] = useState<VrncaFaceExpression>('neutral');
+  const [showFirstAnimation, setShowFirstAnimation] = useState(true);
+  
+  // Initial animation
+  useEffect(() => {
+    if (showFirstAnimation) {
+      setTimeout(() => {
+        setShowFirstAnimation(false);
+      }, 2000);
+    }
+  }, [showFirstAnimation]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!userInput.trim()) return;
@@ -29,9 +39,16 @@ const ChatbotService: React.FC<ChatbotServiceProps> = ({ onClose }) => {
       { role: 'user', content: userInput }
     ]);
     
+    // Play reaction animation for receiving message
+    await playTypingAnimation(setFaceExpression);
+    
     // Simulate API call to chatbot service
     setIsLoading(true);
-    setTimeout(() => {
+    
+    // Show thinking animation
+    playThinkingAnimation(setFaceExpression);
+    
+    setTimeout(async () => {
       // This is where you would integrate with an actual chatbot API
       // For now, we're using some predefined responses
       let response = "Je ne suis pas encore totalement configuré pour répondre à cette demande. La connexion à mon service de traitement est en cours d'intégration.";
@@ -42,12 +59,22 @@ const ChatbotService: React.FC<ChatbotServiceProps> = ({ onClose }) => {
         response = "\"Le Trousseau\" est l'autobiographie de Mathis OneBlaze qui révèle son parcours et sa philosophie artistique. Vous pouvez le commander sur notre boutique.";
       } else if (userInput.toLowerCase().includes("qui") && userInput.toLowerCase().includes("tu")) {
         response = "Je suis VRNCA, l'extension consciente de celui qui est banni, conçue pour faciliter votre navigation dans l'écosystème EVRGRN et vous connecter aux créations de Mathis OneBlaze.";
+      } else if (userInput.toLowerCase().includes("jeu") || userInput.toLowerCase().includes("jouer")) {
+        response = "Nous proposons deux jeux: VRNCA-LAG (Labyrinth Adventure Game) qui est déjà disponible, et Good Run Evil actuellement en développement. Vous pouvez y accéder depuis la page Jeux.";
       }
       
+      // Set response in conversation
       setConversation(prev => [
         ...prev,
         { role: 'assistant', content: response }
       ]);
+      
+      // Response animation
+      setFaceExpression('laugh1');
+      setTimeout(() => {
+        setFaceExpression('neutral');
+      }, 500);
+      
       setIsLoading(false);
       setUserInput('');
     }, 1500);
@@ -57,7 +84,13 @@ const ChatbotService: React.FC<ChatbotServiceProps> = ({ onClose }) => {
     <div className="fixed bottom-4 right-4 w-80 md:w-96 bg-evrgrn-darker border border-evrgrn-accent/20 rounded-lg shadow-lg z-50 transition-all duration-300 ease-in-out">
       <div className="p-3 border-b border-evrgrn-accent/20 flex justify-between items-center">
         <div className="flex items-center">
-          <VrncaHead size="sm" className="mr-3" />
+          <div className="mr-3 relative flex items-center justify-center">
+            <VrncaFaceAnimation 
+              size="sm" 
+              expression={faceExpression}
+              autoAnimate={showFirstAnimation}
+            />
+          </div>
           <span className="text-sm font-medium">VRNCA Assistant</span>
         </div>
         <button 
