@@ -36,10 +36,10 @@ const MainNav = () => {
         </NavigationMenuItem>
         
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="bg-transparent hover:bg-evrgrn-accent/10">
-            Médias
+          <NavigationMenuTrigger asChild className="bg-transparent hover:bg-evrgrn-accent/10">
+            <Link to="/publications">Médias</Link>
           </NavigationMenuTrigger>
-          <NavigationMenuContent>
+          <NavigationMenuContent className="absolute left-0 origin-top-left">
             <ul className="grid w-[250px] gap-1 p-2">
               <ListItem title="Presse" href="/publications?tab=presse" />
               <ListItem title="Livres" href="/publications?tab=livres" />
@@ -51,10 +51,10 @@ const MainNav = () => {
         </NavigationMenuItem>
         
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="bg-transparent hover:bg-evrgrn-accent/10">
-            Services
+          <NavigationMenuTrigger asChild className="bg-transparent hover:bg-evrgrn-accent/10">
+            <Link to="/services">Services</Link>
           </NavigationMenuTrigger>
-          <NavigationMenuContent>
+          <NavigationMenuContent className="absolute left-0 origin-top-left">
             <ul className="grid w-[250px] gap-1 p-2">
               <ListItem title="Consulting Production" href="/services#consulting" />
               <ListItem title="Formation Théorie" href="/services#formation" />
