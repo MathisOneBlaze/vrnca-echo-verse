@@ -1,6 +1,5 @@
-
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { Menu, X, ShoppingCart } from 'lucide-react';
 import GlitchText from '../ui/GlitchText';
@@ -17,6 +16,7 @@ const Header: React.FC = () => {
   const [cartOpen, setCartOpen] = useState(false);
   const { totalItems } = useCart();
   const navigate = useNavigate();
+  const location = useLocation();
   
   // Monitor scroll position
   useEffect(() => {
@@ -30,18 +30,8 @@ const Header: React.FC = () => {
 
   // Close mobile menu when navigating
   useEffect(() => {
-    // Create a listener function that will be called when navigation happens
-    const unlisten = navigate(() => {
-      setMobileMenuOpen(false);
-    });
-    
-    // Return a cleanup function that calls the unlisten function
-    return () => {
-      if (typeof unlisten === 'function') {
-        unlisten();
-      }
-    };
-  }, [navigate]);
+    setMobileMenuOpen(false);
+  }, [location.pathname]); // This will run when the pathname changes
   
   return (
     <header 
