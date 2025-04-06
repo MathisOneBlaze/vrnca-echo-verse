@@ -15,7 +15,7 @@ const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
-  const { cartItems } = useCart();
+  const { totalItems } = useCart();
   const navigate = useNavigate();
   
   // Monitor scroll position
@@ -34,8 +34,6 @@ const Header: React.FC = () => {
       setMobileMenuOpen(false);
     });
   }, [navigate]);
-  
-  const totalCartItems = cartItems.reduce((total, item) => total + item.quantity, 0);
   
   return (
     <header 
@@ -71,15 +69,15 @@ const Header: React.FC = () => {
               onClick={() => setCartOpen(!cartOpen)}
             >
               <ShoppingCart className="h-5 w-5" />
-              {totalCartItems > 0 && (
+              {totalItems > 0 && (
                 <span className="absolute -top-2 -right-2 bg-evrgrn-accent text-black text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                  {totalCartItems}
+                  {totalItems}
                 </span>
               )}
             </Button>
             
             {cartOpen && (
-              <CartDropdown onClose={() => setCartOpen(false)} />
+              <CartDropdown />
             )}
           </div>
           
