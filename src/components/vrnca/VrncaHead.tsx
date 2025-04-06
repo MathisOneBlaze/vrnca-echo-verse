@@ -61,9 +61,6 @@ const VrncaHead: React.FC<VrncaHeadProps> = ({
     'custom': '',
   };
 
-  // Use the correct path to the VRNCA head model
-  const vrncaHeadImage = "/vrnca head/VRNCA_4__0404022903_texture.glb";
-
   return (
     <div 
       ref={containerRef}
