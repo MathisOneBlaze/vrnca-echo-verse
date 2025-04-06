@@ -43,7 +43,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, addToCart }) => {
     }
   };
 
-  const imageUrl = product.image || (product.images && product.images.length > 0 ? product.images[0] : "/placeholder.svg");
+  // Use a black rectangle fallback instead of placeholder
+  const imageUrl = product.image || (product.images && product.images.length > 0 && product.images[0] !== "/placeholder.svg") 
+    ? (product.image || product.images[0]) 
+    : "data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 800 800'%3E%3Crect fill='%23000000' width='800' height='800'/%3E%3C/svg%3E";
 
   return (
     <Link to={`/shop/product/${product.id}`} className="block">
