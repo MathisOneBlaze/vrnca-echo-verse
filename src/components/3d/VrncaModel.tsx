@@ -1,11 +1,67 @@
 
-import React, { useRef, useState } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import React, { useRef, useState, useEffect } from 'react';
+import { Canvas, useFrame, useLoader } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
-// 3D Model component - using custom geometry instead of GLTF
+// 3D Model component - using GLTF model
 const Model = () => {
+  const modelRef = useRef<THREE.Group>(null);
+  const [modelLoaded, setModelLoaded] = useState(false);
+  const [modelError, setModelError] = useState(false);
+  
+  // Try to load the GLTF model
+  useEffect(() => {
+    const loader = new GLTFLoader();
+    loader.load(
+      '/vrnca head/VRNCA_4__0404022903_texture.glb',
+      () => setModelLoaded(true),
+      undefined,
+      () => setModelError(true)
+    );
+  }, []);
+  
+  useFrame(({ clock }) => {
+    if (modelRef.current) {
+      // Gentle floating animation
+      modelRef.current.position.y = Math.sin(clock.getElapsedTime() * 0.5) * 0.1;
+      // Gentle rotation
+      modelRef.current.rotation.y = clock.getElapsedTime() * 0.2;
+    }
+  });
+  
+  // If there was an error loading the model, render a custom geometry
+  if (modelError) {
+    return <FallbackModel />;
+  }
+  
+  // If model is still loading, show nothing (loader is handled by parent)
+  if (!modelLoaded) {
+    return null;
+  }
+  
+  // Try to render the GLB model
+  try {
+    const gltf = useLoader(GLTFLoader, '/vrnca head/VRNCA_4__0404022903_texture.glb');
+    
+    return (
+      <primitive 
+        ref={modelRef} 
+        object={gltf.scene} 
+        position={[0, 0, 0]}
+        scale={1.5}
+      />
+    );
+  } catch (error) {
+    console.error("Error loading VRNCA model:", error);
+    // If there's an error, render the fallback model
+    return <FallbackModel />;
+  }
+};
+
+// Simple fallback model when the main model fails to load
+const FallbackModel = () => {
   const modelRef = useRef<THREE.Group>(null);
   
   useFrame(({ clock }) => {
@@ -66,45 +122,6 @@ const Model = () => {
   );
 };
 
-// Simple fallback model when the main model fails to load
-const FallbackModel = () => {
-  const modelRef = useRef<THREE.Group>(null);
-  
-  useFrame(({ clock }) => {
-    if (modelRef.current) {
-      // Gentle floating animation
-      modelRef.current.position.y = Math.sin(clock.getElapsedTime() * 0.5) * 0.1;
-      // Gentle rotation
-      modelRef.current.rotation.y = clock.getElapsedTime() * 0.2;
-    }
-  });
-  
-  return (
-    <group ref={modelRef} position={[0, 0, 0]} scale={1.5}>
-      {/* Main head sphere */}
-      <mesh>
-        <sphereGeometry args={[0.7, 32, 32]} />
-        <meshStandardMaterial color="#00f5d4" wireframe />
-      </mesh>
-      
-      {/* Orbital elements */}
-      <group rotation={[Math.PI / 4, 0, 0]}>
-        <mesh>
-          <sphereGeometry args={[0.9, 16, 8]} />
-          <meshStandardMaterial color="#00f5d4" opacity={0.3} transparent={true} />
-        </mesh>
-      </group>
-      
-      <group rotation={[0, 0, Math.PI / 4]}>
-        <mesh>
-          <sphereGeometry args={[1.1, 16, 8]} />
-          <meshStandardMaterial color="#00f5d4" opacity={0.2} transparent={true} />
-        </mesh>
-      </group>
-    </group>
-  );
-};
-
 interface VrncaModelProps {
   className?: string;
   scale?: number;
@@ -113,6 +130,7 @@ interface VrncaModelProps {
 
 const VrncaModel: React.FC<VrncaModelProps> = ({ className, scale = 1.5, showLoader = true }) => {
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState(false);
 
   const handleModelLoaded = () => {
     setLoading(false);
