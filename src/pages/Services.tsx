@@ -91,7 +91,7 @@ const Services = () => {
             </Button>
           </div>
           
-          {/* New section for Ateliers */}
+          {/* Section mise à jour pour Ateliers */}
           <div className="bg-evrgrn-muted border border-evrgrn-accent/10 rounded-lg p-8 mb-12">
             <div className="flex flex-col md:flex-row gap-6">
               <div className="md:w-2/3">
@@ -109,11 +109,11 @@ const Services = () => {
                   </div>
                   <div className="flex items-center">
                     <Music className="w-5 h-5 text-evrgrn-accent mr-2" />
-                    <span className="text-sm">Tous styles</span>
+                    <span className="text-sm">Hip-Hop/Rap, R&B, Pop, Afro, Dancehall</span>
                   </div>
                   <div className="flex items-center">
-                    <Headphones className="w-5 h-5 text-evrgrn-accent mr-2" />
-                    <span className="text-sm">Matériel fourni</span>
+                    <Users className="w-5 h-5 text-evrgrn-accent mr-2" />
+                    <span className="text-sm">De 7 à 77 ans</span>
                   </div>
                 </div>
                 <Button asChild className="bg-evrgrn-accent text-black hover:bg-evrgrn-accent/80">
@@ -166,7 +166,7 @@ const Services = () => {
                 <p className="text-muted-foreground">
                   Pour organiser un atelier, contactez-nous via notre formulaire en spécifiant vos besoins, 
                   le public concerné et les dates souhaitées. Nous vous proposerons un programme 
-                  adapté et un devis personnalisé. Le matériel peut être fourni et les ateliers 
+                  adapté et un devis personnalisé. Les ateliers 
                   sont modulables en durée et en contenu.
                 </p>
               </div>

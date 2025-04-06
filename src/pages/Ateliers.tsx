@@ -8,6 +8,14 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Headphones, Users, Music, BookOpen, ArrowRight, Download } from 'lucide-react';
 
 const Ateliers = () => {
+  const workshopImages = [
+    "/atelier/photo atelier/IMG_1726 anonymous.jpg",
+    "/atelier/photo atelier/IMG_1747.png",
+    "/atelier/photo atelier/IMG_1761.png",
+    "/atelier/photo atelier/IMG_3344 anonymous.jpg",
+    "/atelier/photo atelier/IMG_3346 anonymous.jpg"
+  ];
+
   return (
     <div className="bg-evrgrn-dark text-foreground min-h-screen flex flex-col">
       <Header />
@@ -28,6 +36,23 @@ const Ateliers = () => {
             />
           </div>
           
+          {/* Image gallery - New section with workshop photos */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
+            {workshopImages.map((img, index) => (
+              <div 
+                key={index} 
+                className={`rounded-lg overflow-hidden ${index === 0 ? 'md:col-span-2 md:row-span-2' : ''}`}
+              >
+                <img 
+                  src={img} 
+                  alt={`Atelier de production musicale ${index + 1}`} 
+                  className="w-full h-full object-cover"
+                  style={{ height: index === 0 ? '500px' : '250px' }}
+                />
+              </div>
+            ))}
+          </div>
+
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
             <div>
               <h2 className="text-2xl font-serif mb-4 text-evrgrn-accent">Présentation des ateliers</h2>
@@ -79,7 +104,7 @@ const Ateliers = () => {
                 </div>
                 <h3 className="text-lg font-medium mb-2">Pour tous les publics</h3>
                 <p className="text-sm text-muted-foreground">
-                  Accessibles à tous, quel que soit l'âge ou le niveau musical : jeunes, adultes, seniors, débutants ou musiciens confirmés.
+                  Accessibles à tous, quel que soit le niveau musical : jeunes, adultes, seniors, débutants ou musiciens confirmés. De 7 à 77 ans !
                 </p>
               </CardContent>
             </Card>
@@ -89,9 +114,9 @@ const Ateliers = () => {
                 <div className="mb-4">
                   <Music className="w-10 h-10 text-evrgrn-accent" />
                 </div>
-                <h3 className="text-lg font-medium mb-2">Tous styles musicaux</h3>
+                <h3 className="text-lg font-medium mb-2">Styles musicaux variés</h3>
                 <p className="text-sm text-muted-foreground">
-                  Hip-hop, électro, rap, pop, rock... Les ateliers s'adaptent à vos goûts et vos influences musicales.
+                  Hip-Hop/Rap, R&B, Pop, Afro, Dancehall... Les ateliers s'adaptent à vos goûts et vos influences musicales.
                 </p>
               </CardContent>
             </Card>
@@ -101,9 +126,9 @@ const Ateliers = () => {
                 <div className="mb-4">
                   <Headphones className="w-10 h-10 text-evrgrn-accent" />
                 </div>
-                <h3 className="text-lg font-medium mb-2">Matériel fourni</h3>
+                <h3 className="text-lg font-medium mb-2">Équipement de qualité</h3>
                 <p className="text-sm text-muted-foreground">
-                  Ordinateurs, interfaces audio, claviers MIDI, microphones et logiciels de production musicale fournis pour tous les participants.
+                  Utilisation d'ordinateurs, interfaces audio, claviers MIDI, microphones et logiciels de production musicale professionnels.
                 </p>
               </CardContent>
             </Card>
