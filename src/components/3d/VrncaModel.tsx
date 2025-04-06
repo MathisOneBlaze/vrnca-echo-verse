@@ -11,14 +11,24 @@ const Model = () => {
   const [modelLoaded, setModelLoaded] = useState(false);
   const [modelError, setModelError] = useState(false);
   
-  // Try to load the GLTF model
+  // Attempt to load the GLTF model
   useEffect(() => {
     const loader = new GLTFLoader();
+    console.log('Attempting to load VRNCA model from:', '/VRNCA_4__0404022903_texture.glb');
+    
     loader.load(
-      '/vrnca head/VRNCA_4__0404022903_texture.glb',
-      () => setModelLoaded(true),
-      undefined,
-      () => setModelError(true)
+      '/VRNCA_4__0404022903_texture.glb',
+      (gltf) => {
+        console.log('VRNCA model loaded successfully:', gltf);
+        setModelLoaded(true);
+      },
+      (progress) => {
+        console.log('Loading progress:', (progress.loaded / progress.total) * 100, '%');
+      },
+      (error) => {
+        console.error('Error loading VRNCA model:', error);
+        setModelError(true);
+      }
     );
   }, []);
   
@@ -33,6 +43,7 @@ const Model = () => {
   
   // If there was an error loading the model, render a custom geometry
   if (modelError) {
+    console.log('Using fallback model due to loading error');
     return <FallbackModel />;
   }
   
@@ -43,7 +54,8 @@ const Model = () => {
   
   // Try to render the GLB model
   try {
-    const gltf = useLoader(GLTFLoader, '/vrnca head/VRNCA_4__0404022903_texture.glb');
+    const gltf = useLoader(GLTFLoader, '/VRNCA_4__0404022903_texture.glb');
+    console.log('VRNCA model rendered successfully');
     
     return (
       <primitive 
@@ -54,7 +66,7 @@ const Model = () => {
       />
     );
   } catch (error) {
-    console.error("Error loading VRNCA model:", error);
+    console.error("Error rendering VRNCA model:", error);
     // If there's an error, render the fallback model
     return <FallbackModel />;
   }
@@ -133,6 +145,7 @@ const VrncaModel: React.FC<VrncaModelProps> = ({ className, scale = 1.5, showLoa
   const [loadError, setLoadError] = useState(false);
 
   const handleModelLoaded = () => {
+    console.log('Model loaded event triggered');
     setLoading(false);
   };
 
