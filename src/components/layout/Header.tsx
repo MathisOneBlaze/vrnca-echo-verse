@@ -30,9 +30,17 @@ const Header: React.FC = () => {
 
   // Close mobile menu when navigating
   useEffect(() => {
-    return navigate(() => {
+    // Create a listener function that will be called when navigation happens
+    const unlisten = navigate(() => {
       setMobileMenuOpen(false);
     });
+    
+    // Return a cleanup function that calls the unlisten function
+    return () => {
+      if (typeof unlisten === 'function') {
+        unlisten();
+      }
+    };
   }, [navigate]);
   
   return (
