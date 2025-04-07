@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { ShoppingCart, Info } from 'lucide-react';
 import { CartItem } from '@/context/CartContext';
 
-interface ProductCardProps {
+export interface ProductCardProps {
   product: ShopItem;
   addToCart: (item: CartItem) => void;
 }
