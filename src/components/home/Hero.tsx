@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
 import VrncaDialog from '../vrnca/VrncaDialog';
@@ -18,6 +19,7 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
   const [showDialog, setShowDialog] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const heroRef = useRef<HTMLDivElement>(null);
+  const chatbotRef = useRef<HTMLDivElement>(null);
 
   // Track mouse movement for the VrncaHead
   useEffect(() => {
@@ -131,12 +133,25 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
             <div className="h-80 w-80 mx-auto mb-12 opacity-0"></div>
             
             {/* Play VRNCA LAG button */}
-            <div className="mt-4 flex justify-center mask-reveal" style={{ '--delay': '700ms' } as React.CSSProperties}>
+            <div className="mt-4 flex flex-col gap-3 justify-center mask-reveal" style={{ '--delay': '700ms' } as React.CSSProperties}>
               <Link to="/jeux">
                 <Button variant="default" className="bg-evrgrn-accent text-black hover:bg-evrgrn-accent/80">
                   Découvrir les jeux
                 </Button>
               </Link>
+              
+              <Button 
+                variant="outline" 
+                size="sm" 
+                onClick={() => {
+                  // Remove the stored intro flag and reload
+                  localStorage.removeItem('hasSeenIntro');
+                  window.location.reload();
+                }}
+                className="text-xs border-evrgrn-accent/30 text-evrgrn-accent/70 hover:bg-evrgrn-accent/10"
+              >
+                Revoir l'animation d'intro
+              </Button>
             </div>
             
             {/* VRNCA dialog */}

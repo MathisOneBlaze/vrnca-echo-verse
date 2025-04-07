@@ -1,120 +1,113 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
-import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import ParticleBackground from '../components/ui/ParticleBackground';
-
-interface GameItem {
-  id: string;
-  title: string;
-  description: string;
-  image: string;
-  link: string;
-  status: 'available' | 'coming-soon' | 'in-development';
-}
-
-const gamesList: GameItem[] = [
-  {
-    id: 'vrnca-lag',
-    title: 'VRNCA LAG',
-    description: 'Labyrinth Adventure Game - Un jeu d\'exploration dans un labyrinthe cybernétique. Explorez les profondeurs du labyrinthe et découvrez les secrets de VRNCA.',
-    image: '/games/VRNCA-LAG/VRNCA-LAG environement concept 3.jpg',
-    link: '/game',
-    status: 'available'
-  },
-  {
-    id: 'good-run-evil',
-    title: 'Good Run Evil',
-    description: 'Un endless runner psychédélique où vous incarnez une entité qui traverse des corridors cérébraux, alternant entre la forme bénéfique et maléfique pour surmonter les obstacles.',
-    image: '/games/Good Run Evil/cd90842d-8fc0-4990-9930-19498c45566b.png',
-    link: '/good-run-evil',
-    status: 'in-development'
-  }
-];
 
 const Jeux = () => {
   return (
-    <div className="bg-evrgrn-dark text-foreground min-h-screen flex flex-col relative overflow-hidden">
+    <div className="bg-evrgrn-dark text-foreground min-h-screen flex flex-col">
       <Header />
       
-      {/* Background animation */}
-      <ParticleBackground />
-      
-      <main className="flex-grow pt-24 z-10 relative">
+      <main className="flex-grow pt-24">
         <div className="container mx-auto px-4 py-12">
-          <div className="flex flex-col md:flex-row justify-between items-center mb-12">
+          <div className="flex items-center justify-between mb-12">
             <div>
-              <h1 className="text-4xl font-serif mb-2">Jeux EVRGRN</h1>
-              <p className="text-lg text-muted-foreground max-w-2xl">
-                Découvrez des expériences interactives uniques qui étendent l'univers EVRGRN au-delà de la musique et des mots.
-              </p>
+              <h1 className="text-4xl font-serif mb-2">EVRGRN Games Studio</h1>
+              <p className="text-lg text-muted-foreground">Découvrez les jeux développés par EVRGRN Games Studio</p>
             </div>
             <img 
               src="/lovable-uploads/01e9bec9-0cde-4e57-a7c9-aa81659ce1c0.png" 
-              alt="EVRGRN Logo"
-              className="h-16 mb-4 md:mb-0 md:ml-4"
+              alt="EVRGRN Logo" 
+              className="h-16"
             />
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-            {gamesList.map(game => (
-              <div 
-                key={game.id}
-                className="bg-evrgrn-muted border border-evrgrn-accent/10 rounded-lg overflow-hidden hover:border-evrgrn-accent/30 transition-all duration-300 flex flex-col"
-              >
-                <div className="aspect-video w-full overflow-hidden">
-                  <img 
-                    src={game.image} 
-                    alt={game.title}
-                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                  />
-                </div>
-                
-                <div className="p-6 flex-1 flex flex-col">
-                  <div className="flex justify-between items-start mb-4">
-                    <h2 className="text-2xl font-medium">{game.title}</h2>
-                    <div className={`
-                      px-3 py-1 text-xs font-medium rounded-full
-                      ${game.status === 'available' ? 'bg-green-500/20 text-green-300' : 
-                        game.status === 'coming-soon' ? 'bg-yellow-500/20 text-yellow-300' : 
-                        'bg-blue-500/20 text-blue-300'}
-                    `}>
-                      {game.status === 'available' ? 'Disponible' : 
-                       game.status === 'coming-soon' ? 'Bientôt disponible' : 
-                       'En développement'}
-                    </div>
-                  </div>
-                  
-                  <p className="text-muted-foreground mb-6 flex-1">{game.description}</p>
-                  
-                  <div className="mt-auto">
-                    {game.status === 'available' ? (
-                      <Button asChild className="w-full bg-evrgrn-accent text-black hover:bg-evrgrn-accent/80">
-                        <Link to={game.link}>Jouer maintenant</Link>
-                      </Button>
-                    ) : (
-                      <Button asChild className="w-full" variant="outline" disabled={game.status === 'in-development'}>
-                        <Link to={game.link}>
-                          {game.status === 'coming-soon' ? 'Bientôt disponible' : 'En développement'}
-                        </Link>
-                      </Button>
-                    )}
-                  </div>
+          <h2 className="text-2xl font-serif mb-6">À propos des jeux EVRGRN GAMES STUDIO</h2>
+          <p className="mb-8 text-muted-foreground">
+            EVRGRN Games Studio est la branche de création de jeux vidéo de l'écosystème EVRGRN. 
+            Nos jeux explorent des univers narratifs riches et proposent des expériences immersives uniques, 
+            en cohérence avec notre direction artistique et notre philosophie créative.
+          </p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+            {/* VRNCA-LAG */}
+            <div className="bg-evrgrn-darker border border-evrgrn-accent/20 rounded-lg overflow-hidden">
+              <div className="aspect-video bg-black relative">
+                <img 
+                  src="/games/VRNCA-LAG/other assets/VRNCA-LAG concept 1.jpg" 
+                  alt="VRNCA-LAG Game" 
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-evrgrn-darker to-transparent"></div>
+                <div className="absolute bottom-4 left-4">
+                  <span className="bg-evrgrn-accent text-black text-xs px-2 py-1 rounded">Disponible</span>
                 </div>
               </div>
-            ))}
+              <div className="p-6">
+                <h3 className="text-2xl font-medium mb-2 text-evrgrn-accent">VRNCA-LAG</h3>
+                <p className="text-sm mb-4 text-muted-foreground">Labyrinth Adventure Game</p>
+                <p className="mb-6">
+                  Un jeu de labyrinthe pixel art inspiré des classiques des années 80. Naviguez dans un monde 
+                  cyberpunk et découvrez les secrets cachés de VRNCA.
+                </p>
+                <div className="flex gap-3">
+                  <Button asChild>
+                    <Link to="/game">Jouer maintenant</Link>
+                  </Button>
+                  <Button variant="outline">
+                    <a href="/VRNCA_LAG - Labyrinth Adventure Game.zip" download>Télécharger</a>
+                  </Button>
+                </div>
+              </div>
+            </div>
+            
+            {/* Good Run Evil */}
+            <div className="bg-evrgrn-darker border border-evrgrn-accent/20 rounded-lg overflow-hidden">
+              <div className="aspect-video bg-black relative">
+                <img 
+                  src="/games/Good Run Evil/cd90842d-8fc0-4990-9930-19498c45566b.png" 
+                  alt="Good Run Evil Game" 
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-evrgrn-darker to-transparent"></div>
+                <div className="absolute bottom-4 left-4">
+                  <span className="bg-evrgrn-darker/80 text-evrgrn-accent text-xs px-2 py-1 rounded border border-evrgrn-accent/30">En développement</span>
+                </div>
+              </div>
+              <div className="p-6">
+                <h3 className="text-2xl font-medium mb-2 text-evrgrn-accent">Good Run Evil</h3>
+                <p className="text-sm mb-4 text-muted-foreground">Endless Runner Psychologique</p>
+                <p className="mb-6">
+                  Un endless runner qui explore les thèmes de la dualité et du choix moral. Traversez un univers 
+                  cérébral en constante évolution et faites face à vos propres démons.
+                </p>
+                <div className="flex gap-3">
+                  <Button asChild>
+                    <Link to="/good-run-evil">En savoir plus</Link>
+                  </Button>
+                  <Button variant="outline" disabled>
+                    Alpha prévue fin 2025
+                  </Button>
+                </div>
+              </div>
+            </div>
           </div>
           
-          <div className="mt-8 bg-evrgrn-muted border border-evrgrn-accent/10 rounded-lg p-6">
-            <h2 className="text-2xl font-medium mb-4">À propos des jeux EVRGRN</h2>
-            <p className="text-muted-foreground mb-4">
-              Les jeux EVRGRN sont des expériences interactives qui prolongent l'univers narratif et conceptuel de mes projets musicaux. Ils offrent une nouvelle façon d'explorer les thèmes et les esthétiques qui définissent ma vision créative.
-            </p>
-            <p className="text-muted-foreground">
-              Chaque jeu est conçu comme une porte d'entrée vers un aspect spécifique de l'univers EVRGRN, permettant aux joueurs de s'immerger dans ces mondes d'une manière active et engageante.
-            </p>
+          {/* Studio section */}
+          <div className="mt-24 mb-12">
+            <h2 className="text-2xl font-serif mb-6">L'équipe derrière les jeux</h2>
+            <div className="bg-evrgrn-darker border border-evrgrn-accent/20 rounded-lg p-6">
+              <p className="mb-4">
+                EVRGRN Games Studio est dirigé par Mathis OneBlaze, assisté par une équipe de développeurs indépendants 
+                et d'artistes partageant une vision commune de créer des expériences de jeu uniques et significatives.
+              </p>
+              <p>
+                Tous nos jeux sont développés avec une attention particulière à l'esthétique, à la narration et à l'immersion, 
+                dans le but de créer des expériences mémorables qui font réfléchir.
+              </p>
+            </div>
           </div>
         </div>
       </main>

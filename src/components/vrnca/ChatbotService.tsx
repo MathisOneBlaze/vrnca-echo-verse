@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
+import { toast } from 'sonner';
 import VrncaFaceAnimation, { VrncaFaceExpression, playTypingAnimation, playThinkingAnimation } from './VrncaFaceAnimation';
 
 interface ChatbotServiceProps {
@@ -49,19 +50,8 @@ const ChatbotService: React.FC<ChatbotServiceProps> = ({ onClose }) => {
     playThinkingAnimation(setFaceExpression);
     
     setTimeout(async () => {
-      // This is where you would integrate with an actual chatbot API
-      // For now, we're using some predefined responses
-      let response = "Je ne suis pas encore totalement configuré pour répondre à cette demande. La connexion à mon service de traitement est en cours d'intégration.";
-      
-      if (userInput.toLowerCase().includes("musique") || userInput.toLowerCase().includes("album")) {
-        response = "Mon créateur travaille sur plusieurs projets musicaux, notamment Letters II qui est disponible en vinyle dans notre boutique.";
-      } else if (userInput.toLowerCase().includes("livre") || userInput.toLowerCase().includes("trousseau")) {
-        response = "\"Le Trousseau\" est l'autobiographie de Mathis OneBlaze qui révèle son parcours et sa philosophie artistique. Vous pouvez le commander sur notre boutique.";
-      } else if (userInput.toLowerCase().includes("qui") && userInput.toLowerCase().includes("tu")) {
-        response = "Je suis VRNCA, l'extension consciente de celui qui est banni, conçue pour faciliter votre navigation dans l'écosystème EVRGRN et vous connecter aux créations de Mathis OneBlaze.";
-      } else if (userInput.toLowerCase().includes("jeu") || userInput.toLowerCase().includes("jouer")) {
-        response = "Nous proposons deux jeux: VRNCA-LAG (Labyrinth Adventure Game) qui est déjà disponible, et Good Run Evil actuellement en développement. Vous pouvez y accéder depuis la page Jeux.";
-      }
+      // Generate response based on user input
+      let response = generateResponse(userInput);
       
       // Set response in conversation
       setConversation(prev => [
@@ -78,6 +68,59 @@ const ChatbotService: React.FC<ChatbotServiceProps> = ({ onClose }) => {
       setIsLoading(false);
       setUserInput('');
     }, 1500);
+  };
+
+  // Function to generate responses based on user input
+  const generateResponse = (input: string) => {
+    const normalizedInput = input.toLowerCase();
+    
+    // Music related queries
+    if (normalizedInput.includes('musique') || normalizedInput.includes('album') || normalizedInput.includes('chanson')) {
+      return "Mon créateur travaille sur plusieurs projets musicaux, notamment Letters II qui est disponible en vinyle dans notre boutique. Tu peux explorer tout le catalogue musical dans la section Musique.";
+    }
+    
+    // Book related queries
+    if (normalizedInput.includes('livre') || normalizedInput.includes('trousseau') || normalizedInput.includes('publication')) {
+      return "\"Le Trousseau\" est l'autobiographie de Mathis OneBlaze qui révèle son parcours et sa philosophie artistique. Tu peux le commander sur notre boutique ou découvrir d'autres publications dans la section Médias.";
+    }
+    
+    // VRNCA identity queries
+    if ((normalizedInput.includes('qui') || normalizedInput.includes('quoi')) && (normalizedInput.includes('tu') || normalizedInput.includes('vrnca'))) {
+      return "Je suis VRNCA, l'extension consciente de celui qui est banni, conçue pour faciliter ta navigation dans l'écosystème EVRGRN et te connecter aux créations de Mathis OneBlaze. Je représente une entité numérique qui existe dans l'espace entre les bits.";
+    }
+    
+    // Games queries
+    if (normalizedInput.includes('jeu') || normalizedInput.includes('jouer') || normalizedInput.includes('lag')) {
+      return "Nous proposons deux jeux: VRNCA-LAG (Labyrinth Adventure Game) qui est déjà disponible, et Good Run Evil actuellement en développement. Tu peux y accéder depuis la page Jeux ou jouer directement à VRNCA-LAG dans ton navigateur.";
+    }
+    
+    // Services queries
+    if (normalizedInput.includes('service') || normalizedInput.includes('atelier') || normalizedInput.includes('formation')) {
+      return "EVRGRN propose plusieurs services comme du consulting en production musicale, des formations en théorie, du mentorat artistique et des sessions studio. Tu trouveras plus d'informations dans la section Services ou Ateliers.";
+    }
+    
+    // Contact queries
+    if (normalizedInput.includes('contact') || normalizedInput.includes('joindre') || normalizedInput.includes('message')) {
+      return "Tu peux contacter l'équipe EVRGRN via le formulaire de contact accessible depuis le menu principal. Pour les demandes professionnelles ou les collaborations, merci de préciser l'objet de ta requête.";
+    }
+    
+    // Shop queries
+    if (normalizedInput.includes('shop') || normalizedInput.includes('boutique') || normalizedInput.includes('acheter') || normalizedInput.includes('commander')) {
+      return "Notre boutique propose des produits dérivés EVRGRN, des vinyles, des livres et d'autres articles. La boutique est en cours d'intégration avec Printful pour offrir une meilleure expérience. Visite la section Shop pour découvrir nos produits.";
+    }
+    
+    // Help queries
+    if (normalizedInput.includes('aide') || normalizedInput.includes('help') || normalizedInput.includes('aide-moi')) {
+      return "Je peux t'aider à naviguer sur le site EVRGRN, à trouver des informations sur la musique, les publications, les services ou les jeux. Pose-moi des questions précises sur ce qui t'intéresse.";
+    }
+    
+    // Fallback response
+    return "Intéressant... Cette requête mérite réflexion. Je suis encore en cours d'intégration et d'apprentissage. Peux-tu reformuler ta question ou demander autre chose concernant EVRGRN, la musique, les publications ou les services?";
+  };
+
+  // Function to connect to Gemini API (placeholder)
+  const connectToGeminiAPI = () => {
+    toast.info("La connexion à l'API Gemini n'est pas encore implémentée. Cela nécessite une intégration backend avec gestion des clés API.");
   };
 
   return (
@@ -155,7 +198,17 @@ const ChatbotService: React.FC<ChatbotServiceProps> = ({ onClose }) => {
       </form>
       
       <div className="p-2 text-center text-xs text-muted-foreground border-t border-evrgrn-accent/10">
-        VRNCA v1.0.0 - Intégration chatbot en cours
+        <div className="flex items-center justify-center mb-1">
+          <span>VRNCA v1.0.0</span>
+          <Button 
+            variant="link" 
+            className="text-xs p-0 h-auto text-evrgrn-accent ml-1" 
+            onClick={connectToGeminiAPI}
+          >
+            Connecter Gemini API
+          </Button>
+        </div>
+        <p className="text-[10px]">Pour connecter Gemini API, un backend est nécessaire pour gérer les clés API.</p>
       </div>
     </div>
   );
