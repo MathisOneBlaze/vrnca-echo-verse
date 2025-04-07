@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 import { Button } from '@/components/ui/button';
@@ -10,11 +10,19 @@ import { Link } from 'react-router-dom';
 const Game = () => {
   const [isGameLoading, setIsGameLoading] = useState(true);
   const [loadingError, setLoadingError] = useState<string | null>(null);
+  const gameContainerRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
     const loadGame = async () => {
       try {
         setIsGameLoading(true);
+        setLoadingError(null);
+        
+        // Make sure the container exists before trying to extract the game
+        if (!gameContainerRef.current) {
+          throw new Error("Game container not found");
+        }
+        
         await extractGame('/VRNCA_LAG - Labyrinth Adventure Game.zip', 'game-container');
         setIsGameLoading(false);
       } catch (error) {
@@ -24,7 +32,14 @@ const Game = () => {
       }
     };
     
-    loadGame();
+    // Small delay to ensure DOM is ready
+    const timer = setTimeout(() => {
+      loadGame();
+    }, 100);
+    
+    return () => {
+      clearTimeout(timer);
+    };
   }, []);
   
   // Game screenshots
@@ -59,7 +74,7 @@ const Game = () => {
           
           {/* Game container */}
           <div className="bg-evrgrn-darker border border-evrgrn-accent/20 rounded-lg overflow-hidden mb-12">
-            <div id="game-container" className="h-[600px] flex items-center justify-center bg-black">
+            <div id="game-container" ref={gameContainerRef} className="h-[600px] flex items-center justify-center bg-black">
               {isGameLoading && (
                 <div className="text-center">
                   <div className="w-16 h-16 border-4 border-evrgrn-accent/20 border-t-evrgrn-accent rounded-full animate-spin mb-4 mx-auto"></div>
