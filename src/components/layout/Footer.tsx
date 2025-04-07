@@ -20,11 +20,6 @@ const Footer = forwardRef<HTMLDivElement, FooterProps>(({ className }, ref) => {
           {/* Logo and description */}
           <div className="md:col-span-1">
             <div className="flex items-center mb-4">
-              <img 
-                src="/lovable-uploads/01e9bec9-0cde-4e57-a7c9-aa81659ce1c0.png"
-                alt="EVRGRN Logo" 
-                className="h-10 mr-2"
-              />
               <GlitchText intensity="low" className="text-xl font-bold text-evrgrn-accent">
                 EVRGRN
               </GlitchText>

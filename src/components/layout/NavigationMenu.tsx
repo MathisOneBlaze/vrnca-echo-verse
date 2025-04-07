@@ -16,10 +16,6 @@ import { cn } from '@/lib/utils';
 const MainNav = () => {
   const navigate = useNavigate();
   
-  const handleNavItemClick = (path: string) => {
-    navigate(path);
-  };
-  
   return (
     <NavigationMenu>
       <NavigationMenuList className="space-x-1">
@@ -42,31 +38,25 @@ const MainNav = () => {
         </NavigationMenuItem>
         
         <NavigationMenuItem>
-          <NavigationMenuTrigger 
-            onClick={() => handleNavItemClick('/publications')}
-            className="bg-transparent hover:bg-evrgrn-accent/10 cursor-pointer"
-          >
+          <NavigationMenuTrigger className="bg-transparent hover:bg-evrgrn-accent/10 cursor-pointer">
             Médias
           </NavigationMenuTrigger>
-          <NavigationMenuContent className="origin-top-center absolute z-10">
+          <NavigationMenuContent>
             <ul className="grid w-[250px] gap-1 p-2">
               <ListItem title="Presse" href="/publications?tab=presse" />
               <ListItem title="Livres" href="/publications?tab=livres" />
               <ListItem title="Articles" href="/publications?tab=articles" />
               <ListItem title="Clips" href="/publications?tab=clips" />
-              <ListItem title="Le Trousseau" href="/publications?tab=letrousseau" />
+              <ListItem title="Le Trousseau" href="/le-trousseau" />
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
         
         <NavigationMenuItem>
-          <NavigationMenuTrigger 
-            onClick={() => handleNavItemClick('/services')}
-            className="bg-transparent hover:bg-evrgrn-accent/10 cursor-pointer"
-          >
+          <NavigationMenuTrigger className="bg-transparent hover:bg-evrgrn-accent/10 cursor-pointer">
             Services
           </NavigationMenuTrigger>
-          <NavigationMenuContent className="origin-top-center absolute z-10">
+          <NavigationMenuContent>
             <ul className="grid w-[250px] gap-1 p-2">
               <ListItem title="Consulting Production" href="/services#consulting" />
               <ListItem title="Formation Théorie" href="/services#formation" />
@@ -91,15 +81,12 @@ const MainNav = () => {
         </NavigationMenuItem>
         
         <NavigationMenuItem>
-          <NavigationMenuTrigger 
-            onClick={() => handleNavItemClick('/jeux')}
-            className="bg-transparent hover:bg-evrgrn-accent/10 cursor-pointer"
-          >
+          <NavigationMenuTrigger className="bg-transparent hover:bg-evrgrn-accent/10 cursor-pointer">
             Jeux
           </NavigationMenuTrigger>
-          <NavigationMenuContent className="origin-top-center absolute z-10">
+          <NavigationMenuContent>
             <ul className="grid w-[250px] gap-1 p-2">
-              <ListItem title="VRNCA-LAG" href="/game" />
+              <ListItem title="VRNCA-LAG" href="/VRNCA-Lag" />
               <ListItem title="Good Run Evil" href="/good-run-evil" />
             </ul>
           </NavigationMenuContent>

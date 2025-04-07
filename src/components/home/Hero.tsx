@@ -140,18 +140,16 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
                 </Button>
               </Link>
               
-              <Button 
-                variant="outline" 
-                size="sm" 
+              <button 
                 onClick={() => {
                   // Remove the stored intro flag and reload
                   localStorage.removeItem('hasSeenIntro');
                   window.location.reload();
                 }}
-                className="text-xs border-evrgrn-accent/30 text-evrgrn-accent/70 hover:bg-evrgrn-accent/10"
+                className="text-xs text-evrgrn-accent/70 hover:text-evrgrn-accent mt-3"
               >
                 Revoir l'animation d'intro
-              </Button>
+              </button>
             </div>
             
             {/* VRNCA dialog */}

@@ -170,17 +170,38 @@ const VrncaIntro: React.FC<VrncaIntroProps> = ({ onComplete, className }) => {
         
         {stage === 'intro' && (
           <div className="animate-fade-in">
-            <div className="flex items-start gap-4 mb-4">
-              <VrncaFaceAnimation 
-                expression={faceExpression}
-                size="md"
-              />
-              <VrncaDialog 
-                messages={introMessages} 
-                speed={20} 
-                onComplete={handleIntroComplete} 
-                avatarState="active"
-              />
+            <div className="flex flex-col items-center">
+              {/* Terminal-style window */}
+              <div className="bg-evrgrn-darker border border-evrgrn-accent/30 rounded-md w-full max-w-md">
+                {/* Terminal header */}
+                <div className="border-b border-evrgrn-accent/30 p-2 flex items-center justify-between">
+                  <div className="text-xs font-mono text-evrgrn-accent">VRNCA TERMINAL v1.2</div>
+                  <div className="flex items-center space-x-1">
+                    <div className="w-2 h-2 rounded-full bg-red-500/70"></div>
+                    <div className="w-2 h-2 rounded-full bg-yellow-500/70"></div>
+                    <div className="w-2 h-2 rounded-full bg-evrgrn-accent/70"></div>
+                  </div>
+                </div>
+                
+                {/* Terminal content */}
+                <div className="p-4">
+                  <div className="flex items-start gap-4 mb-4">
+                    {/* Circular container for VRNCA face */}
+                    <div className="w-12 h-12 rounded-full bg-evrgrn-accent/20 border border-evrgrn-accent/30 flex items-center justify-center overflow-hidden">
+                      <VrncaFaceAnimation 
+                        expression={faceExpression}
+                        size="sm"
+                      />
+                    </div>
+                    <VrncaDialog 
+                      messages={introMessages} 
+                      speed={20} 
+                      onComplete={handleIntroComplete} 
+                      avatarState="active"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         )}
