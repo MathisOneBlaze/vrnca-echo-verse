@@ -40,7 +40,7 @@ const VrncaHead3D = () => {
             ref={containerRef}
             className="flex items-center justify-center h-[70vh] bg-evrgrn-darker/50 rounded-lg relative overflow-hidden"
           >
-            {/* Utilisation de l'image directement pour garantir l'affichage */}
+            {/* Utilisation du composant VrncaHead pour l'affichage interactif */}
             <div className="relative w-64 h-64 md:w-96 md:h-96">
               <VrncaHead 
                 size="lg"
@@ -67,9 +67,9 @@ const VrncaHead3D = () => {
           </div>
           
           <div className="mt-12 flex flex-col items-center">
-            <h3 className="text-xl font-serif mb-4">Modèle 3D VRNCA</h3>
+            <h3 className="text-xl font-serif mb-4">EVRGRN Planète</h3>
             <div className="h-[400px] w-full md:w-[600px] bg-evrgrn-darker/30 rounded-lg overflow-hidden">
-              <VrncaModel />
+              <VrncaModel modelPath="/vrnca head/VRNCA_4__0404022903_texture.glb" />
             </div>
           </div>
           
