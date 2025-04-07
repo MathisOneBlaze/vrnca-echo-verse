@@ -9,11 +9,13 @@ export interface CartItem {
   price: number;
   image?: string;
   quantity: number;
+  product: ShopItem; // Add this to match the usage in components
+  variation?: string; // Add this to match usage in ShopData
 }
 
 interface CartContextType {
   items: CartItem[];
-  addToCart: (item: CartItem) => void;
+  addToCart: (item: ShopItem) => void; // Changed from CartItem to ShopItem
   removeFromCart: (productId: string) => void;
   updateQuantity: (productId: string, quantity: number) => void;
   clearCart: () => void;
@@ -44,20 +46,30 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     localStorage.setItem('evrgrnCart', JSON.stringify(items));
   }, [items]);
   
-  const addToCart = (item: CartItem) => {
+  const addToCart = (product: ShopItem) => {
     setItems(prevItems => {
-      const existingItem = prevItems.find(i => i.productId === item.productId);
+      // Check if the product already exists in the cart
+      const existingItemIndex = prevItems.findIndex(i => i.productId === product.id);
       
-      if (existingItem) {
+      if (existingItemIndex >= 0) {
         // If product already exists, increase quantity
-        return prevItems.map(i => 
-          i.productId === item.productId 
-            ? { ...i, quantity: i.quantity + 1 } 
-            : i
+        return prevItems.map((item, index) => 
+          index === existingItemIndex 
+            ? { ...item, quantity: item.quantity + 1 } 
+            : item
         );
       } else {
         // If product doesn't exist, add it with quantity 1
-        return [...prevItems, item];
+        const newItem: CartItem = {
+          id: product.id,
+          productId: product.id,
+          name: product.name,
+          price: product.price,
+          image: product.image,
+          quantity: 1,
+          product: product
+        };
+        return [...prevItems, newItem];
       }
     });
   };

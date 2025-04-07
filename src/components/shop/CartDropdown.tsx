@@ -56,43 +56,43 @@ const CartDropdown: React.FC = () => {
               </div>
             ) : (
               items.map(item => (
-                <div key={item.product.id} className="p-3 border-b border-evrgrn-accent/10 flex items-center">
+                <div key={item.id} className="p-3 border-b border-evrgrn-accent/10 flex items-center">
                   <div className="h-12 w-12 bg-evrgrn-muted overflow-hidden mr-3 flex-shrink-0">
                     <img 
-                      src={item.product.image || (item.product.images && item.product.images.length > 0 ? item.product.images[0] : "/placeholder.svg")} 
-                      alt={item.product.name}
+                      src={item.image || (item.product.images && item.product.images.length > 0 ? item.product.images[0] : "/placeholder.svg")} 
+                      alt={item.name}
                       className="h-full w-full object-cover"
                     />
                   </div>
                   
                   <div className="flex-1">
-                    <h4 className="text-sm font-medium">{item.product.name}</h4>
+                    <h4 className="text-sm font-medium">{item.name}</h4>
                     <div className="flex items-center justify-between mt-1">
                       <div className="flex items-center space-x-2">
                         <button 
                           className="text-xs p-1 rounded-full bg-evrgrn-muted"
-                          onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
+                          onClick={() => updateQuantity(item.productId, item.quantity - 1)}
                         >
                           <Minus className="h-3 w-3" />
                         </button>
                         <span className="text-xs">{item.quantity}</span>
                         <button 
                           className="text-xs p-1 rounded-full bg-evrgrn-muted"
-                          onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
+                          onClick={() => updateQuantity(item.productId, item.quantity + 1)}
                         >
                           <Plus className="h-3 w-3" />
                         </button>
                       </div>
                       
                       <div className="text-xs text-evrgrn-accent">
-                        {(item.product.price * item.quantity).toFixed(2)} {item.product.currency}
+                        {(item.price * item.quantity).toFixed(2)} {item.product.currency || "€"}
                       </div>
                     </div>
                   </div>
                   
                   <button 
                     className="ml-2 text-muted-foreground hover:text-foreground"
-                    onClick={() => removeFromCart(item.product.id)}
+                    onClick={() => removeFromCart(item.productId)}
                   >
                     <X className="h-4 w-4" />
                   </button>

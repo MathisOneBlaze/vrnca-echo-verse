@@ -1,4 +1,3 @@
-
 import { CartItem } from '../../context/CartContext';
 
 export interface ShopItem {
@@ -15,6 +14,8 @@ export interface ShopItem {
   quantity?: number;
   variations?: ShopItemVariation[];
   relatedProducts?: string[];
+  currency?: string;
+  images?: string[];
 }
 
 export interface ShopItemVariation {
@@ -146,14 +147,14 @@ export const getItemById = (id: string): ShopItem | undefined => {
   return shopItems.find(item => item.id === id);
 };
 
-export const addToCartAdapter = (item: ShopItem, quantity: number = 1, variation?: string): CartItem => {
+export const addToCartAdapter = (item: ShopItem, quantity: number = 1): CartItem => {
   return {
-    id: variation ? `${item.id}-${variation}` : item.id,
+    id: item.id,
     productId: item.id,
     name: item.name,
     price: item.price,
     image: item.image,
     quantity,
-    variation: variation ? item.variations?.find(v => v.id === variation)?.name : undefined
+    product: item
   };
 };

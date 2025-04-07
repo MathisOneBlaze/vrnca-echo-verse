@@ -70,30 +70,30 @@ const Cart = () => {
                   
                   <div className="divide-y divide-evrgrn-accent/10">
                     {items.map(item => (
-                      <div key={item.product.id} className="p-4 flex items-center">
+                      <div key={item.id} className="p-4 flex items-center">
                         <div className="h-20 w-20 bg-evrgrn-darker overflow-hidden mr-4 flex-shrink-0">
                           <img 
-                            src={item.product.image || (item.product.images && item.product.images.length > 0 ? item.product.images[0] : "/placeholder.svg")} 
-                            alt={item.product.name}
+                            src={item.image || (item.product.images && item.product.images.length > 0 ? item.product.images[0] : "/placeholder.svg")} 
+                            alt={item.name}
                             className="h-full w-full object-cover"
                           />
                         </div>
                         
                         <div className="flex-1">
-                          <h3 className="font-medium mb-1">{item.product.name}</h3>
+                          <h3 className="font-medium mb-1">{item.name}</h3>
                           <p className="text-sm text-muted-foreground mb-2">{item.product.collection}</p>
                           
                           <div className="flex items-center">
                             <button 
                               className="text-xs p-1.5 rounded-full bg-evrgrn-darker"
-                              onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
+                              onClick={() => updateQuantity(item.productId, item.quantity - 1)}
                             >
                               <Minus className="h-3 w-3" />
                             </button>
                             <span className="text-sm mx-3 w-6 text-center">{item.quantity}</span>
                             <button 
                               className="text-xs p-1.5 rounded-full bg-evrgrn-darker"
-                              onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
+                              onClick={() => updateQuantity(item.productId, item.quantity + 1)}
                             >
                               <Plus className="h-3 w-3" />
                             </button>
@@ -102,11 +102,11 @@ const Cart = () => {
                         
                         <div className="text-right">
                           <div className="font-mono text-evrgrn-accent mb-2">
-                            {(item.product.price * item.quantity).toFixed(2)} {item.product.currency}
+                            {(item.price * item.quantity).toFixed(2)} {item.product.currency || "€"}
                           </div>
                           <button 
                             className="text-muted-foreground hover:text-foreground"
-                            onClick={() => removeFromCart(item.product.id)}
+                            onClick={() => removeFromCart(item.productId)}
                           >
                             <X className="h-4 w-4" />
                           </button>
