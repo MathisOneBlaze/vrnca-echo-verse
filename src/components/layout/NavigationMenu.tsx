@@ -38,7 +38,7 @@ const MainNav = () => {
         </NavigationMenuItem>
         
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="bg-transparent hover:bg-evrgrn-accent/10 cursor-pointer">
+          <NavigationMenuTrigger>
             <Link to="/publications" className="flex items-center">Médias</Link>
           </NavigationMenuTrigger>
           <NavigationMenuContent>
@@ -53,7 +53,7 @@ const MainNav = () => {
         </NavigationMenuItem>
         
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="bg-transparent hover:bg-evrgrn-accent/10 cursor-pointer">
+          <NavigationMenuTrigger>
             <Link to="/services" className="flex items-center">Services</Link>
           </NavigationMenuTrigger>
           <NavigationMenuContent>
@@ -81,7 +81,7 @@ const MainNav = () => {
         </NavigationMenuItem>
         
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="bg-transparent hover:bg-evrgrn-accent/10 cursor-pointer">
+          <NavigationMenuTrigger>
             <Link to="/jeux" className="flex items-center">Jeux</Link>
           </NavigationMenuTrigger>
           <NavigationMenuContent>

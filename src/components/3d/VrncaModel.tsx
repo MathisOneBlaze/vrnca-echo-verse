@@ -5,8 +5,12 @@ import { OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
+interface ModelProps {
+  modelPath?: string;
+}
+
 // 3D Model component - using GLTF model
-const Model = () => {
+const Model: React.FC<ModelProps> = ({ modelPath }) => {
   const modelRef = useRef<THREE.Group>(null);
   const [modelLoaded, setModelLoaded] = useState(false);
   const [modelError, setModelError] = useState(false);
@@ -14,10 +18,11 @@ const Model = () => {
   // Attempt to load the GLTF model
   useEffect(() => {
     const loader = new GLTFLoader();
-    console.log('Attempting to load VRNCA model from:', '/VRNCA_4__0404022903_texture.glb');
+    const path = modelPath || '/VRNCA_4__0404022903_texture.glb';
+    console.log('Attempting to load VRNCA model from:', path);
     
     loader.load(
-      '/VRNCA_4__0404022903_texture.glb',
+      path,
       (gltf) => {
         console.log('VRNCA model loaded successfully:', gltf);
         setModelLoaded(true);
@@ -30,7 +35,7 @@ const Model = () => {
         setModelError(true);
       }
     );
-  }, []);
+  }, [modelPath]);
   
   useFrame(({ clock }) => {
     if (modelRef.current) {
@@ -54,7 +59,8 @@ const Model = () => {
   
   // Try to render the GLB model
   try {
-    const gltf = useLoader(GLTFLoader, '/VRNCA_4__0404022903_texture.glb');
+    const path = modelPath || '/VRNCA_4__0404022903_texture.glb';
+    const gltf = useLoader(GLTFLoader, path);
     console.log('VRNCA model rendered successfully');
     
     return (
@@ -138,9 +144,10 @@ interface VrncaModelProps {
   className?: string;
   scale?: number;
   showLoader?: boolean;
+  modelPath?: string;
 }
 
-const VrncaModel: React.FC<VrncaModelProps> = ({ className, scale = 1.5, showLoader = true }) => {
+const VrncaModel: React.FC<VrncaModelProps> = ({ className, scale = 1.5, showLoader = true, modelPath }) => {
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState(false);
 
@@ -155,7 +162,7 @@ const VrncaModel: React.FC<VrncaModelProps> = ({ className, scale = 1.5, showLoa
         <div className="absolute inset-0 flex items-center justify-center bg-evrgrn-darker/50 backdrop-blur-sm z-10">
           <div className="flex flex-col items-center">
             <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-evrgrn-accent mb-2"></div>
-            <p className="text-evrgrn-accent text-sm">Chargement de VRNCA...</p>
+            <p className="text-evrgrn-accent text-sm">Chargement du modèle...</p>
           </div>
         </div>
       )}
@@ -170,7 +177,7 @@ const VrncaModel: React.FC<VrncaModelProps> = ({ className, scale = 1.5, showLoa
         <directionalLight position={[-10, -10, -5]} intensity={0.3} />
         <spotLight position={[0, 5, 10]} angle={0.3} penumbra={1} intensity={1} castShadow />
         <React.Suspense fallback={<FallbackModel />}>
-          <Model />
+          <Model modelPath={modelPath} />
           <OrbitControls 
             enablePan={false}
             enableZoom={false}

@@ -51,14 +51,14 @@ const Game = () => {
     };
   }, []);
   
-  // Game screenshots
+  // Game screenshots - Using official screenshots from the folder
   const screenshots = [
-    '/games/VRNCA-LAG/other assets/VRNCA-LAG Background 1.jpg',
-    '/games/VRNCA-LAG/other assets/VRNCA-LAG Background 2.jpg',
-    '/games/VRNCA-LAG/other assets/VRNCA-LAG Background 3.jpg',
-    '/games/VRNCA-LAG/other assets/VRNCA-LAG concept 1.jpg',
-    '/games/VRNCA-LAG/other assets/VRNCA-LAG concept 2.jpg',
-    '/games/VRNCA-LAG/other assets/Winning Screen 1.jpg',
+    '/games/VRNCA-LAG/screenshots/0 VRNCA-LAG U.I - Title Screen.png',
+    '/games/VRNCA-LAG/screenshots/1 VRNCA-LAG U.I - Story Screen 01.png',
+    '/games/VRNCA-LAG/screenshots/2 VRNCA-LAG U.I - Game Screen 1.png',
+    '/games/VRNCA-LAG/screenshots/3 VRNCA-LAG U.I - Leaderboard Screen from Game Screen.png',
+    '/games/VRNCA-LAG/screenshots/6 VRNCA-LAG U.I - Level Completee Screen.png',
+    '/games/VRNCA-LAG/screenshots/7 VRNCA-LAG U.I - Winning Screen.png',
   ];
 
   return (
@@ -75,9 +75,13 @@ const Game = () => {
               </p>
             </div>
             <img 
-              src="/lovable-uploads/01e9bec9-0cde-4e57-a7c9-aa81659ce1c0.png" 
-              alt="EVRGRN Logo" 
+              src="/games/VRNCA-LAG/VRNCA-LAG Cover Art 1.png" 
+              alt="VRNCA-LAG Logo" 
               className="h-16 mb-4 md:mb-0" 
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.src = '/Placeholder.png';
+              }}
             />
           </div>
           
@@ -213,6 +217,10 @@ const Game = () => {
                     src={screenshot} 
                     alt={`VRNCA-LAG Screenshot ${index + 1}`} 
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = '/Placeholder.png';
+                    }}
                   />
                 </div>
               ))}
@@ -229,6 +237,10 @@ const Game = () => {
                     src="/Cover Art/VRNCA-PATCH 1.2.exe ;/COVER-VRNCA-1.2.exe3-1200x1200.jpeg" 
                     alt="VRNCA-PATCH 1.2.exe" 
                     className="w-full h-full object-cover"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = '/Placeholder.png';
+                    }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-evrgrn-darker to-transparent"></div>
                 </div>
@@ -253,6 +265,10 @@ const Game = () => {
                     src="/games/Good Run Evil/cd90842d-8fc0-4990-9930-19498c45566b.png" 
                     alt="Good Run Evil" 
                     className="w-full h-full object-cover"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = '/Placeholder.png';
+                    }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-evrgrn-darker to-transparent"></div>
                   <div className="absolute bottom-4 left-4">

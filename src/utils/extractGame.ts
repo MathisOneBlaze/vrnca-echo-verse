@@ -21,9 +21,7 @@ export async function extractGame(zipUrl: string, targetElementId: string): Prom
     console.log('Extracting zip content and creating iframe');
     
     // Safely clear previous content
-    while (container.firstChild) {
-      container.removeChild(container.firstChild);
-    }
+    container.innerHTML = '';
     
     // Create iframe to load the game
     const iframe = document.createElement('iframe');
@@ -141,28 +139,17 @@ export async function extractGame(zipUrl: string, targetElementId: string): Prom
     
   } catch (error) {
     console.error('Error extracting game:', error);
-    // Show error message in container - use a safer way to replace content
+    // Show error message in container using innerHTML for safety
     if (container) {
-      // Clear container safely
-      while (container.firstChild) {
-        container.removeChild(container.firstChild);
-      }
-      
-      // Add error message
-      const errorDiv = document.createElement('div');
-      errorDiv.className = "p-4 bg-red-900/50 border border-red-500 rounded-lg text-white";
-      errorDiv.innerHTML = `
-        <h3 class="text-lg font-medium mb-2">Erreur lors du chargement du jeu</h3>
-        <p>${error instanceof Error ? error.message : 'Une erreur inconnue est survenue'}</p>
+      container.innerHTML = `
+        <div class="p-4 bg-red-900/50 border border-red-500 rounded-lg text-white">
+          <h3 class="text-lg font-medium mb-2">Erreur lors du chargement du jeu</h3>
+          <p>${error instanceof Error ? error.message : 'Une erreur inconnue est survenue'}</p>
+          <button class="mt-4 px-4 py-2 bg-red-500 hover:bg-red-600 rounded" onclick="window.location.reload()">
+            Réessayer
+          </button>
+        </div>
       `;
-      
-      const retryButton = document.createElement('button');
-      retryButton.className = "mt-4 px-4 py-2 bg-red-500 hover:bg-red-600 rounded";
-      retryButton.textContent = "Réessayer";
-      retryButton.onclick = () => window.location.reload();
-      
-      errorDiv.appendChild(retryButton);
-      container.appendChild(errorDiv);
     }
     throw error; // Re-throw to allow calling code to handle the error
   }
