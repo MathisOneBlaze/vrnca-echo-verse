@@ -20,9 +20,16 @@ export async function extractGame(zipUrl: string, targetElementId: string): Prom
     
     console.log('Extracting zip content and creating iframe');
     
-    // Clear previous content safely
+    // Safely clear previous content
     while (container.firstChild) {
-      container.removeChild(container.firstChild);
+      try {
+        container.removeChild(container.firstChild);
+      } catch (error) {
+        console.error('Error removing child:', error);
+        // If error occurs, just empty the container and break the loop
+        container.innerHTML = '';
+        break;
+      }
     }
     
     // Create iframe to load the game
@@ -31,6 +38,9 @@ export async function extractGame(zipUrl: string, targetElementId: string): Prom
     iframe.style.height = '600px';
     iframe.style.border = 'none';
     iframe.style.backgroundColor = '#000';
+    
+    // Set a default src to trigger onload
+    iframe.src = 'about:blank';
     
     // Append iframe to container
     container.appendChild(iframe);
@@ -129,17 +139,19 @@ export async function extractGame(zipUrl: string, targetElementId: string): Prom
       console.log('Game loaded in iframe');
     };
     
-    // Set a default src to trigger onload
-    iframe.src = 'about:blank';
-    
   } catch (error) {
     console.error('Error extracting game:', error);
     // Show error message in container
     const container = document.getElementById(targetElementId);
     if (container) {
       // Clear container safely
-      while (container.firstChild) {
-        container.removeChild(container.firstChild);
+      try {
+        while (container.firstChild) {
+          container.removeChild(container.firstChild);
+        }
+      } catch (error) {
+        console.error('Error clearing container:', error);
+        container.innerHTML = '';
       }
       
       container.innerHTML = `

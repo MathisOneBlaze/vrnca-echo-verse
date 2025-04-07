@@ -4,23 +4,15 @@ import { Link } from 'react-router-dom';
 import { ShopItem } from './ShopData';
 import { Button } from '@/components/ui/button';
 import { ShoppingCart, Info } from 'lucide-react';
-import { CartItem } from '@/context/CartContext';
 
 export interface ProductCardProps {
   product: ShopItem;
-  addToCart: (item: CartItem) => void;
+  addToCart: (item: ShopItem) => void;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, addToCart }) => {
   const handleAddToCart = () => {
-    addToCart({
-      id: product.id,
-      productId: product.id,
-      name: product.name,
-      price: product.price,
-      image: product.image,
-      quantity: 1
-    });
+    addToCart(product);
   };
 
   return (
