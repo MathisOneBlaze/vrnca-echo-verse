@@ -45,7 +45,6 @@ const Header: React.FC = () => {
         {/* Logo */}
         <Link to="/" className="flex items-center mr-6">
           <div className="flex items-center">
-            <img src="/lovable-uploads/01e9bec9-0cde-4e57-a7c9-aa81659ce1c0.png" alt="EVRGRN Logo" className="h-8 mr-2" />
             <GlitchText className="text-lg md:text-xl font-bold text-evrgrn-accent" intensity="low">
               EVRGRN
             </GlitchText>

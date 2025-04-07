@@ -23,6 +23,7 @@ import Game from './pages/Game';
 import Jeux from './pages/Jeux';
 import GoodRunEvil from './pages/GoodRunEvil';
 import VrncaHead3D from './pages/VrncaHead3D';
+import LeTrousseau from './pages/LeTrousseau';
 import { CartProvider } from './context/CartContext';
 import { Toaster } from 'sonner';
 import VrncaVoiceChat from './components/vrnca/VrncaVoiceChat';
@@ -52,10 +53,11 @@ function App() {
           <Route path="/mentions-legales" element={<MentionsLegales />} />
           <Route path="/confidentialite" element={<Confidentialite />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/game" element={<Game />} />
+          <Route path="/VRNCA-Lag" element={<Game />} />
           <Route path="/jeux" element={<Jeux />} />
           <Route path="/good-run-evil" element={<GoodRunEvil />} />
           <Route path="/vrnca-head" element={<VrncaHead3D />} />
+          <Route path="/le-trousseau" element={<LeTrousseau />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         
@@ -75,7 +77,7 @@ function App() {
         )}
         
         {/* VRNCA Chat Interface */}
-        {showChat && <VrncaVoiceChat onClose={() => setShowChat(false)} />}
+        {showChat && <VrncaVoiceChat onClose={() => setShowVoiceChat(false)} />}
         
         <Toaster position="top-right" />
       </div>

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 import { Button } from '@/components/ui/button';
+import { Tag } from 'lucide-react';
 
 const Jeux = () => {
   return (
@@ -17,11 +18,9 @@ const Jeux = () => {
               <h1 className="text-4xl font-serif mb-2">EVRGRN Games Studio</h1>
               <p className="text-lg text-muted-foreground">Découvrez les jeux développés par EVRGRN Games Studio</p>
             </div>
-            <img 
-              src="/lovable-uploads/01e9bec9-0cde-4e57-a7c9-aa81659ce1c0.png" 
-              alt="EVRGRN Logo" 
-              className="h-16"
-            />
+            <div className="text-evrgrn-accent">
+              <Tag size={32} />
+            </div>
           </div>
           
           <h2 className="text-2xl font-serif mb-6">À propos des jeux EVRGRN GAMES STUDIO</h2>
@@ -54,10 +53,10 @@ const Jeux = () => {
                 </p>
                 <div className="flex gap-3">
                   <Button asChild>
-                    <Link to="/game">Jouer maintenant</Link>
+                    <Link to="/VRNCA-Lag">Jouer maintenant</Link>
                   </Button>
                   <Button variant="outline">
-                    <a href="/VRNCA_LAG - Labyrinth Adventure Game.zip" download>Télécharger</a>
+                    <a href="https://buy.stripe.com/test_00g5kt0rG1cc0Xm000" target="_blank" rel="noopener noreferrer">Soutenir</a>
                   </Button>
                 </div>
               </div>
