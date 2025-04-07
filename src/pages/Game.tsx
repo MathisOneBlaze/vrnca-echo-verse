@@ -11,8 +11,12 @@ const Game = () => {
   const [isGameLoading, setIsGameLoading] = useState(true);
   const [loadingError, setLoadingError] = useState<string | null>(null);
   const gameContainerRef = useRef<HTMLDivElement>(null);
+  const gameLoadAttempted = useRef(false);
   
   useEffect(() => {
+    // Only attempt to load game if it hasn't been attempted yet in this component lifecycle
+    if (gameLoadAttempted.current) return;
+    
     const loadGame = async () => {
       try {
         setIsGameLoading(true);
@@ -23,8 +27,9 @@ const Game = () => {
           throw new Error("Game container not found");
         }
         
-        // Use a more robust path to ensure the zip file is found
-        await extractGame(window.location.origin + '/VRNCA_LAG - Labyrinth Adventure Game.zip', 'game-container');
+        // Use absolute URL to ensure the zip file is found
+        const zipUrl = new URL('/VRNCA_LAG - Labyrinth Adventure Game.zip', window.location.origin).href;
+        await extractGame(zipUrl, 'game-container');
         setIsGameLoading(false);
       } catch (error) {
         console.error('Failed to load game:', error);
@@ -33,10 +38,13 @@ const Game = () => {
       }
     };
     
+    // Mark that we've attempted to load the game
+    gameLoadAttempted.current = true;
+    
     // Small delay to ensure DOM is ready
     const timer = setTimeout(() => {
       loadGame();
-    }, 100);
+    }, 200);
     
     return () => {
       clearTimeout(timer);
@@ -88,7 +96,10 @@ const Game = () => {
                   <h3 className="text-lg font-medium mb-2">Erreur lors du chargement du jeu</h3>
                   <p>{loadingError}</p>
                   <Button 
-                    onClick={() => window.location.reload()} 
+                    onClick={() => {
+                      gameLoadAttempted.current = false;
+                      window.location.reload();
+                    }} 
                     className="mt-4"
                   >
                     Réessayer
@@ -105,7 +116,7 @@ const Game = () => {
                 </span>
               </div>
               <a 
-                href={window.location.origin + '/VRNCA_LAG - Labyrinth Adventure Game.zip'}
+                href="/VRNCA_LAG - Labyrinth Adventure Game.zip"
                 download 
                 className="flex items-center text-evrgrn-accent text-sm hover:underline"
               >
@@ -147,7 +158,7 @@ const Game = () => {
               
               <div className="mt-8 flex space-x-4">
                 <Button asChild variant="outline">
-                  <a href={window.location.origin + '/VRNCA_LAG - Labyrinth Adventure Game.zip'} download>
+                  <a href="/VRNCA_LAG - Labyrinth Adventure Game.zip" download>
                     <Download className="h-4 w-4 mr-2" /> 
                     Télécharger
                   </a>
