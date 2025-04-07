@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 import VrncaHead from '../components/vrnca/VrncaHead';
+import VrncaModel from '../components/3d/VrncaModel';
 
 const VrncaHead3D = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -39,6 +40,7 @@ const VrncaHead3D = () => {
             ref={containerRef}
             className="flex items-center justify-center h-[70vh] bg-evrgrn-darker/50 rounded-lg relative overflow-hidden"
           >
+            {/* Utilisation de l'image directement pour garantir l'affichage */}
             <div className="relative w-64 h-64 md:w-96 md:h-96">
               <VrncaHead 
                 size="lg"
@@ -61,6 +63,13 @@ const VrncaHead3D = () => {
               <div className="absolute top-0 left-1/4 h-full w-px bg-evrgrn-accent/10"></div>
               <div className="absolute top-0 left-1/2 h-full w-px bg-evrgrn-accent/15"></div>
               <div className="absolute top-0 left-3/4 h-full w-px bg-evrgrn-accent/10"></div>
+            </div>
+          </div>
+          
+          <div className="mt-12 flex flex-col items-center">
+            <h3 className="text-xl font-serif mb-4">Modèle 3D VRNCA</h3>
+            <div className="h-[400px] w-full md:w-[600px] bg-evrgrn-darker/30 rounded-lg overflow-hidden">
+              <VrncaModel />
             </div>
           </div>
           

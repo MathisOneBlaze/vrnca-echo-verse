@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/layout/Header';
@@ -120,17 +121,6 @@ const Services = () => {
                       onClick={() => setActiveTab('faq')}
                     >
                       FAQ
-                    </a>
-                  </li>
-                  <li className="mt-4 pt-4 border-t border-evrgrn-accent/10">
-                    <a 
-                      href="/utils/apiIntegrationGuide.md" 
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center py-2 px-3 rounded text-evrgrn-accent hover:bg-evrgrn-accent/10"
-                    >
-                      Guide d'intégration API
-                      <ExternalLink className="ml-2 h-4 w-4" />
                     </a>
                   </li>
                 </ul>

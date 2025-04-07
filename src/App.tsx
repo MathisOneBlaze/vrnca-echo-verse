@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Index from './pages/Index';
 import Biography from './pages/Biography';
@@ -32,6 +32,23 @@ import VrncaHead from './components/vrnca/VrncaHead';
 function App() {
   const [showChat, setShowChat] = useState(false);
   
+  // Effet pour gérer le redimensionnement de la fenêtre et s'assurer que le chat est visible
+  useEffect(() => {
+    const handleResize = () => {
+      // Assurez-vous que le chat est toujours visible sur mobile
+      if (window.innerWidth < 768 && showChat) {
+        // Limiter la taille du chat sur mobile
+        const chatElement = document.querySelector('.vrnca-chat');
+        if (chatElement) {
+          chatElement.classList.add('mobile-chat');
+        }
+      }
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [showChat]);
+  
   return (
     <CartProvider>
       <div className="App">
@@ -61,18 +78,16 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
         
-        {/* VRNCA Floating Chat Button */}
+        {/* VRNCA Floating Chat Button (always visible when chat is closed) */}
         {!showChat && (
           <button
-            className="fixed bottom-5 right-5 z-40"
+            className="fixed bottom-5 right-5 z-40 w-12 h-12 rounded-full bg-evrgrn-accent/20 flex items-center justify-center"
             onClick={() => setShowChat(true)}
             aria-label="Open VRNCA Assistant"
           >
-            <VrncaHead 
-              size="sm" 
-              fixed
-              position="bottom-right"
-            />
+            <div className="w-10 h-10 rounded-full border-2 border-evrgrn-accent flex items-center justify-center">
+              <div className="w-6 h-6 bg-evrgrn-accent rounded-full animate-pulse"></div>
+            </div>
           </button>
         )}
         
