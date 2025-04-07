@@ -1,3 +1,4 @@
+
 import { CartItem } from '../../context/CartContext';
 
 export interface ShopItem {
@@ -11,6 +12,7 @@ export interface ShopItem {
   collection?: string;
   isFeatured?: boolean;
   isAvailable?: boolean;
+  isNew?: boolean; // Added this property
   quantity?: number;
   variations?: ShopItemVariation[];
   relatedProducts?: string[];
