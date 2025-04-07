@@ -20,17 +20,8 @@ export async function extractGame(zipUrl: string, targetElementId: string): Prom
     
     console.log('Extracting zip content and creating iframe');
     
-    // Safely clear previous content
-    while (container.firstChild) {
-      try {
-        container.removeChild(container.firstChild);
-      } catch (error) {
-        console.error('Error removing child:', error);
-        // If error occurs, just empty the container and break the loop
-        container.innerHTML = '';
-        break;
-      }
-    }
+    // Safely clear previous content - use innerHTML instead of DOM manipulation
+    container.innerHTML = '';
     
     // Create iframe to load the game
     const iframe = document.createElement('iframe');
@@ -144,16 +135,7 @@ export async function extractGame(zipUrl: string, targetElementId: string): Prom
     // Show error message in container
     const container = document.getElementById(targetElementId);
     if (container) {
-      // Clear container safely
-      try {
-        while (container.firstChild) {
-          container.removeChild(container.firstChild);
-        }
-      } catch (error) {
-        console.error('Error clearing container:', error);
-        container.innerHTML = '';
-      }
-      
+      // Clear container safely using innerHTML
       container.innerHTML = `
         <div class="p-4 bg-red-900/50 border border-red-500 rounded-lg text-white">
           <h3 class="text-lg font-medium mb-2">Erreur lors du chargement du jeu</h3>

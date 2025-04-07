@@ -23,7 +23,8 @@ const Game = () => {
           throw new Error("Game container not found");
         }
         
-        await extractGame('/VRNCA_LAG - Labyrinth Adventure Game.zip', 'game-container');
+        // Use a more robust path to ensure the zip file is found
+        await extractGame(window.location.origin + '/VRNCA_LAG - Labyrinth Adventure Game.zip', 'game-container');
         setIsGameLoading(false);
       } catch (error) {
         console.error('Failed to load game:', error);
@@ -104,7 +105,7 @@ const Game = () => {
                 </span>
               </div>
               <a 
-                href="/VRNCA_LAG - Labyrinth Adventure Game.zip" 
+                href={window.location.origin + '/VRNCA_LAG - Labyrinth Adventure Game.zip'}
                 download 
                 className="flex items-center text-evrgrn-accent text-sm hover:underline"
               >
@@ -146,7 +147,7 @@ const Game = () => {
               
               <div className="mt-8 flex space-x-4">
                 <Button asChild variant="outline">
-                  <a href="/VRNCA_LAG - Labyrinth Adventure Game.zip" download>
+                  <a href={window.location.origin + '/VRNCA_LAG - Labyrinth Adventure Game.zip'} download>
                     <Download className="h-4 w-4 mr-2" /> 
                     Télécharger
                   </a>
