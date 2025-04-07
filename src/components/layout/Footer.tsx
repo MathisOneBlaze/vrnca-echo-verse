@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, forwardRef } from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import GlitchText from '../ui/GlitchText';
@@ -10,11 +10,11 @@ interface FooterProps {
   className?: string;
 }
 
-const Footer: React.FC<FooterProps> = ({ className }) => {
+const Footer = forwardRef<HTMLDivElement, FooterProps>(({ className }, ref) => {
   const [showVoiceChat, setShowVoiceChat] = useState(false);
 
   return (
-    <footer className={cn('bg-evrgrn-darker border-t border-evrgrn-accent/10 py-12', className)}>
+    <footer ref={ref} className={cn('bg-evrgrn-darker border-t border-evrgrn-accent/10 py-12', className)}>
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Logo and description */}
@@ -67,7 +67,7 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
             <h3 className="text-evrgrn-accent font-medium mb-4 text-sm uppercase tracking-wider">Ressources</h3>
             <ul className="space-y-2 text-sm">
               <FooterLink to="/publications" label="Publications" />
-              <FooterLink to="/publications#livres" label="Livres & Articles" />
+              <FooterLink to="/publications?tab=livres" label="Livres & Articles" />
               <FooterLink to="/services" label="Services Studio" />
               <FooterLink to="/services#design" label="Design & Direction Artistique" />
               <FooterLink to="/contact" label="Presse & Médias" />
@@ -110,7 +110,9 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
       {showVoiceChat && <VrncaVoiceChat onClose={() => setShowVoiceChat(false)} />}
     </footer>
   );
-};
+});
+
+Footer.displayName = "Footer";
 
 interface FooterLinkProps {
   to: string;

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
@@ -42,7 +43,7 @@ const Header: React.FC = () => {
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
         {/* Logo */}
-        <Link to="/" className="flex items-center">
+        <Link to="/" className="flex items-center mr-6">
           <div className="flex items-center">
             <img src="/lovable-uploads/01e9bec9-0cde-4e57-a7c9-aa81659ce1c0.png" alt="EVRGRN Logo" className="h-8 mr-2" />
             <GlitchText className="text-lg md:text-xl font-bold text-evrgrn-accent" intensity="low">
@@ -52,7 +53,7 @@ const Header: React.FC = () => {
         </Link>
         
         {/* Desktop Navigation */}
-        <div className="hidden md:block">
+        <div className="hidden md:block flex-grow">
           <NavigationMenu />
         </div>
         
@@ -78,11 +79,6 @@ const Header: React.FC = () => {
               <CartDropdown />
             )}
           </div>
-          
-          {/* VRNCA Mini Model */}
-          <Link to="/game" className="hidden md:flex ml-2 items-center justify-center hover:bg-evrgrn-accent/10 rounded-full p-1">
-            <MiniVrncaModel />
-          </Link>
           
           {/* Login Button */}
           <Button asChild size="sm" variant="ghost" className="hidden md:flex ml-2">
@@ -114,10 +110,10 @@ const Header: React.FC = () => {
               <li className="border-b border-evrgrn-accent/10 pb-2">
                 <MobileLink to="/publications" label="Médias" onClick={() => setMobileMenuOpen(false)} />
                 <ul className="pl-4 mt-1 space-y-1">
-                  <MobileLink to="/publications#livres" label="Livres" onClick={() => setMobileMenuOpen(false)} />
-                  <MobileLink to="/publications#articles" label="Articles" onClick={() => setMobileMenuOpen(false)} />
-                  <MobileLink to="/publications#videos" label="Vidéos" onClick={() => setMobileMenuOpen(false)} />
-                  <MobileLink to="/publications#presse" label="Presse" onClick={() => setMobileMenuOpen(false)} />
+                  <MobileLink to="/publications?tab=livres" label="Livres" onClick={() => setMobileMenuOpen(false)} />
+                  <MobileLink to="/publications?tab=articles" label="Articles" onClick={() => setMobileMenuOpen(false)} />
+                  <MobileLink to="/publications?tab=videos" label="Vidéos" onClick={() => setMobileMenuOpen(false)} />
+                  <MobileLink to="/publications?tab=presse" label="Presse" onClick={() => setMobileMenuOpen(false)} />
                 </ul>
               </li>
               
@@ -136,7 +132,7 @@ const Header: React.FC = () => {
               
               <MobileLink to="/shop" label="Shop" onClick={() => setMobileMenuOpen(false)} />
               <MobileLink to="/contact" label="Contact" onClick={() => setMobileMenuOpen(false)} />
-              <MobileLink to="/game" label="Jeu VRNCA LAG" onClick={() => setMobileMenuOpen(false)} />
+              <MobileLink to="/jeux" label="Jeux" onClick={() => setMobileMenuOpen(false)} />
               
               {/* Login and Register */}
               <li className="pt-4 border-t border-evrgrn-accent/10 mt-4">

@@ -22,6 +22,7 @@ import Dashboard from './pages/Dashboard';
 import Game from './pages/Game';
 import Jeux from './pages/Jeux';
 import GoodRunEvil from './pages/GoodRunEvil';
+import VrncaHead3D from './pages/VrncaHead3D';
 import { CartProvider } from './context/CartContext';
 import { Toaster } from 'sonner';
 import VrncaVoiceChat from './components/vrnca/VrncaVoiceChat';
@@ -54,6 +55,7 @@ function App() {
           <Route path="/game" element={<Game />} />
           <Route path="/jeux" element={<Jeux />} />
           <Route path="/good-run-evil" element={<GoodRunEvil />} />
+          <Route path="/vrnca-head" element={<VrncaHead3D />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         

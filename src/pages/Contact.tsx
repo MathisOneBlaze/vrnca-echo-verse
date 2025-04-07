@@ -28,12 +28,30 @@ const Contact = () => {
   
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Form validation
+    if (!formData.name.trim()) {
+      toast.error('Veuillez saisir votre nom');
+      return;
+    }
+    
+    if (!formData.email.trim()) {
+      toast.error('Veuillez saisir votre email');
+      return;
+    }
+    
+    if (!formData.message.trim()) {
+      toast.error('Veuillez saisir votre message');
+      return;
+    }
+    
     setIsSubmitting(true);
     
     // Simulate form submission
     setTimeout(() => {
       console.log('Form submitted:', formData);
       toast.success('Message envoyé avec succès!');
+      toast.info('Actuellement, les données sont uniquement enregistrées localement. Une intégration email sera mise en place prochainement.');
       setFormData({
         name: '',
         email: '',
@@ -59,7 +77,7 @@ const Contact = () => {
           <div className="mt-12 max-w-xl mx-auto">
             <form className="space-y-6" onSubmit={handleSubmit}>
               <div>
-                <label htmlFor="name" className="block text-sm font-medium mb-2">Nom</label>
+                <label htmlFor="name" className="block text-sm font-medium mb-2">Nom <span className="text-red-500">*</span></label>
                 <input 
                   type="text" 
                   id="name"
@@ -72,7 +90,7 @@ const Contact = () => {
               </div>
               
               <div>
-                <label htmlFor="email" className="block text-sm font-medium mb-2">Email</label>
+                <label htmlFor="email" className="block text-sm font-medium mb-2">Email <span className="text-red-500">*</span></label>
                 <input 
                   type="email" 
                   id="email"
@@ -97,7 +115,7 @@ const Contact = () => {
               </div>
               
               <div>
-                <label htmlFor="message" className="block text-sm font-medium mb-2">Message</label>
+                <label htmlFor="message" className="block text-sm font-medium mb-2">Message <span className="text-red-500">*</span></label>
                 <textarea 
                   id="message"
                   name="message"

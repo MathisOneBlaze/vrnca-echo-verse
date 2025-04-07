@@ -14,6 +14,12 @@ import {
 import { cn } from '@/lib/utils';
 
 const MainNav = () => {
+  const navigate = useNavigate();
+  
+  const handleNavItemClick = (path: string) => {
+    navigate(path);
+  };
+  
   return (
     <NavigationMenu>
       <NavigationMenuList className="space-x-1">
@@ -36,10 +42,13 @@ const MainNav = () => {
         </NavigationMenuItem>
         
         <NavigationMenuItem>
-          <NavigationMenuTrigger asChild className="bg-transparent hover:bg-evrgrn-accent/10">
-            <Link to="/publications">Médias</Link>
+          <NavigationMenuTrigger 
+            onClick={() => handleNavItemClick('/publications')}
+            className="bg-transparent hover:bg-evrgrn-accent/10 cursor-pointer"
+          >
+            Médias
           </NavigationMenuTrigger>
-          <NavigationMenuContent className="absolute left-0 origin-top-left">
+          <NavigationMenuContent className="origin-top-center absolute z-10">
             <ul className="grid w-[250px] gap-1 p-2">
               <ListItem title="Presse" href="/publications?tab=presse" />
               <ListItem title="Livres" href="/publications?tab=livres" />
@@ -51,10 +60,13 @@ const MainNav = () => {
         </NavigationMenuItem>
         
         <NavigationMenuItem>
-          <NavigationMenuTrigger asChild className="bg-transparent hover:bg-evrgrn-accent/10">
-            <Link to="/services">Services</Link>
+          <NavigationMenuTrigger 
+            onClick={() => handleNavItemClick('/services')}
+            className="bg-transparent hover:bg-evrgrn-accent/10 cursor-pointer"
+          >
+            Services
           </NavigationMenuTrigger>
-          <NavigationMenuContent className="absolute left-0 origin-top-left">
+          <NavigationMenuContent className="origin-top-center absolute z-10">
             <ul className="grid w-[250px] gap-1 p-2">
               <ListItem title="Consulting Production" href="/services#consulting" />
               <ListItem title="Formation Théorie" href="/services#formation" />
@@ -79,9 +91,18 @@ const MainNav = () => {
         </NavigationMenuItem>
         
         <NavigationMenuItem>
-          <Link to="/jeux" className={navigationMenuTriggerStyle()}>
+          <NavigationMenuTrigger 
+            onClick={() => handleNavItemClick('/jeux')}
+            className="bg-transparent hover:bg-evrgrn-accent/10 cursor-pointer"
+          >
             Jeux
-          </Link>
+          </NavigationMenuTrigger>
+          <NavigationMenuContent className="origin-top-center absolute z-10">
+            <ul className="grid w-[250px] gap-1 p-2">
+              <ListItem title="VRNCA-LAG" href="/game" />
+              <ListItem title="Good Run Evil" href="/good-run-evil" />
+            </ul>
+          </NavigationMenuContent>
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>

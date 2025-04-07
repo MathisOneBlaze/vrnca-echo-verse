@@ -1,101 +1,92 @@
 
 import React from 'react';
-import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from "@/components/ui/badge";
-import { ShoppingCart } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useToast } from "@/components/ui/use-toast";
-
-export interface Product {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  currency: string;
-  image?: string;
-  images: string[];
-  category: string;
-  tags: string[];
-  collection?: string;
-  isNew?: boolean;
-  isFeatured?: boolean;
-  inStock: boolean;
-  source?: 'printful' | 'shopify' | 'woocommerce';
-}
+import { ShopItem } from './ShopData';
+import { Button } from '@/components/ui/button';
+import { ShoppingCart, Info } from 'lucide-react';
+import { CartItem } from '@/context/CartContext';
 
 interface ProductCardProps {
-  product: Product;
-  addToCart?: (product: Product) => void;
+  product: ShopItem;
+  addToCart: (item: CartItem) => void;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, addToCart }) => {
-  const { toast } = useToast();
-  
-  const handleAddToCart = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (addToCart) {
-      addToCart(product);
-      toast({
-        title: "Ajouté au panier",
-        description: `${product.name} a été ajouté à votre panier.`,
-      });
-    }
+  const handleAddToCart = () => {
+    addToCart({
+      id: product.id,
+      productId: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      quantity: 1
+    });
   };
 
-  // Use a black rectangle fallback instead of placeholder
-  const imageUrl = product.image || (product.images && product.images.length > 0 && product.images[0] !== "/placeholder.svg") 
-    ? (product.image || product.images[0]) 
-    : "data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 800 800'%3E%3Crect fill='%23000000' width='800' height='800'/%3E%3C/svg%3E";
-
   return (
-    <Link to={`/shop/product/${product.id}`} className="block">
-      <Card className="overflow-hidden bg-evrgrn-muted border border-evrgrn-accent/10 hover:border-evrgrn-accent/30 transition-all duration-300 card-hover">
-        <div className="relative h-48 overflow-hidden bg-evrgrn-darker">
-          <img
-            src={imageUrl}
-            alt={product.name}
-            className="w-full h-full object-cover"
-          />
-          
-          {product.source && (
-            <div className="absolute bottom-2 right-2">
-              <Badge variant="outline" className="bg-evrgrn-dark/80 border-evrgrn-accent/30 text-xs">
-                {product.source}
-              </Badge>
+    <div className="bg-evrgrn-muted border border-evrgrn-accent/10 rounded-lg overflow-hidden transition-all duration-300 hover:border-evrgrn-accent/30 h-full flex flex-col">
+      <Link to={`/shop/product/${product.id}`} className="block flex-grow">
+        <div className="aspect-square relative overflow-hidden bg-evrgrn-darker">
+          {product.image ? (
+            <img 
+              src={product.image} 
+              alt={product.name} 
+              className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+            />
+          ) : (
+            // Black rectangle placeholder
+            <div className="w-full h-full bg-black flex items-center justify-center">
+              <span className="text-evrgrn-accent/30 text-xs">Image produit</span>
             </div>
           )}
           
-          {product.isNew && (
-            <div className="absolute top-2 left-2">
-              <Badge className="bg-evrgrn-accent text-black font-medium">
-                Nouveau
-              </Badge>
+          {product.isFeatured && (
+            <div className="absolute top-2 right-2 bg-evrgrn-accent text-black text-xs font-medium px-2 py-1 rounded">
+              En vedette
+            </div>
+          )}
+          
+          {product.collection && (
+            <div className="absolute bottom-0 left-0 w-full bg-evrgrn-darker/80 text-xs font-medium text-foreground py-1 px-2">
+              Collection: {product.collection}
             </div>
           )}
         </div>
         
-        <CardContent className="p-4">
-          <div className="flex items-start justify-between">
-            <div>
-              <h3 className="font-medium text-foreground">{product.name}</h3>
-              <p className="text-sm text-muted-foreground">{product.collection}</p>
-            </div>
-            <span className="font-mono text-evrgrn-accent">{product.price.toFixed(2)} {product.currency}</span>
-          </div>
+        <div className="p-4">
+          <h3 className="font-medium mb-1">{product.name}</h3>
+          <p className="text-evrgrn-accent font-medium text-lg mb-2">{product.price.toFixed(2)} €</p>
           
-          <div className="mt-4 flex justify-between items-center">
-            <span className="text-xs text-muted-foreground">{product.category}</span>
-            <button 
-              className="bg-evrgrn-dark hover:bg-evrgrn-light p-1.5 rounded-md transition-colors"
-              onClick={handleAddToCart}
-            >
-              <ShoppingCart className="h-4 w-4 text-evrgrn-accent" />
-            </button>
-          </div>
-        </CardContent>
-      </Card>
-    </Link>
+          {product.shortDescription && (
+            <p className="text-sm text-muted-foreground mb-4">{product.shortDescription}</p>
+          )}
+        </div>
+      </Link>
+      
+      <div className="p-4 pt-0 mt-auto">
+        <div className="flex space-x-2">
+          <Button 
+            onClick={handleAddToCart}
+            className="flex-grow"
+            variant="default"
+            disabled={!product.isAvailable}
+          >
+            <ShoppingCart className="h-4 w-4 mr-2" />
+            {product.isAvailable ? 'Ajouter' : 'Indisponible'}
+          </Button>
+          
+          <Button 
+            variant="outline" 
+            size="icon"
+            asChild
+          >
+            <Link to={`/shop/product/${product.id}`}>
+              <Info className="h-4 w-4" />
+            </Link>
+          </Button>
+        </div>
+      </div>
+    </div>
   );
 };
 
