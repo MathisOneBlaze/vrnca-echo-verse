@@ -77,7 +77,7 @@ function App() {
         )}
         
         {/* VRNCA Chat Interface */}
-        {showChat && <VrncaVoiceChat onClose={() => setShowVoiceChat(false)} />}
+        {showChat && <VrncaVoiceChat onClose={() => setShowChat(false)} />}
         
         <Toaster position="top-right" />
       </div>

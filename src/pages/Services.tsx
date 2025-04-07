@@ -5,6 +5,7 @@ import Footer from '../components/layout/Footer';
 import { Button } from '@/components/ui/button';
 import { Download, ExternalLink } from 'lucide-react';
 import { Headphones, BookOpen, BarChart3, Mic2, Users, Music } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
 
 const Services = () => {
   const [activeTab, setActiveTab] = useState('all');
