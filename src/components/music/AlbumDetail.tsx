@@ -5,7 +5,6 @@ import { Progress } from '@/components/ui/progress';
 import { ExternalLink, Music, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Album } from '@/data/albumData';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 const AlbumDetail: React.FC<Album> = ({
   id,
@@ -81,7 +80,7 @@ const AlbumDetail: React.FC<Album> = ({
                   {allImages.map((_, index) => (
                     <div 
                       key={index} 
-                      className={`h-2 w-2 rounded-full ${currentImageIndex === index ? 'bg-evrgrn-accent' : 'bg-white/50'}`}
+                      className={`h-2 w-2 rounded-full cursor-pointer ${currentImageIndex === index ? 'bg-evrgrn-accent' : 'bg-white/50'}`}
                       onClick={() => setCurrentImageIndex(index)}
                     />
                   ))}
@@ -116,72 +115,83 @@ const AlbumDetail: React.FC<Album> = ({
             )}
 
             {format && (
-              <p className="text-sm font-medium text-muted-foreground">
+              <p className="text-sm font-medium text-muted-foreground mb-4">
                 {format}
               </p>
             )}
           </div>
           
-          <Tabs defaultValue="description" className="flex-1">
-            <TabsList className="mb-4 bg-evrgrn-darker">
-              <TabsTrigger value="description">Description</TabsTrigger>
-              {credits && <TabsTrigger value="credits">Crédits</TabsTrigger>}
-              {visualConcept && <TabsTrigger value="concept">Concept</TabsTrigger>}
-              {musicCharacteristics && <TabsTrigger value="characteristics">Caractéristiques</TabsTrigger>}
-            </TabsList>
-            
-            <TabsContent value="description" className="mt-0">
-              <div className="mb-6">
+          <div className="flex-1 space-y-6">
+            {/* Description */}
+            <Card className="bg-evrgrn-muted border-evrgrn-accent/10">
+              <CardHeader>
+                <CardTitle className="text-lg">Description</CardTitle>
+              </CardHeader>
+              <CardContent>
                 <p className="text-muted-foreground">{description}</p>
-              </div>
-            </TabsContent>
+              </CardContent>
+            </Card>
             
+            {/* Credits */}
             {credits && (
-              <TabsContent value="credits" className="mt-0">
-                <div className="mb-6">
+              <Card className="bg-evrgrn-muted border-evrgrn-accent/10">
+                <CardHeader>
+                  <CardTitle className="text-lg">Crédits</CardTitle>
+                </CardHeader>
+                <CardContent>
                   <p className="text-muted-foreground">{credits}</p>
-                </div>
-              </TabsContent>
+                </CardContent>
+              </Card>
             )}
 
+            {/* Visual Concept */}
             {visualConcept && (
-              <TabsContent value="concept" className="mt-0">
-                <div className="mb-6">
+              <Card className="bg-evrgrn-muted border-evrgrn-accent/10">
+                <CardHeader>
+                  <CardTitle className="text-lg">Concept Visuel</CardTitle>
+                </CardHeader>
+                <CardContent>
                   <p className="text-muted-foreground">{visualConcept}</p>
-                </div>
-              </TabsContent>
+                </CardContent>
+              </Card>
             )}
             
+            {/* Music Characteristics */}
             {musicCharacteristics && (
-              <TabsContent value="characteristics" className="mt-0">
-                <div className="space-y-6">
-                  <div className="space-y-2">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-muted-foreground">Calme</span>
-                      <span className="text-muted-foreground">Dansant</span>
+              <Card className="bg-evrgrn-muted border-evrgrn-accent/10">
+                <CardHeader>
+                  <CardTitle className="text-lg">Caractéristiques Musicales</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-6">
+                    <div className="space-y-2">
+                      <div className="flex justify-between text-sm">
+                        <span className="text-muted-foreground">Calme</span>
+                        <span className="text-muted-foreground">Dansant</span>
+                      </div>
+                      <Progress value={musicCharacteristics.calmDancing} className="h-2 bg-evrgrn-darker" />
                     </div>
-                    <Progress value={musicCharacteristics.calmDancing} className="h-2 bg-evrgrn-muted" />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-muted-foreground">Engagé</span>
-                      <span className="text-muted-foreground">Stupide</span>
+                    
+                    <div className="space-y-2">
+                      <div className="flex justify-between text-sm">
+                        <span className="text-muted-foreground">Engagé</span>
+                        <span className="text-muted-foreground">Stupide</span>
+                      </div>
+                      <Progress value={musicCharacteristics.engagedSilly} className="h-2 bg-evrgrn-darker" />
                     </div>
-                    <Progress value={musicCharacteristics.engagedSilly} className="h-2 bg-evrgrn-muted" />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-muted-foreground">Réalité</span>
-                      <span className="text-muted-foreground">Fiction</span>
+                    
+                    <div className="space-y-2">
+                      <div className="flex justify-between text-sm">
+                        <span className="text-muted-foreground">Réalité</span>
+                        <span className="text-muted-foreground">Fiction</span>
+                      </div>
+                      <Progress value={musicCharacteristics.realityFiction} className="h-2 bg-evrgrn-darker" />
                     </div>
-                    <Progress value={musicCharacteristics.realityFiction} className="h-2 bg-evrgrn-muted" />
                   </div>
-                </div>
-              </TabsContent>
+                </CardContent>
+              </Card>
             )}
-          </Tabs>
+          </div>
           
           <div className="mt-auto flex space-x-4 pt-6">
             {!isUnreleased ? (

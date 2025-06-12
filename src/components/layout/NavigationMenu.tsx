@@ -47,7 +47,6 @@ const MainNav = () => {
               <ListItem title="Livres" href="/publications?tab=livres" />
               <ListItem title="Articles" href="/publications?tab=articles" />
               <ListItem title="Clips" href="/publications?tab=clips" />
-              <ListItem title="Le Trousseau" href="/le-trousseau" />
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
