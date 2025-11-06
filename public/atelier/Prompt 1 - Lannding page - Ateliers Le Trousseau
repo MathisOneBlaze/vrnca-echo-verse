@@ -1,0 +1,306 @@
+PROMPT (FR)
+
+Contexte & objectif — Résumé (à inclure au début du travail)
+Tu es une IA de production web. Crée une landing page single-page professionnelle, accessible et responsive (mobile + desktop) pour l’association Le Trousseau — présentation de l’atelier « Atelier Création & Production Musicale » animé par Mathis OneBlaze (EVRGRN).
+Public cible : décideurs culturels (MJC, mairies, centres socio-culturels), directions pédagogiques, financeurs (DRAC, CAF), parents et jeunes (12–18 ans).
+Ton livrable : code HTML/CSS (ou React + Tailwind) + export PDF brochure, + JSON-LD schema for SEO, + assets list & copy textes exacts en français.
+Ne pas mentionner ni inclure Spark dans le contenu.
+
+1) STRUCTURE & HIERARCHIE (H1..H4)
+
+H1 : Atelier Création & Production Musicale — Le Trousseau
+
+Sections (ordre) : Hero → Présentation formateur → Philosophie & objectifs → Public & encadrement → Modules (tableau) → Formats & calendrier → Tarifs → Moyens techniques → Résultats attendus (KPIs) → FAQ → Contact / Réservation → Footer.
+
+Chaque section doit utiliser des balises sémantiques HTML appropriées (<header>, <main>, <section>, <article>, <form>, <footer>).
+
+2) CHARTE GRAPHIQUE & TYPO
+
+Palette principale :
+
+Vert émeraude (accent) : #009966
+
+Noir profond (textes titres) : #0B0B0B
+
+Gris clair (background) : #F4F4F4
+
+Blanc cassé (texte secondaire & BG) : #FFFFFF
+
+Gris medium (borders / meta) : #BDBDBD
+
+Typographies :
+
+Titres : Montserrat (700 pour H1/H2, 600 H3)
+
+Texte courant : Open Sans (400 & 600)
+
+Style : épuré, spacing généreux, grid responsive 12 cols desktop, 1-col mobile. Cards arrondies (8px), ombres soft box-shadow: 0 6px 18px rgba(11,11,11,0.06).
+
+3) HERO (contenu prêt à l’emploi)
+
+Visuel : photo large en situation (Toi en studio / en atelier), overlaid gradient (transparent → #0B0B0B 30%).
+
+H1 : Atelier Création & Production Musicale
+
+Sous-titre : Par Mathis OneBlaze (EVRGRN) — Un programme d’initiation artistique et technique pour révéler le potentiel créatif des jeunes (12–18 ans).
+
+CTA primaires :
+
+Bouton 1 (primaire, vert) : "Réserver une session" → ouvre formulaire / ancre #contact.
+
+Bouton 2 (secondaire, outline) : "Télécharger la brochure (PDF)" → download.
+
+Microcopy sous CTA : Groupes 5–10 jeunes • Formules : 2h / cycle complet • Studio partenaire inclus
+
+4) PRÉSENTATION DU FORMATEUR (texte exact 100–120 mots)
+
+Mathis OneBlaze — Formateur & Producteur
+Mathis Moncoq, fondateur d’EVRGRN, est formateur artistique et technicien du son diplômé (BTS Audiovisuel / formation INA). Artiste et ingénieur studio, il cumule années de production, accompagnement d’artistes et animation d’ateliers jeunesse en Île-de-France. Sa pédagogie combine exigence technique et mise en confiance — l’objectif : donner aux jeunes les outils concrets (écriture, composition, enregistrement, diffusion) pour porter leurs projets de l’idée à la diffusion.
+(100–120 mots — à utiliser tel quel)
+
+5) PHILOSOPHIE & OBJECTIFS PÉDAGOGIQUES (copy)
+
+Titre : Philosophie & objectifs
+
+Texte : « Apprendre à créer, comprendre les métiers, fédérer les talents et révéler les vocations. »
+
+Trois colonnes (icônes minimalistes) :
+
+Transmission — Texte : Transmettre savoirs et techniques (studio, MAO, scénographie).
+
+Autonomie — Texte : Donner des méthodes pour produire seul et en équipe.
+
+Collectif — Texte : Travailler le projet comme un collectif professionnel.
+
+6) PUBLIC, ENCADREMENT & LOGISTIQUE (copy)
+
+Public : jeunes 12–18 ans (collège / lycée).
+
+Effectif : 5–10 participants.
+
+Niveau : débutant → intermédiaire.
+
+Lieu : salle polyvalente + studio partenaire pour la session d’enregistrement + lieu de tournage clip (optionel).
+
+Encadrement : 1 formateur principal (Mathis) + 1 assistant technique sur sessions studio/clip (si budget).
+
+7) MODULES PÉDAGOGIQUES — TABLEAU (texte + microcopy)
+
+Produis une table responsive (desktop grid, mobile stack). Contenu EXACT à afficher :
+
+Module	Objectif	Résultat attendu
+1 — Découverte & Inspiration	Comprendre les métiers et rôles	Vision d’ensemble du secteur
+2 — Écriture & Thématique	Trouver un propos collectif	Texte commun, refrain fort
+3 — Composition & Production	Créer un morceau original	Maquette du titre
+4 — Interprétation & Enregistrement	Apprendre à performer et enregistrer	Titre enregistré en studio
+5 — Droit & Monétisation	Comprendre la valeur de la création	Connaissance SACEM / droits d’auteur
+6 — Promotion & Diffusion	Apprendre à présenter son œuvre	Plan de sortie / communication
++ Optionnel — Tournage clip	Mise en image du projet	Clip collectif prêt à diffuser
+
+Inclure CTA « Demander devis pour parcours complet » sous tableau.
+
+8) FORMAT & CALENDRIER (copy)
+
+Initiation express — 1 séance de 2h (idéal événement / kick-off).
+
+Cycle complet — 6 séances × 4h + 2 journées (1 jour studio + 1 jour tournage clip).
+
+Planning type : 1 séance / semaine (6 semaines) + studio et clip en semaines 7–8.
+
+9) MOYENS TECHNIQUES (liste)
+
+Affiche en liste avec icônes : Sono (1 enceinte ou plus), vidéoprojecteur, paperboard, imprimante + consommables, stylos/feuilles, ordiphone/tablette pour prises mobile, connexion internet stable, matériel studio partenaire (console, micros, DAW).
+
+10) TARIFICATION (tableau & logique dégressive)
+
+Donner prix clairs (en € TTC) et expliquer formule dégressive possible. Propose ceci :
+
+Tarifs indicatifs 2025 (exemples)
+
+Initiation Express (2h) — 250 € TTC (préparation + animation + déplacement)
+
+Cycle Complet (6 × 4h + 2 jours studio/clip) — 2 100 € TTC (inclut 1 jour studio + 1 jour clip, post-prod basique)
+
+Option : tarif dégressif par module (par participant)
+
+Module unique : 120 € / participant
+
+2 modules : 220 € / participant (-8%)
+
+Pack complet (6 modules) : 600 € / participant (tarif pack, réduit)
+
+Inclure microcopy : Prix modulables en fonction du nombre de participants, aides / subventions, localisation.
+Inclure bouton CTA : "Obtenir un devis personnalisé" (ouvre formulaire).
+
+11) RÉSULTATS ATTENDUS (KPIs)
+
+1 maquette audio par groupe, 1 titre enregistré en studio, 1 plan de sortie, clip optionnel.
+
+Impacts attendus : augmentation de la confiance, insertion culturelle locale, 80% de satisfaction attendue.
+
+12) FORMULAIRE DE RÉSERVATION / CONTACT (champ obligatoires + microcopy)
+
+Formulaire avec validation et double opt-in. Champs :
+
+Nom de la structure / parent ou jeune
+
+Email (obligatoire)
+
+Téléphone
+
+Type de formule (select : Initiation / Cycle complet / Modules à la carte)
+
+Nombre de participants
+
+Adresse du lieu (ville + CP)
+
+Date(s) souhaitée(s)
+
+Besoin matériel (checkboxes)
+
+Consentement RGPD (case à cocher) + texte : « J’accepte que mes données soient utilisées par Le Trousseau pour gérer cette demande et recevoir une réponse. »
+After submit : auto-reply email template (fournis le copy) — sujet : "Réception de votre demande — Le Trousseau"
+
+Autoreply email (copy) :
+
+Objet : Réception de votre demande — Atelier Le Trousseau
+Bonjour [Prénom],
+Merci — nous avons bien reçu votre demande pour l’atelier Le Trousseau. Mathis reviendra vers vous sous 48h ouvrées avec un devis personnalisé. Cordialement, L’équipe Le Trousseau (EVRGRN) — contact@letrousseau.fr
+
+13) ASSETS PHOTO / BRIEF PHOTOS (pour le designer)
+
+3 photos clés : 1 portrait pro Mathis en studio (wide), 1 photo d’atelier (groupe jeunes en activité), 1 visuel moodboard EVRGRN (logo minimal).
+
+Alt text pour SEO : "Atelier création musicale Le Trousseau — jeunes en studio avec Mathis OneBlaze".
+
+14) ACCESSIBILITÉ & SEO (doit être produit)
+
+Hn structure, labels ARIA sur form; contraste couleurs >=4.5:1 (textes sur BG).
+
+Meta Title suggestion : Atelier Création & Production Musicale — Le Trousseau | Mathis OneBlaze
+
+Meta Description : Atelier pour jeunes (12-18 ans) animé par Mathis OneBlaze (EVRGRN). Cycle complet : écriture, production, enregistrement studio et diffusion. Réservez une session ou demandez un devis.
+
+Keywords : atelier musique jeunesse, initiation musique IDF, atelier MAO jeunesse, formation artistique 12-18.
+
+15) JSON-LD (Organisation + Event template)
+
+Génère JSON-LD Organization pour Le Trousseau (nom, logo, adresse, contact, sameAs links) et un Course or Event schema exemple pour le Cycle complet (dates placeholders) — prêt à être personnalisé.
+
+16) FAQ & Objections (à inclure)
+
+Inclure mini-FAQ :
+
+Quel matériel fournissez-vous ? — Réponse courte.
+
+Combien d’élèves par groupe ? — 5–10.
+
+Et si un jeune manque une séance ? — Rattrapage possible, enregistrement.
+
+Comment sont gérés les droits ? — Convention + formulaire droit d’image et cession/partage expliqué.
+
+17) Footer (contenu)
+
+Coordonnées (contact@letrousseau.fr
+, tel), SIREN placeholder, mentions légales (lien), politique confidentialité (lien), réseaux sociaux (links).
+
+Call to action secondaire : "Inscrivez-vous à la newsletter — recevoir la brochure & actualités"
+
+18) TECHNIQUE & LIVRABLES
+
+Génère :
+
+Version HTML/CSS (responsive) avec Tailwind utility classes (ou React + Tailwind component si demandé).
+
+Brochure PDF imprimable A4 (équivalent contenu condensé).
+
+Fichier JSON-LD prêt à coller.
+
+ZIP contenant images (placeholder), favicon, logo SVG, fonts import.
+
+Performance : lazy-load images, webp fallback, critical CSS inline, keep total initial JS < 80 KB.
+
+Analytics : intégrer Google Analytics (ID placeholder) + Pixel (option) ; cookie consent snippet (RGPD).
+
+19) Micro-interactions & UI details
+
+CTA hover : scale(1.02) + shadow intensifié.
+
+Smooth scroll to anchors.
+
+Mobile menu slide from right.
+
+Progress indicator for modules (horizontal bullets).
+
+Compétences du formateur : "barres style jeux vidéo" (horizontal bars) — affiche 6 compétences clés et niveaux (ex : Mixage 90%, Production 85%, Pédagogie 88%, Direction artistique 86%, Post-prod vidéo 70%, Gestion de projet 80%). Use animated fill on scroll.
+
+20) Texte final prêt à publier (fourni dans la réponse)
+
+Fourni exactement tous les textes ci-dessous (H1, hero subtitle, 100-120w bio, modules table copy, tarification copy, CTA microcopy, auto-reply email, meta tags).
+
+21) Variantes A/B (conseil rapide)
+
+CTA hero A : "Réserver une session" (action)
+
+CTA hero B : "Demander un devis gratuit" (réassurance)
+Test 50/50 pendant 2 semaines.
+
+22) Contraintes & notes finales
+
+N’inclure aucune référence à Spark. Mentionner seulement EVRGRN et VRNCA si besoin.
+
+Ton : professionnel, direct, pédagogique, sans superlatifs exagérés.
+
+Langue : français (toutes sections).
+
+Livrable prioritaire : page prête à déployer + PDF brochure.
+
+CONTENU À COPIER/COLLER — TEXTES EXACTS (FR)
+
+Hero H1
+Atelier Création & Production Musicale
+
+Hero subtitle
+Par Mathis OneBlaze (EVRGRN) — Un programme d’initiation artistique et technique pour révéler le potentiel créatif des jeunes (12–18 ans).
+
+Formateur — bio (100–120 mots)
+Mathis Moncoq, fondateur d’EVRGRN, est formateur artistique et technicien du son diplômé (BTS Audiovisuel / formation INA). Artiste et ingénieur studio, il cumule années de production, accompagnement d’artistes et animation d’ateliers jeunesse en Île-de-France. Sa pédagogie combine exigence technique et mise en confiance — l’objectif : donner aux jeunes les outils concrets (écriture, composition, enregistrement, diffusion) pour porter leurs projets de l’idée à la diffusion.
+
+Philosophie (ligne)
+Apprendre à créer, comprendre les métiers, fédérer les talents et révéler les vocations.
+
+Modules (copier tableau ci-dessus) — voir section 7
+
+Formats & calendrier
+Initiation express — 1 séance de 2h
+Cycle complet — 6 séances × 4h + 2 journées (1 jour studio + 1 jour clip)
+
+Tarifs indicatifs
+Initiation Express (2h) — 250 € TTC
+Cycle Complet — 2 100 € TTC
+Pack modules et tarifs dégressifs disponibles — contactez-nous pour un devis.
+
+Auto-reply email (copy)
+Objet : Réception de votre demande — Atelier Le Trousseau
+Bonjour [Prénom],
+Merci — nous avons bien reçu votre demande pour l’atelier Le Trousseau. Mathis reviendra vers vous sous 48h ouvrées avec un devis personnalisé. Cordialement, L’équipe Le Trousseau (EVRGRN) — contact@letrousseau.fr
+
+Meta Title
+Atelier Création & Production Musicale — Le Trousseau | Mathis OneBlaze
+
+Meta Description
+Atelier pour jeunes (12-18 ans) animé par Mathis OneBlaze (EVRGRN). Cycle complet : écriture, production, enregistrement studio et diffusion. Réservez une session ou demandez un devis.
+
+FIN DU PROMPT
+
+Fais-moi un rendu en :
+
+HTML + Tailwind prêt à déployer (single page).
+
+PDF brochure A4 imprimable.
+
+JSON-LD organisation + event sample.
+
+ZIP assets (placeholders + recommended photo briefs).
+
+Merci. Produce the page copy in French, respecting tone (professionnel, direct, pédagogique) and the visual guidelines.

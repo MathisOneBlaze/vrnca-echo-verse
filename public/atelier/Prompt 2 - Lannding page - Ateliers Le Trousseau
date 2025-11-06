@@ -1,0 +1,250 @@
+# Prompt Lovable — Landing Page “Le Trousseau — Atelier Création & Production Musicale”
+
+Copie-colle ce prompt dans Lovable. Il est exhaustif et directement actionnable.
+
+## Contexte & objectif
+- Tu es une IA de production web.
+- Crée une landing page single-page professionnelle, accessible et responsive (mobile + desktop) pour l’association Le Trousseau, présentant l’atelier “Atelier Création & Production Musicale” animé par Mathis OneBlaze (EVRGRN).
+- Public cible: décideurs culturels (MJC, mairies, centres socio-culturels), directions pédagogiques, financeurs (DRAC, CAF), parents et jeunes (12–18 ans).
+- Livrables: 
+  - Page web en HTML/CSS ou React + Tailwind (préféré si stack React/Tailwind disponible).
+  - Export PDF brochure A4 imprimable (mêmes contenus condensés).
+  - JSON-LD SEO (Organization + Event/Course).
+  - Liste d’assets et textes finaux FR.
+- Ne pas mentionner Spark. Mentionner EVRGRN et éventuellement VRNCA si pertinent.
+
+## Structure & hiérarchie
+- Structure sémantique: <header>, <main>, <section>, <article>, <form>, <footer>.
+- Ordre des sections:
+  1) Hero
+  2) Présentation formateur
+  3) Philosophie & objectifs
+  4) Public & encadrement
+  5) Modules (tableau)
+  6) Formats & calendrier
+  7) Tarifs
+  8) Moyens techniques
+  9) Résultats attendus (KPIs)
+  10) FAQ
+  11) Contact / Réservation (formulaire)
+  12) Footer
+
+## Charte graphique & typo
+- Palette:
+  - Vert émeraude: #009966
+  - Noir profond: #0B0B0B
+  - Gris clair: #F4F4F4
+  - Blanc cassé: #FFFFFF
+  - Gris medium: #BDBDBD
+- Typographies:
+  - Titres: Montserrat (700 H1/H2, 600 H3)
+  - Corps: Open Sans (400, 600)
+- Style: épuré, spacing généreux, grid responsive (12 colonnes desktop, 1 colonne mobile), cards radius 8px, ombre 0 6px 18px rgba(11,11,11,0.06).
+
+## Hero (contenu exact)
+- Visuel large (atelier/studio) avec overlay gradient transparent → #0B0B0B 30%.
+- H1: “Atelier Création & Production Musicale”
+- Sous-titre: “Par Mathis OneBlaze (EVRGRN) — Un programme d’initiation artistique et technique pour révéler le potentiel créatif des jeunes (12–18 ans).”
+- CTA:
+  - Primaire (vert): “Réserver une session” → ancre #contact
+  - Secondaire (outline): “Télécharger la brochure (PDF)” → téléchargement
+- Microcopy: “Groupes 5–10 jeunes • Formules: 2h / cycle complet • Studio partenaire inclus”
+
+## Présentation formateur (texte 100–120 mots)
+- Titre: “Mathis OneBlaze — Formateur & Producteur”
+- Texte (utiliser tel quel):
+  - “Mathis Moncoq, fondateur d’EVRGRN, est formateur artistique et technicien du son diplômé (BTS Audiovisuel / formation INA). Artiste et ingénieur studio, il cumule années de production, accompagnement d’artistes et animation d’ateliers jeunesse en Île-de-France. Sa pédagogie combine exigence technique et mise en confiance — l’objectif : donner aux jeunes les outils concrets (écriture, composition, enregistrement, diffusion) pour porter leurs projets de l’idée à la diffusion.”
+
+## Philosophie & objectifs (copy)
+- Titre: “Philosophie & objectifs”
+- Baseline: “Apprendre à créer, comprendre les métiers, fédérer les talents et révéler les vocations.”
+- Trois colonnes avec icônes minimalistes:
+  - Transmission — “Transmettre savoirs et techniques (studio, MAO, scénographie).”
+  - Autonomie — “Donner des méthodes pour produire seul et en équipe.”
+  - Collectif — “Travailler le projet comme un collectif professionnel.”
+
+## Public, encadrement & logistique
+- Public: jeunes 12–18 ans (collège / lycée).
+- Effectif: 5–10 participants.
+- Niveau: débutant → intermédiaire.
+- Lieu: salle polyvalente + studio partenaire (session d’enregistrement) + lieu de tournage clip (optionnel).
+- Encadrement: 1 formateur principal (Mathis) + 1 assistant technique sur studio/clip (si budget).
+
+## Modules — tableau responsive
+- Tableau (desktop grid, mobile stack) avec colonnes: Module | Objectif | Résultat attendu
+- Lignes EXACTES:
+  - “1 — Découverte & Inspiration | Comprendre les métiers et rôles | Vision d’ensemble du secteur”
+  - “2 — Écriture & Thématique | Trouver un propos collectif | Texte commun, refrain fort”
+  - “3 — Composition & Production | Créer un morceau original | Maquette du titre”
+  - “4 — Interprétation & Enregistrement | Apprendre à performer et enregistrer | Titre enregistré en studio”
+  - “5 — Droit & Monétisation | Comprendre la valeur de la création | Connaissance SACEM / droits d’auteur”
+  - “6 — Promotion & Diffusion | Apprendre à présenter son œuvre | Plan de sortie / communication”
+  - “+ Optionnel — Tournage clip | Mise en image du projet | Clip collectif prêt à diffuser”
+- CTA sous tableau: “Demander devis pour parcours complet”
+
+## Formats & calendrier
+- Initiation express — 1 séance de 2h (idéal événement / kick-off).
+- Cycle complet — 6 séances × 4h + 2 journées (1 jour studio + 1 jour tournage clip).
+- Planning type — 1 séance / semaine (6 semaines) + studio et clip en semaines 7–8.
+
+## Moyens techniques (liste avec icônes)
+- Sono (1 enceinte ou plus), vidéoprojecteur, paperboard, imprimante + consommables, stylos/feuilles, smartphone/tablette pour prises mobiles, connexion internet stable, matériel studio partenaire (console, micros, DAW).
+
+## Tarification (tableau & logique dégressive)
+- “Tarifs indicatifs 2025 (exemples)”
+  - Initiation Express (2h) — 250 € TTC (préparation + animation + déplacement)
+  - Cycle Complet (6 × 4h + 2 jours studio/clip) — 2 100 € TTC (inclut 1 jour studio + 1 jour clip, post‑prod basique)
+- Option tarif dégressif par module (par participant):
+  - Module unique: 120 € / participant
+  - 2 modules: 220 € / participant (−8%)
+  - Pack complet (6 modules): 600 € / participant (tarif pack)
+- Microcopy: “Prix modulables selon participants, aides/subventions, localisation.”
+- CTA: “Obtenir un devis personnalisé” → ouvre formulaire.
+
+## Résultats attendus (KPIs)
+- 1 maquette audio par groupe, 1 titre enregistré en studio, 1 plan de sortie, clip optionnel.
+- Impacts: hausse de la confiance, insertion culturelle locale, 80% de satisfaction attendue.
+
+## Formulaire de réservation / contact
+- Validation + double opt-in.
+- Champs:
+  - Nom de la structure / parent ou jeune
+  - Email (obligatoire)
+  - Téléphone
+  - Type de formule (Initiation / Cycle complet / Modules à la carte)
+  - Nombre de participants
+  - Adresse du lieu (ville + CP)
+  - Date(s) souhaitée(s)
+  - Besoins matériel (checkboxes)
+  - Consentement RGPD (case à cocher) — “J’accepte que mes données soient utilisées par Le Trousseau pour gérer cette demande et recevoir une réponse.”
+- Auto-reply email (copier tel quel):
+  - Objet: “Réception de votre demande — Atelier Le Trousseau”
+  - Corps: “Bonjour [Prénom], Merci — nous avons bien reçu votre demande pour l’atelier Le Trousseau. Mathis reviendra vers vous sous 48h ouvrées avec un devis personnalisé. Cordialement, L’équipe Le Trousseau (EVRGRN) — contact@letrousseau.fr”
+
+## Accessibilité & SEO
+- A11y: structure Hn, labels ARIA sur le formulaire, contrastes >= 4.5:1, focus visible, alt text.
+- Meta:
+  - Title: “Atelier Création & Production Musicale — Le Trousseau | Mathis OneBlaze”
+  - Description: “Atelier pour jeunes (12-18 ans) animé par Mathis OneBlaze (EVRGRN). Cycle complet: écriture, production, enregistrement studio et diffusion. Réservez une session ou demandez un devis.”
+  - Keywords: “atelier musique jeunesse, initiation musique IDF, atelier MAO jeunesse, formation artistique 12-18”.
+- Open Graph/Twitter Cards: titre, description, image sociale (placeholder).
+- Sitemap/robots (si applicable).
+
+## JSON-LD (coller en <script type="application/ld+json">)
+- Organization (Le Trousseau) + Event ou Course (Cycle complet). Utiliser placeholders pour dates/URL/logo.
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Le Trousseau",
+  "url": "https://www.letrousseau.fr",
+  "logo": "https://www.letrousseau.fr/assets/logo.png",
+  "email": "contact@letrousseau.fr",
+  "sameAs": [
+    "https://www.facebook.com/letrousseau",
+    "https://www.instagram.com/letrousseau"
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "FR",
+    "addressLocality": "Paris"
+  }
+}
+```
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "Atelier Création & Production Musicale — Cycle complet",
+  "provider": {
+    "@type": "Organization",
+    "name": "Le Trousseau"
+  },
+  "hasCourseInstance": {
+    "@type": "CourseInstance",
+    "courseMode": "OnSite",
+    "startDate": "2025-10-01",
+    "endDate": "2025-12-01",
+    "location": {
+      "@type": "Place",
+      "name": "Studio partenaire — Île-de-France"
+    }
+  },
+  "description": "Cycle 6×4h + 2 journées (studio + clip): écriture, composition, enregistrement, diffusion.",
+  "occupationalCredentialAwarded": "Attestation de participation"
+}
+```
+
+## Micro-interactions & UI
+- Hover CTA: scale(1.02) + shadow intensifié.
+- Smooth scroll vers ancres.
+- Menu mobile slide-in (droite).
+- Indicateur de progression modules (bullets horizontales).
+- “Compétences du formateur” en barres animées au scroll (Mixage 90%, Production 85%, Pédagogie 88%, Direction artistique 86%, Post‑prod vidéo 70%, Gestion de projet 80%).
+
+## Performance & technique
+- Tailwind utilities. CSS critique inline pour above-the-fold.
+- Images lazy-loaded, format webp si possible.
+- JS initial < 80 KB. Pas de lourdes librairies inutiles.
+- Analytics (option): GA4 ID placeholder + consentement cookies RGPD.
+- Export PDF A4: feuille de style print dédiée (ou génération via md-to-pdf/Puppeteer), même contenu condensé.
+
+## Assets & médias
+- Si possible, utiliser/placer 3 visuels:
+  - Portrait pro Mathis en studio (wide)
+  - Photo d’atelier (jeunes en activité)
+  - Visuel moodboard EVRGRN (logo minimal)
+- Alt text recommandé: “Atelier création musicale Le Trousseau — jeunes en studio avec Mathis OneBlaze”.
+
+## FAQ (exemples)
+- Quel matériel fournissez-vous ? — Sono, vidéo, paperboard; studio et clip en option.
+- Combien d’élèves par groupe ? — 5–10.
+- Et si un jeune manque une séance ? — Rattrapage possible, supports partagés.
+- Comment sont gérés les droits ? — Convention + droit à l’image; cession/partage clarifié.
+
+## Footer
+- Coordonnées: contact@letrousseau.fr, téléphone (placeholder).
+- Mentions légales, Politique de confidentialité (liens placeholders).
+- Réseaux sociaux.
+- CTA secondaire: “Inscrivez-vous à la newsletter — recevoir la brochure & actualités”.
+
+## Textes finaux à utiliser tels quels (copier-coller)
+- Hero H1: “Atelier Création & Production Musicale”
+- Hero subtitle: “Par Mathis OneBlaze (EVRGRN) — Un programme d’initiation artistique et technique pour révéler le potentiel créatif des jeunes (12–18 ans).”
+- Bio formateur (100–120 mots): voir section “Présentation formateur”.
+- Philosophie (ligne): “Apprendre à créer, comprendre les métiers, fédérer les talents et révéler les vocations.”
+- Modules: tableau ci-dessus.
+- Formats & calendrier: “Initiation express — 1 séance de 2h” / “Cycle complet — 6 séances × 4h + 2 journées (1 jour studio + 1 jour clip)”.
+- Tarifs indicatifs: “Initiation Express (2h) — 250 € TTC” / “Cycle Complet — 2 100 € TTC” / “Pack modules et tarifs dégressifs disponibles — contactez‑nous pour un devis.”
+- Auto‑reply email: voir section Formulaire (copier tel quel).
+- Meta Title / Description: voir section SEO.
+
+## Variantes A/B (conseil)
+- CTA hero A: “Réserver une session”
+- CTA hero B: “Demander un devis gratuit”
+- Test 50/50 pendant 2 semaines.
+
+## Contraintes finales
+- Langue: français intégral.
+- Ton: professionnel, direct, pédagogique, sans superlatifs exagérés.
+- Pas de référence à “Spark”.
+- Si stack existante React + Tailwind: produire un composant/page unique et (si un router existe) une route dédiée; sinon, produire un index.html autonome avec Tailwind CDN ou build.
+
+## Critères d’acceptation (vérifiables)
+- Structure sémantique respectée; responsive mobile/desktop.
+- Contrastes AA, focus visible, champs du formulaire labellisés.
+- CTA fonctionnels (scroll vers #contact, lien download brochure).
+- JSON-LD valides (testable sur Rich Results Test).
+- Poids JS initial < 80 KB, images lazy-loaded.
+- PDF A4 exportable avec mêmes contenus condensés.
+- Tous les textes fournis ont été repris tels quels (hors labels UI et microcopys supplémentaires).
+
+# Recommended Actions
+- **[coller dans Lovable]** Utilise ce prompt tel quel.
+- **[me dire]** Si tu veux que je l’enregistre aussi dans un fichier `public/atelier/Prompt - Landing Le Trousseau.md` pour suivi.
+
+# Task status
+- **Rédaction du prompt Lovable**: terminée et fournie ci-dessus.
+- Prêt à l’usage pour générer la landing page, PDF et SEO JSON-LD.

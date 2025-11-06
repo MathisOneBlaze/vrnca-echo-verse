@@ -1,0 +1,111 @@
+Facture
+
+Numéro de facture
+
+Date d'émission
+
+Date d'échéance
+
+ 2022-002
+ 24/08/2022
+ 17/09/2022
+
+EACH VOCAL & RECORDING GENERATES
+RESSOURCES NECESSARY
+
+60 RUE FRANCOIS 1ER
+
+75008 PARIS 8, FR
+
+moncoq.mathis@gmail.com
+
+91763156600010
+
+ Objet(s) Public(s) - Epicerie Rose
+
+50 RUE DES TOURNELLES 75003 PARIS
+
+75003 Paris, FR
+
+objets.publics@gmail.com
+
+51960715400027
+
+Items
+
+Qté
+
+Prix unitaire
+
+TVA (%)
+
+Montant de la TVA
+
+Total
+
+Session de formation
+
+Deux heures d'atelier : création, interprétation
+
+et scénographie.
+
+Spectacle de fin
+
+Spectacle de fin de formation avec les
+
+participants des ateliers.
+
+4
+
+1
+
+100,00 €
+
+20.0%
+
+80,00 €
+
+480,00 €
+
+183,00 €
+
+20.0%
+
+36,60 €
+
+219,60 €
+
+Total (HT)
+
+583,00 €
+
+Montant de la TVA
+
+116,60 €
+
+Total TTC
+
+699,60 €
+
+Détails du paiement
+
+Nom du bénéficiaire
+
+BIC
+
+IBAN
+
+Référence
+
+ EACH VOCAL & RECORDING GENERATES RESSOURCES NECESSARY
+ QNTOFRP1XXX
+ FR7616958000018856229955017
+ QMH6SZX
+
+EACH VOCAL & RECORDING GENERATES RESSOURCES NECESSARY, SAS · Paiement sous 30 jours à compté de la date d'émission de la
+
+facture.
+
+Powered by Qonto
+
+
