@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 import Hero from '../components/home/Hero';
@@ -13,6 +13,7 @@ const Index = () => {
   const [showIntro, setShowIntro] = useState(false);
   const [introComplete, setIntroComplete] = useState(false);
   const [skipButtonVisible, setSkipButtonVisible] = useState(false);
+  const footerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Check localStorage to see if intro has been shown
@@ -51,12 +52,6 @@ const Index = () => {
     setShowIntro(false);
   };
 
-  // Reset intro (for testing purposes)
-  const resetIntro = () => {
-    localStorage.removeItem('hasSeenIntro');
-    window.location.reload();
-  };
-
   return (
     <div className="bg-evrgrn-dark text-foreground min-h-screen flex flex-col">
       {/* Introduction sequence */}
@@ -86,7 +81,7 @@ const Index = () => {
           <FeaturedContent />
         </main>
         
-        <Footer />
+        <Footer ref={footerRef} />
       </div>
       
       {/* Interactive particle background */}
@@ -95,7 +90,10 @@ const Index = () => {
       {/* Debug button to reset intro (only visible in development) */}
       {process.env.NODE_ENV === 'development' && (
         <button
-          onClick={resetIntro}
+          onClick={() => {
+            localStorage.removeItem('hasSeenIntro');
+            window.location.reload();
+          }}
           className="fixed bottom-4 left-4 bg-red-500 text-white px-2 py-1 text-xs rounded opacity-50 hover:opacity-100 z-50"
         >
           Reset Intro

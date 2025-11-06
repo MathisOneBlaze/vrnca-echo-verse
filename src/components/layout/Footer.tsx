@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, forwardRef } from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import GlitchText from '../ui/GlitchText';
@@ -10,21 +10,16 @@ interface FooterProps {
   className?: string;
 }
 
-const Footer: React.FC<FooterProps> = ({ className }) => {
+const Footer = forwardRef<HTMLDivElement, FooterProps>(({ className }, ref) => {
   const [showVoiceChat, setShowVoiceChat] = useState(false);
 
   return (
-    <footer className={cn('bg-evrgrn-darker border-t border-evrgrn-accent/10 py-12', className)}>
+    <footer ref={ref} className={cn('bg-evrgrn-darker border-t border-evrgrn-accent/10 py-12', className)}>
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Logo and description */}
           <div className="md:col-span-1">
             <div className="flex items-center mb-4">
-              <img 
-                src="/lovable-uploads/01e9bec9-0cde-4e57-a7c9-aa81659ce1c0.png"
-                alt="EVRGRN Logo" 
-                className="h-10 mr-2"
-              />
               <GlitchText intensity="low" className="text-xl font-bold text-evrgrn-accent">
                 EVRGRN
               </GlitchText>
@@ -67,7 +62,7 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
             <h3 className="text-evrgrn-accent font-medium mb-4 text-sm uppercase tracking-wider">Ressources</h3>
             <ul className="space-y-2 text-sm">
               <FooterLink to="/publications" label="Publications" />
-              <FooterLink to="/publications#livres" label="Livres & Articles" />
+              <FooterLink to="/publications?tab=livres" label="Livres & Articles" />
               <FooterLink to="/services" label="Services Studio" />
               <FooterLink to="/services#design" label="Design & Direction Artistique" />
               <FooterLink to="/contact" label="Presse & Médias" />
@@ -110,7 +105,9 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
       {showVoiceChat && <VrncaVoiceChat onClose={() => setShowVoiceChat(false)} />}
     </footer>
   );
-};
+});
+
+Footer.displayName = "Footer";
 
 interface FooterLinkProps {
   to: string;

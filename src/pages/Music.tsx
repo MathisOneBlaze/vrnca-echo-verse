@@ -152,11 +152,18 @@ const AlbumCard: React.FC<AlbumCardProps> = ({ album }) => {
     <Link to={`/album/${album.id}`} className="block">
       <div className="bg-evrgrn-muted border border-evrgrn-accent/10 rounded-lg overflow-hidden hover:border-evrgrn-accent/30 transition-all duration-300 group h-full">
         <div className="relative aspect-square bg-evrgrn-darker">
-          <img
-            src={album.image || "/placeholder.svg"}
-            alt={album.title}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-          />
+          {album.image ? (
+            <img
+              src={album.image}
+              alt={album.title}
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+          ) : (
+            // Black rectangle placeholder instead of default placeholder
+            <div className="w-full h-full bg-black flex items-center justify-center">
+              <span className="text-evrgrn-accent/30 text-xs">Album art</span>
+            </div>
+          )}
           
           {album.isUnreleased && (
             <div className="absolute top-0 left-0 w-full bg-evrgrn-darker/80 text-xs font-medium text-evrgrn-accent py-1 text-center">

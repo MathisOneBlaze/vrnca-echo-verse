@@ -1,13 +1,29 @@
 
-import React from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import { Download, ExternalLink } from 'lucide-react';
 import { Headphones, BookOpen, BarChart3, Mic2, Users, Music } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Card, CardContent } from '@/components/ui/card';
 
 const Services = () => {
+  const [activeTab, setActiveTab] = useState('all');
+
+  React.useEffect(() => {
+    const hash = window.location.hash.replace('#', '');
+    if (hash && ['consulting', 'formation', 'strategie', 'studio', 'faq'].includes(hash)) {
+      setActiveTab(hash);
+      setTimeout(() => {
+        const element = document.getElementById(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  }, []);
+
   const services = [
     {
       id: "consulting",
@@ -51,9 +67,9 @@ const Services = () => {
         <div className="container mx-auto px-4 py-12">
           <div className="flex justify-between items-center mb-12">
             <div>
-              <h1 className="text-4xl font-serif mb-2">Services</h1>
+              <h1 className="text-4xl font-serif mb-2">Services EVRGRN</h1>
               <p className="text-lg text-muted-foreground">
-                Expertise musicale et accompagnement artistique
+                Solutions professionnelles pour artistes et créateurs
               </p>
             </div>
             <img 
@@ -91,7 +107,6 @@ const Services = () => {
             </Button>
           </div>
           
-          {/* Section mise à jour pour Ateliers */}
           <div className="bg-evrgrn-muted border border-evrgrn-accent/10 rounded-lg p-8 mb-12">
             <div className="flex flex-col md:flex-row gap-6">
               <div className="md:w-2/3">
@@ -116,9 +131,17 @@ const Services = () => {
                     <span className="text-sm">De 7 à 77 ans</span>
                   </div>
                 </div>
-                <Button asChild className="bg-evrgrn-accent text-black hover:bg-evrgrn-accent/80">
-                  <Link to="/ateliers">Plus d'informations</Link>
-                </Button>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <Button asChild className="bg-evrgrn-accent text-black hover:bg-evrgrn-accent/80">
+                    <Link to="/ateliers">Plus d'informations</Link>
+                  </Button>
+                  <Button asChild variant="outline" size="sm" className="border-evrgrn-accent/50 text-evrgrn-accent">
+                    <a href="/atelier/Atelier Création & Production 2022.pdf" download>
+                      <Download className="mr-2 h-4 w-4" />
+                      Guide de Production
+                    </a>
+                  </Button>
+                </div>
               </div>
               <div className="md:w-1/3">
                 <div className="bg-evrgrn-darker rounded-lg overflow-hidden h-full">

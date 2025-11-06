@@ -14,6 +14,8 @@ import {
 import { cn } from '@/lib/utils';
 
 const MainNav = () => {
+  const navigate = useNavigate();
+  
   return (
     <NavigationMenu>
       <NavigationMenuList className="space-x-1">
@@ -36,25 +38,24 @@ const MainNav = () => {
         </NavigationMenuItem>
         
         <NavigationMenuItem>
-          <NavigationMenuTrigger asChild className="bg-transparent hover:bg-evrgrn-accent/10">
-            <Link to="/publications">Médias</Link>
+          <NavigationMenuTrigger>
+            <Link to="/publications" className="flex items-center">Médias</Link>
           </NavigationMenuTrigger>
-          <NavigationMenuContent className="absolute left-0 origin-top-left">
+          <NavigationMenuContent>
             <ul className="grid w-[250px] gap-1 p-2">
               <ListItem title="Presse" href="/publications?tab=presse" />
               <ListItem title="Livres" href="/publications?tab=livres" />
               <ListItem title="Articles" href="/publications?tab=articles" />
               <ListItem title="Clips" href="/publications?tab=clips" />
-              <ListItem title="Le Trousseau" href="/publications?tab=letrousseau" />
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
         
         <NavigationMenuItem>
-          <NavigationMenuTrigger asChild className="bg-transparent hover:bg-evrgrn-accent/10">
-            <Link to="/services">Services</Link>
+          <NavigationMenuTrigger>
+            <Link to="/services" className="flex items-center">Services</Link>
           </NavigationMenuTrigger>
-          <NavigationMenuContent className="absolute left-0 origin-top-left">
+          <NavigationMenuContent>
             <ul className="grid w-[250px] gap-1 p-2">
               <ListItem title="Consulting Production" href="/services#consulting" />
               <ListItem title="Formation Théorie" href="/services#formation" />
@@ -79,9 +80,15 @@ const MainNav = () => {
         </NavigationMenuItem>
         
         <NavigationMenuItem>
-          <Link to="/jeux" className={navigationMenuTriggerStyle()}>
-            Jeux
-          </Link>
+          <NavigationMenuTrigger>
+            <Link to="/jeux" className="flex items-center">Jeux</Link>
+          </NavigationMenuTrigger>
+          <NavigationMenuContent>
+            <ul className="grid w-[250px] gap-1 p-2">
+              <ListItem title="VRNCA-LAG" href="/VRNCA-Lag" />
+              <ListItem title="Good Run Evil" href="/good-run-evil" />
+            </ul>
+          </NavigationMenuContent>
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>

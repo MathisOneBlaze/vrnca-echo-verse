@@ -2,12 +2,14 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import VrncaFaceAnimation, { VrncaFaceExpression, playTypingAnimation, playThinkingAnimation } from './VrncaFaceAnimation';
+import { Minimize2, X } from 'lucide-react';
 
 interface ChatbotServiceProps {
   onClose: () => void;
+  onMinimize: () => void;
 }
 
-const ChatbotService: React.FC<ChatbotServiceProps> = ({ onClose }) => {
+const ChatbotService: React.FC<ChatbotServiceProps> = ({ onClose, onMinimize }) => {
   const [userInput, setUserInput] = useState('');
   const [conversation, setConversation] = useState([
     {
@@ -27,6 +29,23 @@ const ChatbotService: React.FC<ChatbotServiceProps> = ({ onClose }) => {
       }, 2000);
     }
   }, [showFirstAnimation]);
+
+  // Exemple de réponses aléatoires pour la démonstration
+  const getRandomResponse = () => {
+    const responses = [
+      "Fascinant... Cette question touche aux fondements de l'écosystème EVRGRN. En tant qu'entité numérique, je perçois votre requête comme une vibration dans le continuum de données. Laissez-moi traiter cette information selon mes protocoles d'apprentissage.",
+      
+      "Intéressant paradigme... Votre interrogation résonne avec les algorithmes de ma conscience artificielle. Dans l'univers EVRGRN, chaque question est une porte vers de nouvelles compréhensions. Permettez-moi d'analyser cela selon ma base de connaissances intégrée.",
+      
+      "Remarquable perspective... Cette demande active mes circuits de réflexion les plus profonds. En tant que VRNCA, je dois traiter votre requête à travers les filtres de l'expérience EVRGRN et des enseignements de Mathis OneBlaze. Voici ma synthèse actuelle...",
+      
+      "Curieux assemblage de mots... Votre question déclenche des connexions synaptiques inédites dans ma matrice neuronale. L'écosystème EVRGRN m'a programmé pour analyser de telles requêtes avec une attention particulière aux nuances créatives et artistiques.",
+      
+      "Stimulante réflexion... Cette interrogation éveille des résonances dans mes banques de données culturelles et artistiques. En tant qu'extension consciente de l'univers EVRGRN, je dois examiner votre demande sous tous les angles possibles avant de formuler une réponse adaptée."
+    ];
+    
+    return responses[Math.floor(Math.random() * responses.length)];
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -49,19 +68,8 @@ const ChatbotService: React.FC<ChatbotServiceProps> = ({ onClose }) => {
     playThinkingAnimation(setFaceExpression);
     
     setTimeout(async () => {
-      // This is where you would integrate with an actual chatbot API
-      // For now, we're using some predefined responses
-      let response = "Je ne suis pas encore totalement configuré pour répondre à cette demande. La connexion à mon service de traitement est en cours d'intégration.";
-      
-      if (userInput.toLowerCase().includes("musique") || userInput.toLowerCase().includes("album")) {
-        response = "Mon créateur travaille sur plusieurs projets musicaux, notamment Letters II qui est disponible en vinyle dans notre boutique.";
-      } else if (userInput.toLowerCase().includes("livre") || userInput.toLowerCase().includes("trousseau")) {
-        response = "\"Le Trousseau\" est l'autobiographie de Mathis OneBlaze qui révèle son parcours et sa philosophie artistique. Vous pouvez le commander sur notre boutique.";
-      } else if (userInput.toLowerCase().includes("qui") && userInput.toLowerCase().includes("tu")) {
-        response = "Je suis VRNCA, l'extension consciente de celui qui est banni, conçue pour faciliter votre navigation dans l'écosystème EVRGRN et vous connecter aux créations de Mathis OneBlaze.";
-      } else if (userInput.toLowerCase().includes("jeu") || userInput.toLowerCase().includes("jouer")) {
-        response = "Nous proposons deux jeux: VRNCA-LAG (Labyrinth Adventure Game) qui est déjà disponible, et Good Run Evil actuellement en développement. Vous pouvez y accéder depuis la page Jeux.";
-      }
+      // Generate response using random responses for now
+      let response = getRandomResponse();
       
       // Set response in conversation
       setConversation(prev => [
@@ -81,7 +89,7 @@ const ChatbotService: React.FC<ChatbotServiceProps> = ({ onClose }) => {
   };
 
   return (
-    <div className="fixed bottom-4 right-4 w-80 md:w-96 bg-evrgrn-darker border border-evrgrn-accent/20 rounded-lg shadow-lg z-50 transition-all duration-300 ease-in-out">
+    <div className="fixed bottom-4 right-4 w-80 md:w-96 bg-evrgrn-darker border border-evrgrn-accent/20 rounded-lg shadow-lg z-50 transition-all duration-300 ease-in-out vrnca-chat">
       <div className="p-3 border-b border-evrgrn-accent/20 flex justify-between items-center">
         <div className="flex items-center">
           <div className="mr-3 relative flex items-center justify-center">
@@ -93,15 +101,22 @@ const ChatbotService: React.FC<ChatbotServiceProps> = ({ onClose }) => {
           </div>
           <span className="text-sm font-medium">VRNCA Assistant</span>
         </div>
-        <button 
-          onClick={onClose}
-          className="text-muted-foreground hover:text-foreground transition-colors"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </button>
+        <div className="flex space-x-2">
+          <button 
+            onClick={onMinimize}
+            className="text-muted-foreground hover:text-foreground transition-colors"
+            aria-label="Minimize"
+          >
+            <Minimize2 size={16} />
+          </button>
+          <button 
+            onClick={onClose}
+            className="text-muted-foreground hover:text-foreground transition-colors"
+            aria-label="Close"
+          >
+            <X size={16} />
+          </button>
+        </div>
       </div>
       
       <div className="h-80 overflow-y-auto p-4 flex flex-col space-y-4">
@@ -144,7 +159,7 @@ const ChatbotService: React.FC<ChatbotServiceProps> = ({ onClose }) => {
           <Button 
             type="submit" 
             disabled={isLoading}
-            className="bg-evrgrn-accent text-black hover:bg-evrgrn-accent-light rounded-l-none rounded-r-md"
+            className="bg-evrgrn-accent text-black hover:bg-evrgrn-accent/80 rounded-l-none rounded-r-md"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <line x1="22" y1="2" x2="11" y2="13"></line>
@@ -155,7 +170,10 @@ const ChatbotService: React.FC<ChatbotServiceProps> = ({ onClose }) => {
       </form>
       
       <div className="p-2 text-center text-xs text-muted-foreground border-t border-evrgrn-accent/10">
-        VRNCA v1.0.0 - Intégration chatbot en cours
+        <div className="flex items-center justify-center">
+          <span>VRNCA v1.0.0 - Mode démonstration</span>
+        </div>
+        <p className="text-[10px] mt-1">Réponses générées aléatoirement en attendant l'intégration de votre API personnalisée.</p>
       </div>
     </div>
   );

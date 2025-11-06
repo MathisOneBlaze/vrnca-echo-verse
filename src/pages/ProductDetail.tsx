@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, ShoppingCart, ChevronLeft, ChevronRight, Minus, Plus } from 'lucide-react';
@@ -7,12 +6,11 @@ import Footer from '../components/layout/Footer';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useCart } from '../context/CartContext';
-import { Product } from '../components/shop/ProductCard';
-import { shopItems } from '../components/shop/ShopData';
+import { ShopItem, shopItems } from '../components/shop/ShopData';
 
 const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
-  const [product, setProduct] = useState<Product | null>(null);
+  const [product, setProduct] = useState<ShopItem | null>(null);
   const [quantity, setQuantity] = useState(1);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const { addToCart } = useCart();
@@ -61,7 +59,7 @@ const ProductDetail = () => {
   
   const currentImage = product.images && product.images.length > 0 
     ? product.images[currentImageIndex] 
-    : "/placeholder.svg";
+    : product.image || "/placeholder.svg";
   
   return (
     <div className="bg-evrgrn-dark text-foreground min-h-screen flex flex-col">
@@ -75,7 +73,6 @@ const ProductDetail = () => {
           </Link>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Product images */}
             <div>
               <div className="bg-evrgrn-darker rounded-lg overflow-hidden border border-evrgrn-accent/10 relative aspect-square">
                 <img 
@@ -131,7 +128,6 @@ const ProductDetail = () => {
               )}
             </div>
             
-            {/* Product details */}
             <div>
               <div className="mb-2">
                 <Badge variant="outline" className="text-xs text-evrgrn-accent border-evrgrn-accent/30">
