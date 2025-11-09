@@ -7,20 +7,58 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useCart } from '../context/CartContext';
 import { ShopItem, shopItems } from '../components/shop/ShopData';
+import { fetchPrintfulProducts } from '../services/PrintfulService';
 
 const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
   const [product, setProduct] = useState<ShopItem | null>(null);
   const [quantity, setQuantity] = useState(1);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [selectedVariation, setSelectedVariation] = useState<number>(0);
   const { addToCart } = useCart();
   
   useEffect(() => {
-    const foundProduct = shopItems.find(item => item.id === id);
-    if (foundProduct) {
-      setProduct(foundProduct);
-    }
+    const loadProduct = async () => {
+      setLoading(true);
+      
+      // First check mock products
+      let foundProduct = shopItems.find(item => item.id === id);
+      
+      // If not found, check Printful products
+      if (!foundProduct) {
+        try {
+          const printfulProducts = await fetchPrintfulProducts();
+          foundProduct = printfulProducts.find(item => item.id === id);
+        } catch (error) {
+          console.error('Error loading Printful product:', error);
+        }
+      }
+      
+      if (foundProduct) {
+        setProduct(foundProduct);
+      }
+      
+      setLoading(false);
+    };
+    
+    loadProduct();
   }, [id]);
+  
+  if (loading) {
+    return (
+      <div className="bg-evrgrn-dark text-foreground min-h-screen flex flex-col">
+        <Header />
+        <main className="flex-grow pt-24 flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-evrgrn-accent mx-auto mb-4"></div>
+            <p className="text-muted-foreground">Chargement du produit...</p>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
   
   if (!product) {
     return (
@@ -142,7 +180,9 @@ const ProductDetail = () => {
               
               <h1 className="text-3xl font-serif mb-2">{product.name}</h1>
               <p className="text-2xl font-mono text-evrgrn-accent mb-4">
-                {product.price.toFixed(2)} {product.currency}
+                {product.variations && product.variations[selectedVariation]?.price 
+                  ? product.variations[selectedVariation].price.toFixed(2)
+                  : product.price.toFixed(2)} {product.currency || '€'}
               </p>
               
               <div className="prose text-muted-foreground mb-6 max-w-none">
@@ -150,6 +190,37 @@ const ProductDetail = () => {
               </div>
               
               <div className="mt-8 space-y-6">
+                {product.variations && product.variations.length > 0 && (
+                  <div>
+                    <label className="block mb-3 text-sm text-muted-foreground">
+                      Taille
+                    </label>
+                    <div className="grid grid-cols-5 gap-2">
+                      {product.variations.map((variation, index) => (
+                        <button
+                          key={variation.id}
+                          onClick={() => setSelectedVariation(index)}
+                          className={`p-3 border rounded-md text-sm font-medium transition-colors ${
+                            selectedVariation === index
+                              ? 'border-evrgrn-accent bg-evrgrn-accent/10 text-evrgrn-accent'
+                              : 'border-evrgrn-accent/20 bg-evrgrn-muted hover:border-evrgrn-accent/50'
+                          } ${
+                            !variation.isAvailable ? 'opacity-50 cursor-not-allowed' : ''
+                          }`}
+                          disabled={!variation.isAvailable}
+                        >
+                          {variation.name}
+                          {variation.price && variation.price !== product.price && (
+                            <span className="block text-xs mt-1">
+                              €{variation.price.toFixed(2)}
+                            </span>
+                          )}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                
                 <div className="flex items-center">
                   <label htmlFor="quantity" className="block mr-4 text-sm text-muted-foreground">
                     Quantité

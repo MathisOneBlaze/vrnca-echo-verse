@@ -27,17 +27,37 @@ const AlbumDetail: React.FC<Album> = ({
   }
 }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const allImages = [image, ...additionalImages].filter(img => img && img !== "/placeholder.svg");
+  
+  // Separate images: slider (cover + tracklist) vs visual concept
+  const isSliderImage = (imgPath: string) => {
+    // Get only the filename, not the full path
+    const fileName = imgPath.split('/').pop()?.toLowerCase() || '';
+    return fileName.includes('cover') || fileName.includes('tracklist');
+  };
+  
+  // Images for the slider (cover + tracklist only)
+  const sliderImages = [image, ...additionalImages].filter(img => 
+    img && img !== "/placeholder.svg" && isSliderImage(img)
+  );
+  
+  // Images for the visual concept section (comics, alternative covers, etc.)
+  const visualConceptImages = additionalImages.filter(img => 
+    img && img !== "/placeholder.svg" && !isSliderImage(img)
+  );
+  
+  // Encode all image URLs to handle spaces and special characters
+  const encodedSliderImages = sliderImages.map(img => encodeURI(img));
+  const encodedVisualImages = visualConceptImages.map(img => encodeURI(img));
   
   const handlePrevImage = () => {
     setCurrentImageIndex((prev) => 
-      prev === 0 ? allImages.length - 1 : prev - 1
+      prev === 0 ? sliderImages.length - 1 : prev - 1
     );
   };
   
   const handleNextImage = () => {
     setCurrentImageIndex((prev) => 
-      prev === allImages.length - 1 ? 0 : prev + 1
+      prev === sliderImages.length - 1 ? 0 : prev + 1
     );
   };
 
@@ -45,16 +65,16 @@ const AlbumDetail: React.FC<Album> = ({
     <div className="bg-evrgrn-darker rounded-lg overflow-hidden border border-evrgrn-accent/10">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
         {/* Album artwork with slider if multiple images */}
-        <div className="relative aspect-square md:aspect-auto md:h-full bg-evrgrn-darker">
-          {allImages.length > 0 ? (
+        <div className="relative aspect-square bg-black">
+          {encodedSliderImages.length > 0 ? (
             <>
               <img
-                src={allImages[currentImageIndex]}
+                src={encodedSliderImages[currentImageIndex]}
                 alt={title}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
               />
               
-              {allImages.length > 1 && (
+              {sliderImages.length > 1 && (
                 <div className="absolute inset-0 flex items-center justify-between p-2">
                   <Button 
                     variant="ghost" 
@@ -75,9 +95,9 @@ const AlbumDetail: React.FC<Album> = ({
                 </div>
               )}
               
-              {allImages.length > 1 && (
+              {sliderImages.length > 1 && (
                 <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-1">
-                  {allImages.map((_, index) => (
+                  {sliderImages.map((_, index) => (
                     <div 
                       key={index} 
                       className={`h-2 w-2 rounded-full cursor-pointer ${currentImageIndex === index ? 'bg-evrgrn-accent' : 'bg-white/50'}`}
@@ -145,13 +165,29 @@ const AlbumDetail: React.FC<Album> = ({
             )}
 
             {/* Visual Concept */}
-            {visualConcept && (
+            {(visualConcept || encodedVisualImages.length > 0) && (
               <Card className="bg-evrgrn-muted border-evrgrn-accent/10">
                 <CardHeader>
                   <CardTitle className="text-lg">Concept Visuel</CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">{visualConcept}</p>
+                <CardContent className="space-y-4">
+                  {visualConcept && (
+                    <p className="text-muted-foreground">{visualConcept}</p>
+                  )}
+                  
+                  {encodedVisualImages.length > 0 && (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                      {encodedVisualImages.map((img, index) => (
+                        <div key={index} className="rounded-lg overflow-hidden border border-evrgrn-accent/10">
+                          <img 
+                            src={img} 
+                            alt={`${title} - Visuel ${index + 1}`}
+                            className="w-full h-auto object-cover"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             )}

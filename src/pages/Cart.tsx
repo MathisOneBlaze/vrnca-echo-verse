@@ -7,24 +7,66 @@ import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 import { Button } from '@/components/ui/button';
 import { useToast } from "@/components/ui/use-toast";
+import { createCheckoutSession } from '../services/StripeService';
 
 const Cart = () => {
   const { items, totalItems, totalPrice, removeFromCart, updateQuantity, clearCart } = useCart();
   const { toast } = useToast();
   const [isCheckingOut, setIsCheckingOut] = useState(false);
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
+    console.log('🛒 Checkout button clicked');
+    console.log('📦 Cart items:', items);
+    
+    if (items.length === 0) {
+      toast({
+        title: "Panier vide",
+        description: "Ajoutez des articles à votre panier avant de procéder au paiement.",
+        variant: "destructive"
+      });
+      return;
+    }
+    
     setIsCheckingOut(true);
     
-    // Simulate checkout process
-    setTimeout(() => {
-      toast({
-        title: "Commande effectuée",
-        description: "Merci pour votre achat ! Votre commande a été enregistrée.",
+    try {
+      // Transform cart items to checkout format
+      const checkoutItems = items.map(item => {
+        // Convert relative image path to absolute URL for Stripe
+        let imageUrl = item.image;
+        if (imageUrl && !imageUrl.startsWith('http')) {
+          imageUrl = `https://evrgrn.mathisoneblaze.com${imageUrl}`;
+        }
+        
+        return {
+          id: item.id,
+          name: item.name,
+          description: item.product.description || '',
+          price: item.price,
+          quantity: item.quantity,
+          image: imageUrl,
+          printfulId: (item.product as any).printfulId,
+          kunakiProductId: (item.product as any).kunakiProductId,
+          productType: (item.product as any).productType || 'physical',
+          productId: item.productId,
+          variantId: item.id
+        };
       });
-      clearCart();
+
+      console.log('💳 Creating checkout session with:', checkoutItems);
+
+      // Create Stripe checkout session and redirect
+      await createCheckoutSession(checkoutItems);
+      
+    } catch (error: any) {
+      console.error('❌ Checkout error:', error);
+      toast({
+        title: "Erreur de paiement",
+        description: error.message || "Une erreur est survenue. Veuillez réessayer.",
+        variant: "destructive"
+      });
       setIsCheckingOut(false);
-    }, 2000);
+    }
   };
 
   return (

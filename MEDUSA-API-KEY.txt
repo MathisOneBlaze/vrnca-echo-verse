@@ -1,0 +1,9 @@
+MEDUSA PUBLISHABLE API KEY:
+pk_evrgrn_460c765447e4659511a18992a0b2c89c
+
+API URL:
+https://api.evrgrn.mathisoneblaze.com
+
+Test:
+curl "https://api.evrgrn.mathisoneblaze.com/store/products" \
+  -H "x-publishable-api-key: pk_evrgrn_460c765447e4659511a18992a0b2c89c"

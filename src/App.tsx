@@ -16,6 +16,7 @@ import Register from './pages/Register';
 import NotFound from './pages/NotFound';
 import ProductDetail from './pages/ProductDetail';
 import Cart from './pages/Cart';
+import CheckoutSuccess from './pages/CheckoutSuccess';
 import MentionsLegales from './pages/MentionsLegales';
 import Confidentialite from './pages/Confidentialite';
 import Dashboard from './pages/Dashboard';
@@ -63,6 +64,8 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/shop/product/:id" element={<ProductDetail />} />
+          <Route path="/shop/cart" element={<Cart />} />
+          <Route path="/shop/success" element={<CheckoutSuccess />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/events" element={<Events />} />
           <Route path="/login" element={<Login />} />

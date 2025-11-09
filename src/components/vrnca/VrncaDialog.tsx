@@ -108,15 +108,6 @@ const VrncaDialog: React.FC<VrncaDialogProps> = ({
       className={cn('terminal-window', className)}
       style={{ transform: `translateX(${offsetX}px)` }}
     >
-      <div className="terminal-header">
-        <div className="flex space-x-2">
-          <div className="window-button window-close"></div>
-          <div className="window-button window-minimize"></div>
-          <div className="window-button window-maximize"></div>
-        </div>
-        <div className="text-xs text-evrgrn-accent ml-3">VRNCA Terminal</div>
-      </div>
-      
       <div className="flex items-start gap-4">
         <VrncaAvatar state={avatarState} size="sm" />
         

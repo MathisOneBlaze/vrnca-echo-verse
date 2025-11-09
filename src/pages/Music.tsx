@@ -148,13 +148,16 @@ interface AlbumCardProps {
 }
 
 const AlbumCard: React.FC<AlbumCardProps> = ({ album }) => {
+  // Encode image URL to handle spaces and special characters
+  const encodedImageSrc = album.image ? encodeURI(album.image) : null;
+  
   return (
     <Link to={`/album/${album.id}`} className="block">
       <div className="bg-evrgrn-muted border border-evrgrn-accent/10 rounded-lg overflow-hidden hover:border-evrgrn-accent/30 transition-all duration-300 group h-full">
         <div className="relative aspect-square bg-evrgrn-darker">
-          {album.image ? (
+          {encodedImageSrc ? (
             <img
-              src={album.image}
+              src={encodedImageSrc}
               alt={album.title}
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />

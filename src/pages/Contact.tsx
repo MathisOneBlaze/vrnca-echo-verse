@@ -26,7 +26,7 @@ const Contact = () => {
     setFormData(prev => ({ ...prev, [name]: checked }));
   };
   
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // Form validation
@@ -47,20 +47,45 @@ const Contact = () => {
     
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
-      console.log('Form submitted:', formData);
-      toast.success('Message envoyé avec succès!');
-      toast.info('Actuellement, les données sont uniquement enregistrées localement. Une intégration email sera mise en place prochainement.');
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        message: '',
-        newsletter: false
+    try {
+      // Using shared backend API on VPS (same as Le Trousseau)
+      const response = await fetch('https://api.asso-letrousseau.com/api/submissions/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone || '',
+          message: formData.message,
+          newsletter: formData.newsletter,
+          consent: true, // GDPR consent (user submitting form = consent)
+          source: 'evrgrn.mathisoneblaze.com' // Track which site sent the message
+        })
       });
+      
+      const result = await response.json();
+      
+      if (result.success) {
+        toast.success('Message envoyé avec succès!');
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          message: '',
+          newsletter: false
+        });
+      } else {
+        throw new Error(result.message || 'Erreur lors de l\'envoi');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      toast.error('Erreur lors de l\'envoi du message. Veuillez réessayer.');
+    } finally {
       setIsSubmitting(false);
-    }, 1500);
+    }
   };
   
   return (

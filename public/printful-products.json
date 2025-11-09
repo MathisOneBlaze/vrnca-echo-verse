@@ -1,0 +1,55 @@
+{
+  "products": [
+    {
+      "id": "printful-401510215",
+      "name": "EVRGRN - La Définition - Crop Hoodie",
+      "price": 64.50,
+      "description": "Premium quality EVRGRN - La Définition - Crop Hoodie. Available in multiple sizes.",
+      "image": "https://files.cdn.printful.com/files/b3f/b3f23d9b9b8f44fe7da530787f800f20_preview.png",
+      "category": "clothing",
+      "collection": "EVRGRN",
+      "isFeatured": true,
+      "isAvailable": true,
+      "isNew": true,
+      "currency": "EUR",
+      "variations": [
+        {
+          "id": "401510215-12668774615",
+          "name": "S",
+          "price": 64.50,
+          "image": "https://files.cdn.printful.com/files/b3f/b3f23d9b9b8f44fe7da530787f800f20_preview.png",
+          "isAvailable": true
+        },
+        {
+          "id": "401510215-12668774616",
+          "name": "M",
+          "price": 64.50,
+          "image": "https://files.cdn.printful.com/files/b3f/b3f23d9b9b8f44fe7da530787f800f20_preview.png",
+          "isAvailable": true
+        },
+        {
+          "id": "401510215-12668774617",
+          "name": "L",
+          "price": 64.50,
+          "image": "https://files.cdn.printful.com/files/b3f/b3f23d9b9b8f44fe7da530787f800f20_preview.png",
+          "isAvailable": true
+        },
+        {
+          "id": "401510215-12668774618",
+          "name": "XL",
+          "price": 64.50,
+          "image": "https://files.cdn.printful.com/files/b3f/b3f23d9b9b8f44fe7da530787f800f20_preview.png",
+          "isAvailable": true
+        },
+        {
+          "id": "401510215-12668774619",
+          "name": "2XL",
+          "price": 57.00,
+          "image": "https://files.cdn.printful.com/files/b3f/b3f23d9b9b8f44fe7da530787f800f20_preview.png",
+          "isAvailable": true
+        }
+      ],
+      "printfulId": 401510215
+    }
+  ]
+}

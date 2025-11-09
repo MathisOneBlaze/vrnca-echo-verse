@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
@@ -9,14 +9,42 @@ import ShopProductGrid from '../components/shop/ShopProductGrid';
 import CartDropdown from '../components/shop/CartDropdown';
 import { shopItems } from '../components/shop/ShopData';
 import { useCart } from '../context/CartContext';
+import { fetchPrintfulProducts, fetchPrintfulProductDetail, transformPrintfulProduct } from '../services/PrintfulService';
 
 const Shop = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [sortOption, setSortOption] = useState("newest");
   const [activeCategory, setActiveCategory] = useState("all");
+  const [products, setProducts] = useState(shopItems); // Start with mock data
+  const [loading, setLoading] = useState(true);
   const { addToCart } = useCart();
 
-  const filteredProducts = shopItems.filter(item => {
+  // Fetch Printful products on mount
+  useEffect(() => {
+    const loadPrintfulProducts = async () => {
+      try {
+        setLoading(true);
+        const printfulProducts = await fetchPrintfulProducts();
+        
+        if (printfulProducts && printfulProducts.length > 0) {
+          // Products are already in the correct format from JSON
+          console.log('✅ Printful products loaded:', printfulProducts.length);
+          setProducts([...printfulProducts, ...shopItems]);
+        } else {
+          console.log('No Printful products found, using mock data');
+        }
+      } catch (error) {
+        console.error('Error loading Printful products:', error);
+        // Keep mock data on error
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadPrintfulProducts();
+  }, []);
+
+  const filteredProducts = products.filter(item => {
     const matchesCategory = activeCategory === "all" || item.category === activeCategory;
     const matchesSearch = item.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
                         (item.collection && item.collection.toLowerCase().includes(searchQuery.toLowerCase()));
@@ -132,11 +160,22 @@ const Shop = () => {
                 <div className="text-xl font-bold">printful</div>
               </div>
             </div>
-            <h3 className="text-xl font-medium mb-2">Boutique en cours d'intégration</h3>
-            <p className="text-muted-foreground">
-              Notre boutique est en cours d'intégration avec Printful pour vous offrir une expérience d'achat optimale.
-              <br />Les produits seront bientôt disponibles !
-            </p>
+            {loading ? (
+              <>
+                <h3 className="text-xl font-medium mb-2">Chargement des produits...</h3>
+                <p className="text-muted-foreground">
+                  Synchronisation avec Printful en cours...
+                </p>
+              </>
+            ) : (
+              <>
+                <h3 className="text-xl font-medium mb-2 text-green-400">✓ Boutique connectée à Printful!</h3>
+                <p className="text-muted-foreground">
+                  {products.filter(p => p.id.startsWith('printful-')).length} produit(s) disponible(s).
+                  <br />Livraison et production assurées par Printful.
+                </p>
+              </>
+            )}
           </div>
         </div>
       </main>

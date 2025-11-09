@@ -77,15 +77,17 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
         <div className="absolute top-0 left-3/4 h-full w-px bg-evrgrn-accent/10"></div>
       </div>
       
-      {/* VrncaHead that follows mouse */}
-      <div className="absolute inset-0 z-10 pointer-events-none flex items-center justify-center">
-        <VrncaHead 
-          size="lg"
-          initialRotation={{ 
-            x: mousePosition.y * -10, // Invert Y for natural feel
-            y: mousePosition.x * 10 
-          }}
-        />
+      {/* VRNCA 3D Model */}
+      <div className="absolute inset-0 z-10 pointer-events-auto flex items-center justify-center">
+        <div className="w-full h-full max-w-2xl max-h-[600px]">
+          <Suspense fallback={
+            <div className="flex items-center justify-center w-full h-full">
+              <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-evrgrn-accent"></div>
+            </div>
+          }>
+            <VrncaModel className="w-full h-full" />
+          </Suspense>
+        </div>
       </div>
       
       <div className="container mx-auto px-4 relative z-10">

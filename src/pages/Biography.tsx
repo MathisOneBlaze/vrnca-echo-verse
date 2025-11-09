@@ -1,11 +1,22 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 import { Button } from '@/components/ui/button';
-import { Instagram, Twitter, Youtube, Facebook, Linkedin } from 'lucide-react';
+import { Instagram, Twitter, Youtube, Facebook, Linkedin, ExternalLink } from 'lucide-react';
 
 const Biography = () => {
+  // Scroll to chatbot in footer
+  const scrollToChatbot = () => {
+    const footer = document.querySelector('footer');
+    if (footer) {
+      setTimeout(() => {
+        footer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    }
+  };
+  
   return (
     <div className="bg-evrgrn-dark text-foreground min-h-screen flex flex-col">
       <Header />
@@ -115,6 +126,27 @@ const Biography = () => {
                   />
                 </div>
                 
+                {/* Définition EVRGRN - Bloc séparé */}
+                <div className="bg-evrgrn-muted border border-evrgrn-accent/10 rounded-lg p-8 mb-8">
+                  <p className="text-sm italic text-muted-foreground text-center mb-4">
+                    (stylisation de « Evergreen ») — du latin <em>sempervirens</em>.
+                  </p>
+                  <ol className="space-y-3 text-base list-decimal list-inside">
+                    <li>
+                      <span className="font-medium">Botanique.</span>{' '}
+                      <span className="text-muted-foreground">Plante persistante qui conserve ses feuilles vertes toute l'année.</span>
+                    </li>
+                    <li>
+                      <span className="font-medium">Musique.</span>{' '}
+                      <span className="text-muted-foreground">Composition intemporelle pouvant être appréciée à toutes les époques et ne se démodant pas.</span>
+                    </li>
+                    <li>
+                      <span className="font-medium">Stratégie.</span>{' '}
+                      <span className="text-muted-foreground">Projet conçu pour croître et fructifier durablement dans le temps.</span>
+                    </li>
+                  </ol>
+                </div>
+                
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="bg-evrgrn-muted border border-evrgrn-accent/10 rounded-lg p-6">
                     <h3 className="text-xl font-medium mb-3">Philosophie</h3>
@@ -142,16 +174,42 @@ const Biography = () => {
                   
                   <div className="space-y-6">
                     <div>
-                      <h3 className="text-xl font-medium mb-2">VRNCA</h3>
+                      <h3 
+                        className="text-xl font-medium mb-2 text-evrgrn-accent hover:underline cursor-pointer inline-flex items-center gap-2"
+                        onClick={scrollToChatbot}
+                      >
+                        VRNCA
+                      </h3>
                       <p className="text-muted-foreground">
                         Le projet VRNCA explore l'intersection entre technologie et créativité humaine, interrogeant notre relation avec les systèmes numériques qui nous entourent. Après VRNCA.exe et le récent VRNCA Patch 1.2.exe, cette série continue d'évoluer vers de nouvelles formes d'expression.
                       </p>
                     </div>
                     
                     <div>
-                      <h3 className="text-xl font-medium mb-2">Teddy Verse</h3>
+                      <Link to="/publications?tab=articles">
+                        <h3 className="text-xl font-medium mb-2 text-evrgrn-accent hover:underline cursor-pointer inline-flex items-center gap-2">
+                          Teddy Verse
+                          <ExternalLink className="h-4 w-4" />
+                        </h3>
+                      </Link>
                       <p className="text-muted-foreground">
                         Le Teddy Verse est un univers narratif complet qui se déploie à travers plusieurs albums et médiums. Ce concept explore les multiples facettes d'un alter ego artistique, chaque projet révélant une nouvelle dimension de cet univers en expansion.
+                      </p>
+                    </div>
+                    
+                    <div>
+                      <a 
+                        href="https://www.asso-letrousseau.com" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                      >
+                        <h3 className="text-xl font-medium mb-2 text-evrgrn-accent hover:underline cursor-pointer inline-flex items-center gap-2">
+                          Le Trousseau
+                          <ExternalLink className="h-4 w-4" />
+                        </h3>
+                      </a>
+                      <p className="text-muted-foreground">
+                        Association culturelle et artistique dédiée à la création, la production et la diffusion d'œuvres musicales, littéraires et visuelles. Le Trousseau incarne une vision de la culture comme patrimoine collectif et évolutif.
                       </p>
                     </div>
                     

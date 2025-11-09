@@ -78,17 +78,17 @@ const VrncaAvatar: React.FC<VrncaAvatarProps> = ({
         )}
       >
         {/* Avatar face/symbol */}
-        <div className="text-white">
-          {state === 'scanning' ? (
-            <div className="w-full h-full flex items-center justify-center">
-              <div className="w-3/4 h-[2px] bg-evrgrn-green/70 animate-scan"></div>
-            </div>
-          ) : (
-            <div className="font-mono text-xs md:text-sm tracking-wider">
-              VRNCA
-            </div>
-          )}
-        </div>
+        {state === 'scanning' ? (
+          <div className="w-full h-full flex items-center justify-center">
+            <div className="w-3/4 h-[2px] bg-evrgrn-green/70 animate-scan"></div>
+          </div>
+        ) : (
+          <img 
+            src="/VRNCA-pixel-art/chatbot/VRNCA FACES - Base.jpeg" 
+            alt="VRNCA"
+            className="w-full h-full object-cover"
+          />
+        )}
       </div>
       
       {/* Outer ring/effect */}
