@@ -402,7 +402,7 @@ const AlbumDetail: React.FC<Album> = ({
                   {section.title}
                 </h3>
                 
-                {section.type === 'table' && section.rows ? (
+                {section.type === 'table' && Array.isArray(section.content) ? (
                   <div className="bg-evrgrn-muted/30 rounded-lg overflow-hidden border border-evrgrn-accent/10">
                     <table className="w-full">
                       <thead>
@@ -412,16 +412,16 @@ const AlbumDetail: React.FC<Album> = ({
                         </tr>
                       </thead>
                       <tbody>
-                        {section.rows.map((row, rowIndex) => (
+                        {section.content.map((row, rowIndex) => (
                           <tr 
                             key={rowIndex}
                             className="border-b border-evrgrn-accent/5 hover:bg-evrgrn-muted/50 transition-colors"
                           >
                             <td 
                               className="py-3 px-6 text-muted-foreground"
-                              dangerouslySetInnerHTML={{ __html: boldNames(row.artist) }}
+                              dangerouslySetInnerHTML={{ __html: boldNames(row.artists) }}
                             />
-                            <td className="py-3 px-6 text-muted-foreground text-sm">{row.track}</td>
+                            <td className="py-3 px-6 text-muted-foreground text-sm">{row.tracks}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -431,7 +431,7 @@ const AlbumDetail: React.FC<Album> = ({
                   <div className="bg-evrgrn-muted/30 rounded-lg p-6 border border-evrgrn-accent/10">
                     <p 
                       className="text-base text-muted-foreground leading-relaxed"
-                      dangerouslySetInnerHTML={{ __html: boldNames(section.text || '') }}
+                      dangerouslySetInnerHTML={{ __html: boldNames(typeof section.content === 'string' ? section.content : '') }}
                     />
                   </div>
                 )}
