@@ -58,6 +58,84 @@ const parseCreditsToTable = (credits: string | undefined) => {
   return rows;
 };
 
+// Parse credits into flexible sections (tables or text)
+type CreditSection = {
+  title: string;
+  type: 'table' | 'text';
+  content: string | { role: string; artists: string; tracks: string }[];
+};
+
+const parseCreditsToSections = (credits?: string, visualCredits?: string): CreditSection[] | null => {
+  if (!credits && !visualCredits) return null;
+  
+  const sections: CreditSection[] = [];
+  
+  if (credits) {
+    // Check if credits look structured (contains "Production:", "Featuring:", etc.)
+    const isStructured = /Production:|Featuring:|Musiciens:|Choristes:/i.test(credits);
+    
+    if (isStructured) {
+      // Parse into separate table sections
+      const sectionMatches = credits.split(/(?=Production:|Featuring:|Musiciens:|Choristes:|Enregistré)/g);
+      
+      sectionMatches.forEach(section => {
+        if (!section.trim()) return;
+        
+        const roleMatch = section.match(/^([^:]+):/);
+        if (!roleMatch) return;
+        
+        const role = roleMatch[1].trim();
+        const content = section.substring(roleMatch[0].length).trim();
+        
+        // Try to parse tracks
+        const trackPattern = /([^(,]+)\s*\(([^)]+)\)/g;
+        let match;
+        const entries: { role: string; artists: string; tracks: string }[] = [];
+        
+        while ((match = trackPattern.exec(content)) !== null) {
+          entries.push({
+            role,
+            artists: match[1].trim(),
+            tracks: match[2].trim()
+          });
+        }
+        
+        if (entries.length > 0) {
+          sections.push({
+            title: role,
+            type: 'table',
+            content: entries
+          });
+        } else {
+          sections.push({
+            title: role,
+            type: 'text',
+            content: content.replace(/\.$/, '').trim()
+          });
+        }
+      });
+    } else {
+      // Unstructured credits - display as text
+      sections.push({
+        title: 'Crédits',
+        type: 'text',
+        content: credits
+      });
+    }
+  }
+  
+  // Add visual credits section
+  if (visualCredits) {
+    sections.push({
+      title: 'Artwork & Design',
+      type: 'text',
+      content: visualCredits
+    });
+  }
+  
+  return sections.length > 0 ? sections : null;
+};
+
 // Helper to bold names in text
 const boldNames = (text: string) => {
   const knownNames = [
@@ -156,6 +234,7 @@ const AlbumDetail: React.FC<Album> = ({
   
   const descriptionParagraphs = formatDescription(description);
   const creditRows = parseCreditsToTable(credits);
+  const creditSections = parseCreditsToSections(credits, visualCredits);
   const visualConceptParagraphs = visualConcept ? formatDescription(visualConcept) : [];
 
   return (

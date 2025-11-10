@@ -47,11 +47,11 @@ const albumData: Album[] = [
     year: "2022",
     month: "10",
     collaborators: "SEDJRO WESKER & USLE BELMONDO",
-    image: "/Cover Art/Evil blazy : Vilain Teddy/Evil-Blazy-Vilain-Teddy-Cover.jpg",
+    image: "/Cover Art/Evil Blazy Vilain Teddy/Evil-Blazy-Vilain-Teddy-Cover.jpg",
     additionalImages: [
-      "/Cover Art/Evil blazy : Vilain Teddy/Evil-Blazy-Tracklist.jpg",
-      "/Cover Art/Evil blazy : Vilain Teddy/Evil-Blazy-Comic.jpeg",
-      "/Cover Art/Evil blazy : Vilain Teddy/Evil-Blazy-Alt-Cover.jpeg"
+      "/Cover Art/Evil Blazy Vilain Teddy/Evil-Blazy-Tracklist.jpg",
+      "/Cover Art/Evil Blazy Vilain Teddy/Evil-Blazy-Comic.jpeg",
+      "/Cover Art/Evil Blazy Vilain Teddy/Evil-Blazy-Alt-Cover.jpeg"
     ],
     spotifyLink: "https://open.spotify.com/album/evil-blazy-vilain-teddy",
     format: "10 titres",
