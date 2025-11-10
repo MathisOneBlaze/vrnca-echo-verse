@@ -7,7 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { ArrowUpRight, ExternalLink } from 'lucide-react';
 
-interface PressArticle {
+export interface PressArticle {
   id: string;
   media: string;
   title: string;
@@ -17,14 +17,15 @@ interface PressArticle {
   image?: string;
 }
 
-const pressArticles: PressArticle[] = [
+export const pressArticles: PressArticle[] = [
   {
     id: "1",
     media: "La Nouvelle Sam",
     title: "OneBlaze en #8 questions",
     url: "https://www.lanouvellesam.com/2017/10/03/8-oneblaze-musique-cest-lunivers-dun-jeune-monte-business-croit-reves/",
     date: "03/10/2017",
-    excerpt: "La musique, c'est l'univers d'un jeune qui monte en business et qui croit en ses rêves."
+    excerpt: "La musique, c'est l'univers d'un jeune qui monte en business et qui croit en ses rêves. À 23 ans, Mathis OneBlaze fait partie de la génération musicale qui innove dans le style et les sonorités. Héritier du gwoka, OneBlaze allie les rythmes et propose une musique authentique et expérimentale.",
+    image: "https://www.lanouvellesam.com/wp-content/uploads/2017/10/OneBlaze-La-Nouvelle-Sam.jpg"
   },
   {
     id: "2",
@@ -32,23 +33,26 @@ const pressArticles: PressArticle[] = [
     title: "OneBlaze & White Line en concert",
     url: "https://www.leparisien.fr/val-de-marne-94/val-de-marne-coup-de-projecteur-sur-les-musiques-actuelles-18-03-2018-7615086.php",
     date: "18/03/2018",
-    excerpt: "Coup de projecteur sur les musiques actuelles dans le Val-de-Marne"
+    excerpt: "Coup de projecteur sur les musiques actuelles dans le Val-de-Marne. Le festival « On monte le son » se tient toute la semaine dans les conservatoires du territoire Grand Paris Sud-Est Avenir.",
+    image: "https://www.leparisien.fr/resizer/Yh_qSKAKW8kW8Rl8JYdQJ0J3Dj0=/932x582/cloudfront-eu-central-1.images.arcpublishing.com/leparisien/XJQZJ6ICWFAQFAQFAFQAFQAFQA.jpg"
   },
   {
     id: "3",
-    media: "NRJ",
+    media: "NRJ Antilles",
     title: "OneBlaze – Lannwit",
     url: "https://nrjantilles.com/oneblaze-lannwit/",
     date: "2017",
-    excerpt: "OneBlaze nous présente son nouveau single 'Lannwit'"
+    excerpt: "OneBlaze nous présente son nouveau single 'Lannwit'. Prod : CiD On The Track. Recorded at : OneBomb Records.",
+    image: "/Cover Art/MAGNUM 2/Magnum-2-Cover.jpg"
   },
   {
     id: "4",
-    media: "NRJ",
+    media: "NRJ Antilles",
     title: "OneBlaze – MUSE",
     url: "https://nrjantilles.com/oneblaze-muse/",
     date: "2018",
-    excerpt: "Découvrez 'MUSE', le nouveau titre d'OneBlaze"
+    excerpt: "Découvrez 'MUSE', le nouveau titre d'OneBlaze, un morceau qui explore les thématiques de l'inspiration et de la création artistique.",
+    image: "/Cover Art/MAGNUM 2/Magnum-2-Photo-1.jpeg"
   },
   {
     id: "5",
@@ -120,39 +124,12 @@ const publications: PublicationItem[] = [
     image: "/livres/mănĭfesto.png"
   },
   {
-    id: "comprendre-flow-rap",
-    title: "Comprendre le flow en rap - Théorie et application",
-    type: "article",
-    date: "2021",
-    description: "Une analyse technique et pratique du flow en rap, avec des exercices et des exemples concrets.",
-    image: "/placeholder.svg"
-  },
-  {
-    id: "production-minimaliste",
-    title: "Production musicale: l'approche minimaliste",
-    type: "video",
-    date: "2022",
-    description: "Tutoriel vidéo sur l'art de créer un impact maximal avec un minimum d'éléments dans la production musicale.",
-    image: "/placeholder.svg",
-    url: "https://youtube.com/example"
-  },
-  {
-    id: "top-50-france-2023",
-    title: "#1 Single du TOP 50 France - 2023",
-    type: "article",
-    date: "2023",
-    description: "Analyse des singles ayant atteint la première place du TOP 50 en France en 2023.",
-    image: "/placeholder.svg",
-    url: "/top-50-france-2023"
-  },
-  {
-    id: "top-50-france-2024",
-    title: "#1 Single du TOP 50 France - 2024",
+    id: "teddyverse",
+    title: "Le Teddyverse : Un univers narratif en expansion",
     type: "article",
     date: "2024",
-    description: "Analyse des singles ayant atteint la première place du TOP 50 en France en 2024.",
-    image: "/placeholder.svg",
-    url: "/top-50-france-2024"
+    description: "Plongée dans l'univers Teddy, une saga musicale qui débute avec #TeddyBlaze en 2018 et se développe à travers Trap Teddy et Trap Teddy 2. Cette série conceptuelle fusionne influences caribéennes authentiques et sonorités trap contemporaines, créant un langage musical distinctif. De l'introduction brute du concept jusqu'à l'affinage stylistique du second opus, le Teddyverse pose les jalons narratifs d'un univers riche qui sera exploré dans les projets ultérieurs, notamment Evil Blazy Vilain Teddy qui révèle la dualité fascinante du personnage.",
+    image: "/Cover Art/Teddy Blaze/00-Cover-TEDDYBLAZE-1200x1200.jpg"
   }
 ];
 
@@ -166,61 +143,8 @@ interface YouTubeVideo {
   category?: 'clip' | 'trousseau';
 }
 
+// Clips officiels - À compléter avec les vrais clips musicaux
 const youtubeVideos: YouTubeVideo[] = [
-  {
-    id: "4sCd4DrxTTc",
-    title: "Mathis OneBlaze - AK47 (Prod by Mathis Oneblaze)",
-    description: "Clip officiel du titre AK47, produit par Mathis OneBlaze.",
-    thumbnail: "https://img.youtube.com/vi/4sCd4DrxTTc/maxresdefault.jpg",
-    url: "https://www.youtube.com/watch?v=4sCd4DrxTTc",
-    date: "2022",
-    category: 'clip'
-  },
-  {
-    id: "dZeE5Dh0mVk",
-    title: "Mathis Oneblaze - STBB 762 (How deep is your funk)",
-    description: "Participation au Smokers Text Beat Battle (STBB) 762.",
-    thumbnail: "https://img.youtube.com/vi/dZeE5Dh0mVk/maxresdefault.jpg",
-    url: "https://www.youtube.com/watch?v=dZeE5Dh0mVk",
-    date: "2022",
-    category: 'clip'
-  },
-  {
-    id: "O2Vba1EwxzU",
-    title: "LES ALÉAS DU COSMOS - Mathis OneBlaze - Divertimento pour voix & piano",
-    description: "Performance vocale et pianistique sur le thème des aléas du cosmos.",
-    thumbnail: "https://img.youtube.com/vi/O2Vba1EwxzU/maxresdefault.jpg",
-    url: "https://www.youtube.com/watch?v=O2Vba1EwxzU",
-    date: "2022",
-    category: 'clip'
-  },
-  {
-    id: "h0ELPmCKV0U",
-    title: "Comment j'ai créé White Line ?",
-    description: "Découvrez l'histoire derrière la création du projet White Line.",
-    thumbnail: "https://img.youtube.com/vi/h0ELPmCKV0U/maxresdefault.jpg",
-    url: "https://www.youtube.com/watch?v=h0ELPmCKV0U",
-    date: "2020",
-    category: 'clip'
-  },
-  {
-    id: "i7YP8l6-2rE",
-    title: "ONEBLAZE - PSYCHORAMA / CLAP BACK (LIVE)",
-    description: "Performance live des titres PSYCHORAMA et CLAP BACK.",
-    thumbnail: "https://img.youtube.com/vi/i7YP8l6-2rE/maxresdefault.jpg",
-    url: "https://www.youtube.com/watch?v=i7YP8l6-2rE",
-    date: "2020",
-    category: 'clip'
-  },
-  {
-    id: "HiFo0QRUkjA",
-    title: "ONEBLAZE - MUSE (CLIP OFFICIEL)",
-    description: "Clip officiel du titre MUSE de OneBlaze.",
-    thumbnail: "https://img.youtube.com/vi/HiFo0QRUkjA/maxresdefault.jpg",
-    url: "https://www.youtube.com/watch?v=HiFo0QRUkjA",
-    date: "2018",
-    category: 'clip'
-  },
   {
     id: "X8WA2vuBvFM",
     title: "Le Trousseau - Introduction au concept",
@@ -251,7 +175,7 @@ const youtubeVideos: YouTubeVideo[] = [
 ];
 
 const Publications = () => {
-  const [activeTab, setActiveTab] = useState("presse");
+  const [activeTab, setActiveTab] = useState("livres");
   const location = useLocation();
   const navigate = useNavigate();
   
@@ -259,7 +183,7 @@ const Publications = () => {
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
     const tabParam = searchParams.get('tab');
-    if (tabParam && ["presse", "livres", "articles", "clips", "letrousseau"].includes(tabParam)) {
+    if (tabParam && ["livres", "articles", "clips", "letrousseau"].includes(tabParam)) {
       setActiveTab(tabParam);
     }
   }, [location]);
@@ -292,20 +216,11 @@ const Publications = () => {
           
           <Tabs value={activeTab} onValueChange={handleTabChange} className="mb-8">
             <TabsList className="bg-evrgrn-muted border border-evrgrn-accent/10 w-full flex justify-start overflow-x-auto">
-              <TabsTrigger value="presse">Presse</TabsTrigger>
               <TabsTrigger value="livres">Livres</TabsTrigger>
               <TabsTrigger value="articles">Articles</TabsTrigger>
               <TabsTrigger value="clips">Clips</TabsTrigger>
               <TabsTrigger value="letrousseau">Le Trousseau</TabsTrigger>
             </TabsList>
-            
-            <TabsContent value="presse" className="mt-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {pressArticles.map(article => (
-                  <PressCard key={article.id} article={article} />
-                ))}
-              </div>
-            </TabsContent>
             
             <TabsContent value="livres" className="mt-8">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -441,14 +356,27 @@ const PressCard: React.FC<PressCardProps> = ({ article }) => {
       href={article.url} 
       target="_blank" 
       rel="noopener noreferrer"
-      className="bg-evrgrn-muted border border-evrgrn-accent/10 rounded-lg overflow-hidden hover:border-evrgrn-accent/30 transition-all duration-300 flex flex-col"
+      className="bg-evrgrn-muted border border-evrgrn-accent/10 rounded-lg overflow-hidden hover:border-evrgrn-accent/30 transition-all duration-300 flex flex-col group"
     >
-      <div className="p-6 flex-1">
+      {article.image && (
+        <div className="relative aspect-video bg-evrgrn-darker overflow-hidden">
+          <img
+            src={article.image}
+            alt={article.title}
+            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              target.style.display = 'none';
+            }}
+          />
+        </div>
+      )}
+      <div className="p-6 flex-1 flex flex-col">
         <div className="text-sm text-evrgrn-accent mb-2">{article.media}</div>
         <h3 className="font-medium text-lg mb-3">{article.title}</h3>
         
         {article.excerpt && (
-          <p className="text-muted-foreground text-sm mb-4">{article.excerpt}</p>
+          <p className="text-muted-foreground text-sm mb-4 line-clamp-3">{article.excerpt}</p>
         )}
         
         <div className="mt-auto flex justify-between items-center">
@@ -465,8 +393,19 @@ interface PublicationCardProps {
 }
 
 const PublicationCard: React.FC<PublicationCardProps> = ({ publication }) => {
+  const navigate = useNavigate();
+  
+  const handleClick = () => {
+    if (publication.type === "article" || publication.type === "livre") {
+      navigate(`/publication/${publication.id}`);
+    }
+  };
+  
   return (
-    <div className="bg-evrgrn-muted border border-evrgrn-accent/10 rounded-lg overflow-hidden hover:border-evrgrn-accent/30 transition-all duration-300">
+    <div 
+      onClick={handleClick}
+      className="bg-evrgrn-muted border border-evrgrn-accent/10 rounded-lg overflow-hidden hover:border-evrgrn-accent/30 transition-all duration-300 cursor-pointer"
+    >
       <div className="relative aspect-video bg-evrgrn-darker">
         <img
           src={publication.image || "/placeholder.svg"}

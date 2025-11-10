@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 import { Button } from '@/components/ui/button';
-import { Instagram, Twitter, Youtube, Facebook, Linkedin, ExternalLink } from 'lucide-react';
+import { Instagram, Twitter, Youtube, Facebook, Linkedin, ExternalLink, Mail } from 'lucide-react';
+import { pressArticles, type PressArticle } from './Publications';
 
 const Biography = () => {
   // Scroll to chatbot in footer
@@ -47,34 +48,62 @@ const Biography = () => {
                 />
               </div>
               
-              <div className="bg-evrgrn-muted border border-evrgrn-accent/10 rounded-lg p-6">
-                <h3 className="text-xl font-medium mb-4">Réseaux sociaux</h3>
-                <div className="flex justify-center space-x-4">
-                  <SocialIcon 
-                    href="https://instagram.com/mathisoneblaze"
-                    icon={<Instagram size={20} />}
-                    label="Instagram"
-                  />
-                  <SocialIcon 
-                    href="https://twitter.com/mathisoneblaze"
-                    icon={<Twitter size={20} />}
-                    label="Twitter"
-                  />
-                  <SocialIcon 
-                    href="https://www.youtube.com/@MathisOneBlaze"
-                    icon={<Youtube size={20} />}
-                    label="Youtube"
-                  />
-                  <SocialIcon 
-                    href="https://tiktok.com/@mathisoneblaze"
-                    icon={<Facebook size={20} />}
-                    label="Facebook"
-                  />
-                  <SocialIcon 
-                    href="https://linkedin.com/in/mathisoneblaze"
-                    icon={<Linkedin size={20} />}
-                    label="LinkedIn"
-                  />
+              <div className="space-y-6">
+                <div className="bg-evrgrn-muted border border-evrgrn-accent/10 rounded-lg p-6">
+                  <h3 className="text-xl font-medium mb-4">Infos</h3>
+                  <div className="space-y-3 text-sm">
+                    <div className="flex justify-between border-b border-evrgrn-accent/10 pb-2">
+                      <span className="text-muted-foreground">Nom</span>
+                      <span className="font-medium">Mathis</span>
+                    </div>
+                    <div className="flex justify-between border-b border-evrgrn-accent/10 pb-2">
+                      <span className="text-muted-foreground">Pseudo</span>
+                      <span className="font-medium">Mathis OneBlaze</span>
+                    </div>
+                    <div className="flex justify-between border-b border-evrgrn-accent/10 pb-2">
+                      <span className="text-muted-foreground">Lieu</span>
+                      <span className="font-medium">Paris 93</span>
+                    </div>
+                    <div className="flex justify-between border-b border-evrgrn-accent/10 pb-2">
+                      <span className="text-muted-foreground">Origine</span>
+                      <span className="font-medium">Guadeloupe, Martinique</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Style</span>
+                      <span className="font-medium text-right">Rap, R&B, Afro-Caribéen</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-evrgrn-muted border border-evrgrn-accent/10 rounded-lg p-6">
+                  <h3 className="text-xl font-medium mb-4">Réseaux sociaux</h3>
+                  <div className="flex justify-center space-x-4">
+                    <SocialIcon 
+                      href="https://instagram.com/mathisoneblaze"
+                      icon={<Instagram size={20} />}
+                      label="Instagram"
+                    />
+                    <SocialIcon 
+                      href="https://twitter.com/mathisoneblaze"
+                      icon={<Twitter size={20} />}
+                      label="Twitter"
+                    />
+                    <SocialIcon 
+                      href="https://www.youtube.com/@MathisOneBlaze"
+                      icon={<Youtube size={20} />}
+                      label="Youtube"
+                    />
+                    <SocialIcon 
+                      href="https://tiktok.com/@mathisoneblaze"
+                      icon={<Facebook size={20} />}
+                      label="Facebook"
+                    />
+                    <SocialIcon 
+                      href="https://linkedin.com/in/mathisoneblaze"
+                      icon={<Linkedin size={20} />}
+                      label="LinkedIn"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -224,6 +253,43 @@ const Biography = () => {
               </div>
             </div>
           </div>
+          
+          {/* Relations Presse Section */}
+          <div className="mt-16">
+            <div className="flex justify-between items-center mb-8">
+              <div>
+                <h2 className="text-3xl font-serif mb-2">Relations Presse</h2>
+                <p className="text-muted-foreground">
+                  Retrouvez ici l'ensemble des publications et articles de presse mentionnant EVRGRN et Mathis OneBlaze
+                </p>
+              </div>
+            </div>
+            
+            {/* Contact Presse */}
+            <div className="bg-evrgrn-muted border border-evrgrn-accent/10 rounded-lg p-6 mb-8">
+              <div className="flex items-center gap-3 mb-3">
+                <Mail className="h-5 w-5 text-evrgrn-accent" />
+                <h3 className="text-xl font-medium">Contact Relations Presse</h3>
+              </div>
+              <p className="text-muted-foreground mb-4">
+                Pour toute demande d'interview, de collaboration médiatique ou d'information complémentaire :
+              </p>
+              <a 
+                href="mailto:mathisoneblaze@gmail.com" 
+                className="text-evrgrn-accent hover:underline font-medium inline-flex items-center gap-2"
+              >
+                mathisoneblaze@gmail.com
+                <ExternalLink className="h-4 w-4" />
+              </a>
+            </div>
+            
+            {/* Grid d'articles de presse */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {pressArticles.map(article => (
+                <PressCard key={article.id} article={article} />
+              ))}
+            </div>
+          </div>
         </div>
       </main>
       
@@ -251,6 +317,51 @@ const SocialIcon: React.FC<SocialIconProps> = ({ href, icon, label }) => {
         {icon}
       </div>
       <span className="text-xs mt-1 opacity-0 group-hover:opacity-100 transition-opacity">{label}</span>
+    </a>
+  );
+};
+
+interface PressCardProps {
+  article: PressArticle;
+}
+
+const PressCard: React.FC<PressCardProps> = ({ article }) => {
+  return (
+    <a
+      href={article.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="block bg-evrgrn-muted border border-evrgrn-accent/10 rounded-lg overflow-hidden hover:border-evrgrn-accent/30 transition-all group"
+    >
+      {article.image && (
+        <div className="aspect-video overflow-hidden bg-evrgrn-darker">
+          <img 
+            src={article.image} 
+            alt={article.title}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+      )}
+      <div className="p-6">
+        <div className="flex items-center justify-between mb-3">
+          <span className="text-sm text-evrgrn-accent font-medium">{article.media}</span>
+          {article.date && (
+            <span className="text-xs text-muted-foreground">{article.date}</span>
+          )}
+        </div>
+        <h3 className="text-lg font-medium mb-2 group-hover:text-evrgrn-accent transition-colors">
+          {article.title}
+        </h3>
+        {article.excerpt && (
+          <p className="text-sm text-muted-foreground line-clamp-3">
+            {article.excerpt}
+          </p>
+        )}
+        <div className="mt-4 flex items-center text-evrgrn-accent text-sm font-medium">
+          Lire l'article
+          <ExternalLink className="ml-2 h-4 w-4" />
+        </div>
+      </div>
     </a>
   );
 };

@@ -11,6 +11,7 @@ import Contact from './pages/Contact';
 import Services from './pages/Services';
 import Events from './pages/Events';
 import Publications from './pages/Publications';
+import PublicationDetail from './pages/PublicationDetail';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import NotFound from './pages/NotFound';
@@ -59,6 +60,7 @@ function App() {
           <Route path="/album/:id" element={<AlbumPage />} />
           <Route path="/musique" element={<Music />} />
           <Route path="/publications" element={<Publications />} />
+          <Route path="/publication/:id" element={<PublicationDetail />} />
           <Route path="/services" element={<Services />} />
           <Route path="/ateliers" element={<Ateliers />} />
           <Route path="/contact" element={<Contact />} />
